@@ -1,24 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Square } from './Square';
 
-export class RunGame extends React.Component {  
-  constructor(props) {
-    super(props);
-    this.state = {
-      status: 'empty'
-    }
-    this.handleClick = this.handleClick.bind(this)
-  }
+
+export function RunGame() {
+  const gridArray = new Array(16).fill("abc")
+
+  return (
+    <div className="board" id="GameContainer">
+      {gridArray.map(
+        (square, index) => (<Square square={`${square}`} index={`${index}`}/>)
+        )}
+    </div>
+  );
   
-
-  handleClick() {
-    this.setState(prevState => ({
-      status: 'ship'
-    }))
-  }
-
-  render(){
-    return(
-      <div className={`square ${this.state.status}`} id={`square_${this.props.index}`} key={`square_${this.props.index}`} onClick={() => {this.handleClick()}}> </div>
-  )
-}}
+}

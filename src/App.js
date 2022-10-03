@@ -1,16 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
 import { RunGame } from './RunGame';
+import { useState } from 'react';
+import { Welcome } from './Welcome';
 
 function App() {
+  const [playState, setPlayState] = useState('Welcome')
 
-  const gridArray = new Array(16).fill("abc")
   return (
-    <div className="board" id="GameContainer">
-      {gridArray.map(
-        (square, index) => (<RunGame square={`${square}`} index={`${index}`}/>)
-        )}
-    </div>
+    playState === 'Welcome' ? <Welcome changePlayState={ setPlayState }/> : <RunGame />
   );
 }
 
