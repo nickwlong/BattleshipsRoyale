@@ -22,60 +22,74 @@ export class Square extends React.Component {
   
 
   handleClick () {
-    if (shipOrient === 'horizontal'){
-      var newGridArray = this.props.gridArray.map((square, i) => {
-        if(this.props.index === i && (shipSelected === 'ship1'|| shipSelected === 'ship2' || shipSelected === 'ship3'|| shipSelected === 'ship4')){
-          return {
-            ...square,
-            shipStatus: 'ship',
-          };
-        } else if (this.props.index + 1 === i && (shipSelected === 'ship2' || shipSelected === 'ship3' || shipSelected === 'ship4')){
-          return {
-            ...square,
-            shipStatus: 'ship',};
-        } else if (this.props.index + 2 === i && (shipSelected === 'ship3' || shipSelected === 'ship4')){
-          return {
-            ...square,
-            shipStatus: 'ship',};
-        } else if (this.props.index + 3 === i && (shipSelected === 'ship4')){
-          return {
-            ...square,
-            shipStatus: 'ship',};
-        } else {
-          return square
-        }
 
-      })
-      console.log(newGridArray)
-      this.props.setGridArray(newGridArray)
-    }
+    if ((shipSelected === 'ship2' && shipOrient === 'horizontal' && [3,7,11,15].includes(this.props.index)) ||
+        (shipSelected === 'ship3' && shipOrient === 'horizontal' && [2,3,6,7,10,11,14,15].includes(this.props.index)) ||
+        (shipSelected === 'ship4' && shipOrient === 'horizontal' && [1,2,3,5,6,7,9,10,11,13,14,15].includes(this.props.index)) ||
+        (shipSelected === 'ship2' && shipOrient === 'vertical' && [12,13,14,15].includes(this.props.index)) ||
+        (shipSelected === 'ship3' && shipOrient === 'vertical' && [8,9,10,11,12,13,14,15].includes(this.props.index)) ||
+        (shipSelected === 'ship4' && shipOrient === 'vertical' && [4,5,6,7,8,9,10,11,12,13,14,15].includes(this.props.index))
+        ) {
+      console.log("not allowed")
+    } else {
 
-    if (shipOrient === 'vertical'){
-      var newGridArray = this.props.gridArray.map((square, i) => {
-        if(this.props.index === i && (shipSelected === 'ship1'|| shipSelected === 'ship2' || shipSelected === 'ship3'|| shipSelected === 'ship4')){
-          return {
-            ...square,
-            shipStatus: 'ship',
-          };
-        } else if (this.props.index + 4 === i && (shipSelected === 'ship2' || shipSelected === 'ship3' || shipSelected === 'ship4')){
-          return {
-            ...square,
-            shipStatus: 'ship',};
-        } else if (this.props.index + 8 === i && (shipSelected === 'ship3' || shipSelected === 'ship4')){
-          return {
-            ...square,
-            shipStatus: 'ship',};
-        } else if (this.props.index + 12 === i && (shipSelected === 'ship4')){
-          return {
-            ...square,
-            shipStatus: 'ship',};
-        } else {
-          return square
-        }
+      //places horizontal ships
+      //if ship is size 2, the next .map iteration selects the square property as ship too
+      // ~so on for size 3 and 4 and their iterations respectively
+      if (shipOrient === 'horizontal'){
+        var newGridArray = this.props.gridArray.map((square, i) => {
+          if(this.props.index === i && (shipSelected === 'ship1'|| shipSelected === 'ship2' || shipSelected === 'ship3'|| shipSelected === 'ship4')){
+            return {
+              ...square,
+              shipStatus: 'ship',
+            };
+          } else if (this.props.index + 1 === i && (shipSelected === 'ship2' || shipSelected === 'ship3' || shipSelected === 'ship4')){
+            return {
+              ...square,
+              shipStatus: 'ship',};
+          } else if (this.props.index + 2 === i && (shipSelected === 'ship3' || shipSelected === 'ship4')){
+            return {
+              ...square,
+              shipStatus: 'ship',};
+          } else if (this.props.index + 3 === i && (shipSelected === 'ship4')){
+            return {
+              ...square,
+              shipStatus: 'ship',};
+          } else {
+            return square
+          }
 
-      })
-      console.log(newGridArray)
-      this.props.setGridArray(newGridArray)
+        })
+        this.props.setGridArray(newGridArray)
+      }
+
+      //places vertical ships similar to horizontal, but instead of index +1, it goes down (index+4 since row is 4)
+      if (shipOrient === 'vertical'){
+        var newGridArray = this.props.gridArray.map((square, i) => {
+          if(this.props.index === i && (shipSelected === 'ship1'|| shipSelected === 'ship2' || shipSelected === 'ship3'|| shipSelected === 'ship4')){
+            return {
+              ...square,
+              shipStatus: 'ship',
+            };
+          } else if (this.props.index + 4 === i && (shipSelected === 'ship2' || shipSelected === 'ship3' || shipSelected === 'ship4')){
+            return {
+              ...square,
+              shipStatus: 'ship',};
+          } else if (this.props.index + 8 === i && (shipSelected === 'ship3' || shipSelected === 'ship4')){
+            return {
+              ...square,
+              shipStatus: 'ship',};
+          } else if (this.props.index + 12 === i && (shipSelected === 'ship4')){
+            return {
+              ...square,
+              shipStatus: 'ship',};
+          } else {
+            return square
+          }
+
+        })
+        this.props.setGridArray(newGridArray)
+      }
     }
   }
 
