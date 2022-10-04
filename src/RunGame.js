@@ -4,7 +4,7 @@ import { Square } from './Square';
 import { SquareOpponent } from './SquareOpponent'
 
 
-export default function RunGame() {
+export function RunGame() {
   const gridArraySetup = new Array(16).fill({
     shipStatus: '0',
     hitStatus: '-'
@@ -26,7 +26,7 @@ export default function RunGame() {
   
 
   var [player2GridArray2, setGridArray2] = useState(player2WithShips)
-  console.log(player2GridArray2)
+
   return (
     <div>
 

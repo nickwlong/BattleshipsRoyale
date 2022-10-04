@@ -36,6 +36,6 @@ export class SquareOpponent extends React.Component {
 
   render(){
     return(
-      <div className={`square ${this.props.square.hitStatus}`} id={`square_${this.props.index}`} key={`square_${this.props.index}`} onClick={() => {this.handleClick()}}> </div>
+      <div className={`square ${this.props.square.hitStatus}`} id={`play2_square_${this.props.index}`} key={`square_${this.props.index}`} onClick={() => {this.handleClick()}}> </div>
   )
 }}

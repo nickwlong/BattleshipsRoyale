@@ -1,5 +1,5 @@
-import RunGame from './RunGame';
-import App from './App'
+import { RunGame } from '../RunGame';
+import App from '../App'
 import { findByRole, getByText, render, screen } from '@testing-library/react';
 
 
