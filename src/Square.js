@@ -1,3 +1,4 @@
+import { toHaveStyle } from '@testing-library/jest-dom/dist/matchers';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -5,7 +6,8 @@ export class Square extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      status: 'empty'
+      hitStatus: this.props.square.hitStatus,
+      index: this.props.index
     }
     this.handleClick = this.handleClick.bind(this)
   }
@@ -17,16 +19,23 @@ export class Square extends React.Component {
   // 
   
 
-  handleClick() {
-    console.log(this.props.square.shipStatus)
-    console.log(this.props.index)
-    this.setState(prevState => ({
-      status: 'ship'
-    }))
+  handleClick () {
+    let newGridArray = this.props.gridArray.map((square, i) => {
+      if(this.props.index === i){
+        return { ...square, shipStatus: 'ship'}
+      } else {
+        return square
+      }
+    })
+    this.props.setGridArray(newGridArray)
   }
+
+  // This handleClick can be used in the player2/3 board. On clicking the square, it would need to:
+  // Check to see if this square in the player's array has a ship, if so, change hitStatus to hit
+  // If it does NOT have a ship, change hitStatus to miss
 
   render(){
     return(
-      <div className={`square ${this.state.status}`} id={`square_${this.props.index}`} key={`square_${this.props.index}`} onClick={() => {this.handleClick()}}> </div>
+      <div className={`square ${this.props.square.shipStatus}`} id={`square_${this.props.index}`} key={`square_${this.props.index}`} onClick={() => {this.handleClick()}}> </div>
   )
 }}
