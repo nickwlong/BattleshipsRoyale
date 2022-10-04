@@ -20,24 +20,19 @@ export class Square extends React.Component {
   
 
   handleClick () {
-    console.log(this.props.gridArray)
-
     let newGridArray = this.props.gridArray.map((square, i) => {
-      console.log(i)
       if(this.props.index === i){
-        const newSquare = square
-        newSquare.shipStatus = 'ship'
-        console.log(newSquare)
-        return newSquare
+        return { ...square, shipStatus: 'ship'}
       } else {
-        console.log(square)
         return square
       }
     })
-    console.log(newGridArray)
     this.props.setGridArray(newGridArray)
-  
   }
+
+  // This handleClick can be used in the player2/3 board. On clicking the square, it would need to:
+  // Check to see if this square in the player's array has a ship, if so, change hitStatus to hit
+  // If it does NOT have a ship, change hitStatus to miss
 
   render(){
     return(

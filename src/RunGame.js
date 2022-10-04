@@ -14,7 +14,7 @@ export function RunGame() {
   var [gridArray, setGridArray] = useState(gridArraySetup)
   const player2GridArray = []
   const player3GridArray = []
-
+  console.log(gridArray)
   return (
     <div className="player board" id="GameContainer">
       {gridArray.map( // maps through the array and makes a square for each of the elements in the array.
