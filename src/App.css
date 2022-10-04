@@ -11,13 +11,32 @@
   width: 25%;
   height: 25%;
   box-sizing: border-box;
-  background: gray;
+  background: skyblue;
   border: 1px solid black;
   cursor: crosshair;
   transition: background-color 100ms ease-in-out;
 }
 
-.ship {
+.player.ship {
   background: red;
 }
 
+.hit {
+  background: yellow;
+  animation: boom .2s ease-out forwards;
+}
+
+@keyframes boom {
+  0% {
+    background-color: red;
+  }
+
+  100% {
+    background-color: peru;
+  }
+}
+
+
+.miss {
+  background: white;
+}

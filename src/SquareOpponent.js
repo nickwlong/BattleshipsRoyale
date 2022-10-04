@@ -2,7 +2,7 @@ import { toHaveStyle } from '@testing-library/jest-dom/dist/matchers';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-export class Square extends React.Component {  
+export class SquareOpponent extends React.Component {  
   constructor(props) {
     super(props);
     this.state = {
@@ -21,11 +21,11 @@ export class Square extends React.Component {
 
   handleClick () {
     let newGridArray = this.props.gridArray.map((square, i) => {
-      if(this.props.index === i){
-        return { ...square, shipStatus: 'ship'}
-      } else {
-        return square
-      }
+      if(this.props.index === i && this.props.square.shipStatus === 'ship'){
+        return { ...square, hitStatus: 'hit'}
+      } else if (this.props.index === i && this.props.square.shipStatus === '0') {
+        return { ...square, hitStatus: 'miss'}
+      } else { return square }
     })
     this.props.setGridArray(newGridArray)
   }
@@ -36,6 +36,6 @@ export class Square extends React.Component {
 
   render(){
     return(
-      <div className={`player square ${this.props.square.shipStatus}`} id={`square_${this.props.index}`} key={`square_${this.props.index}`} onClick={() => {this.handleClick()}}> </div>
+      <div className={`square ${this.props.square.hitStatus}`} id={`square_${this.props.index}`} key={`square_${this.props.index}`} onClick={() => {this.handleClick()}}> </div>
   )
 }}
