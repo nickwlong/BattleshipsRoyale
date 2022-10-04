@@ -4,7 +4,7 @@ import { Square } from './Square';
 import { SquareOpponent } from './SquareOpponent'
 
 
-export function RunGame() {
+export default function RunGame() {
   const gridArraySetup = new Array(16).fill({
     shipStatus: '0',
     hitStatus: '-'
