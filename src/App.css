@@ -5,6 +5,8 @@
   margin: 1em 2em 2em 1em;
   display: flex;
   flex-wrap: wrap;
+  margin: auto;
+
 }
 
 .square {

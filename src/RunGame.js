@@ -31,10 +31,10 @@ export function RunGame() {
   
 
   var [player2GridArray2, setGridArray2] = useState(player2WithShips)
-  console.log(player2GridArray2)
+
   return (
     <div>
-    <button className="ships" onClick={()=>{ SelectShip(1);}}> Ship1 </button>
+    <button className="ships" id="Ship1" onClick={()=>{ SelectShip(1);}}> Ship1 </button>
     <button className="ships" onClick={()=>{ SelectShip(2);}}> Ship2 </button>
     <button className="ships" onClick={()=>{ SelectShip(3);}}> Ship3 </button>
     <button className="ships" onClick={()=>{ SelectShip(4);}}> Ship4 </button>
