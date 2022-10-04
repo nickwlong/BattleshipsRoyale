@@ -23,14 +23,28 @@ export class Square extends React.Component {
 
   handleClick () {
 
-    if ((shipSelected === 'ship2' && shipOrient === 'horizontal' && [3,7,11,15].includes(this.props.index)) ||
+    if (
+      //checks if button pressed is inside the array given with ship selected and orientation(if button is not then ship will not go out of bounds if placed there, quic maffs)
+        (shipSelected === 'ship2' && shipOrient === 'horizontal' && [3,7,11,15].includes(this.props.index)) ||
         (shipSelected === 'ship3' && shipOrient === 'horizontal' && [2,3,6,7,10,11,14,15].includes(this.props.index)) ||
         (shipSelected === 'ship4' && shipOrient === 'horizontal' && [1,2,3,5,6,7,9,10,11,13,14,15].includes(this.props.index)) ||
         (shipSelected === 'ship2' && shipOrient === 'vertical' && [12,13,14,15].includes(this.props.index)) ||
         (shipSelected === 'ship3' && shipOrient === 'vertical' && [8,9,10,11,12,13,14,15].includes(this.props.index)) ||
         (shipSelected === 'ship4' && shipOrient === 'vertical' && [4,5,6,7,8,9,10,11,12,13,14,15].includes(this.props.index))
-        ) {
-      console.log("not allowed")
+        ){
+      console.log("out of boundaries")
+    } else if (
+      //slices the array with the boxes to check depending on ship selected and orientation, then checks elements for property shipStatus to not include ship (prevents ship overlap)
+      (shipSelected === 'ship1' && shipOrient === 'horizontal' && this.props.gridArray.slice(this.props.index,this.props.index+1).filter(square => square.shipStatus === 'ship').length > 0) ||
+      (shipSelected === 'ship2' && shipOrient === 'horizontal' && this.props.gridArray.slice(this.props.index,this.props.index+2).filter(square => square.shipStatus === 'ship').length > 0) ||
+      (shipSelected === 'ship3' && shipOrient === 'horizontal' && this.props.gridArray.slice(this.props.index,this.props.index+3).filter(square => square.shipStatus === 'ship').length > 0) ||
+      (shipSelected === 'ship4' && shipOrient === 'horizontal' && this.props.gridArray.slice(this.props.index,this.props.index+4).filter(square => square.shipStatus === 'ship').length > 0) ||
+      (shipSelected === 'ship1' && shipOrient === 'vertical' && (this.props.gridArray.slice(this.props.index,this.props.index+1).filter(square => square.shipStatus === 'ship').length > 0)) ||
+      (shipSelected === 'ship2' && shipOrient === 'vertical' && (this.props.gridArray.slice(this.props.index,this.props.index+1).filter(square => square.shipStatus === 'ship').length > 0 || this.props.gridArray.slice(this.props.index+4, this.props.index+5).filter(square => square.shipStatus === 'ship').length > 0)) || 
+      (shipSelected === 'ship3' && shipOrient === 'vertical' && (this.props.gridArray.slice(this.props.index,this.props.index+1).filter(square => square.shipStatus === 'ship').length > 0 || this.props.gridArray.slice(this.props.index+4, this.props.index+5).filter(square => square.shipStatus === 'ship').length > 0 || this.props.gridArray.slice(this.props.index+8,this.props.index+9).filter(square => square.shipStatus === 'ship').length > 0)) ||
+      (shipSelected === 'ship4' && shipOrient === 'vertical' && (this.props.gridArray.slice(this.props.index,this.props.index+1).filter(square => square.shipStatus === 'ship').length > 0 || this.props.gridArray.slice(this.props.index+4, this.props.index+5).filter(square => square.shipStatus === 'ship').length > 0 || this.props.gridArray.slice(this.props.index+8,this.props.index+9).filter(square => square.shipStatus === 'ship').length > 0 || this.props.gridArray.slice(this.props.index+12,this.props.index+13).filter(square => square.shipStatus === 'ship').length > 0))
+      ){
+      console.log("overlaps another ship")
     } else {
 
       //places horizontal ships
