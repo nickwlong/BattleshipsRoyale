@@ -9,9 +9,17 @@ export class Square extends React.Component {
     }
     this.handleClick = this.handleClick.bind(this)
   }
+
+  // this.props.index => the index within the grid array
+
+  // this.state.status => status of the square in the array
+
+  // 
   
 
   handleClick() {
+    console.log(this.props.square.shipStatus)
+    console.log(this.props.index)
     this.setState(prevState => ({
       status: 'ship'
     }))
