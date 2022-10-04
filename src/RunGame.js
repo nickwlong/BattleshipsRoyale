@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Square } from './Square';
+import { SquareOpponent } from './SquareOpponent'
 
 export var shipSelected = true;
 export var shipOrient = true;
@@ -17,9 +18,20 @@ export function RunGame() {
   // hitStatus to store if that location has been hit or not yet. 
 
   var [gridArray, setGridArray] = useState(gridArraySetup)
-  const player2GridArray = []
-  const player3GridArray = []
+
+  const player2GridArray = new Array(16).fill({
+    shipStatus: '0',
+    hitStatus: '-'
+  })
+
+  const player2WithShips = player2GridArray.map((square, index)=>
+    index === 4 || index === 5 || index === 6 ? { ...square, shipStatus: 'ship' } : square
+);
+
   
+
+  var [player2GridArray2, setGridArray2] = useState(player2WithShips)
+  console.log(player2GridArray2)
   return (
     <div>
     <button className="ships" onClick={()=>{ SelectShip(1);}}> Ship1 </button>
@@ -28,11 +40,21 @@ export function RunGame() {
     <button className="ships" onClick={()=>{ SelectShip(4);}}> Ship4 </button>
     <button className="ships" onClick={()=>{ SelectOrientation('horizontal');}}> Horizontal </button>
     <button className="ships" onClick={()=>{ SelectOrientation('vertical');}}> Vertical </button>
+    <h1>Your Board</h1>
     <div className="player board" id="GameContainer">
       {gridArray.map( // maps through the array and makes a square for each of the elements in the array.
-        (square, index) => (<Square square={square} index={index} gridArray={gridArray} setGridArray={setGridArray}/>) // these 'tags' of square and index pass into the 'props' within the Square class component
+        (square, index) => (<Square square={square} key={`player1Board_${index}`} index={index} gridArray={gridArray} setGridArray={setGridArray}/>) // these 'tags' of square and index pass into the 'props' within the Square class component
         )}
     </div>
+
+    <h1>Player 2's Board</h1>
+    <div className="player2 board" id="GameContainer2">
+      {player2GridArray2.map(
+        (square, index) => (<SquareOpponent square={square} key={`player2Board_${index}`} index={index} gridArray={player2GridArray2} setGridArray={setGridArray2}/>)
+        )}
+    </div>
+
+
     </div>
   );
 }
