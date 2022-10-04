@@ -1,6 +1,8 @@
 import { toHaveStyle } from '@testing-library/jest-dom/dist/matchers';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {shipSelected} from './RunGame.js';
+import {shipOrient} from './RunGame.js';
 
 export class Square extends React.Component {  
   constructor(props) {
@@ -20,14 +22,61 @@ export class Square extends React.Component {
   
 
   handleClick () {
-    let newGridArray = this.props.gridArray.map((square, i) => {
-      if(this.props.index === i){
-        return { ...square, shipStatus: 'ship'}
-      } else {
-        return square
-      }
-    })
-    this.props.setGridArray(newGridArray)
+    if (shipOrient === 'horizontal'){
+      var newGridArray = this.props.gridArray.map((square, i) => {
+        if(this.props.index === i && (shipSelected === 'ship1'|| shipSelected === 'ship2' || shipSelected === 'ship3'|| shipSelected === 'ship4')){
+          return {
+            ...square,
+            shipStatus: 'ship',
+          };
+        } else if (this.props.index + 1 === i && (shipSelected === 'ship2' || shipSelected === 'ship3' || shipSelected === 'ship4')){
+          return {
+            ...square,
+            shipStatus: 'ship',};
+        } else if (this.props.index + 2 === i && (shipSelected === 'ship3' || shipSelected === 'ship4')){
+          return {
+            ...square,
+            shipStatus: 'ship',};
+        } else if (this.props.index + 3 === i && (shipSelected === 'ship4')){
+          return {
+            ...square,
+            shipStatus: 'ship',};
+        } else {
+          return square
+        }
+
+      })
+      console.log(newGridArray)
+      this.props.setGridArray(newGridArray)
+    }
+
+    if (shipOrient === 'vertical'){
+      var newGridArray = this.props.gridArray.map((square, i) => {
+        if(this.props.index === i && (shipSelected === 'ship1'|| shipSelected === 'ship2' || shipSelected === 'ship3'|| shipSelected === 'ship4')){
+          return {
+            ...square,
+            shipStatus: 'ship',
+          };
+        } else if (this.props.index + 4 === i && (shipSelected === 'ship2' || shipSelected === 'ship3' || shipSelected === 'ship4')){
+          return {
+            ...square,
+            shipStatus: 'ship',};
+        } else if (this.props.index + 8 === i && (shipSelected === 'ship3' || shipSelected === 'ship4')){
+          return {
+            ...square,
+            shipStatus: 'ship',};
+        } else if (this.props.index + 12 === i && (shipSelected === 'ship4')){
+          return {
+            ...square,
+            shipStatus: 'ship',};
+        } else {
+          return square
+        }
+
+      })
+      console.log(newGridArray)
+      this.props.setGridArray(newGridArray)
+    }
   }
 
   // This handleClick can be used in the player2/3 board. On clicking the square, it would need to:
