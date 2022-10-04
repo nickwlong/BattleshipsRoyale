@@ -46,7 +46,6 @@ export class Square extends React.Component {
         }
 
       })
-      console.log(newGridArray)
       this.props.setGridArray(newGridArray)
     }
 
