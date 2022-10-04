@@ -22,7 +22,6 @@
 }
 
 .hit {
-  background: yellow;
   animation: boom .2s ease-out forwards;
 }
 
@@ -35,7 +34,6 @@
     background-color: peru;
   }
 }
-
 
 .miss {
   background: white;

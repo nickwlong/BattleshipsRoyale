@@ -23,10 +23,10 @@ export function RunGame() {
     index === 4 || index === 5 || index === 6 ? { ...square, shipStatus: 'ship' } : square
 );
 
-  console.log(player2WithShips)
+  
 
   var [player2GridArray2, setGridArray2] = useState(player2WithShips)
-
+  console.log(player2GridArray2)
   return (
     <div>
 
