@@ -22,7 +22,11 @@ describe('Square tests', () => {
     const player1square0 = document.getElementById('play1_square_0')
     expect(player1square0).toBeVisible
 
+    const shipBtn = document.getElementById('Ship1')
+
+    await user.click(shipBtn)
     await user.click(player1square0)
+
 
     expect(player1square0).toHaveClass('ship')
 

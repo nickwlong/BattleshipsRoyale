@@ -12,19 +12,19 @@ describe('Square tests', () => {
     const grid = document.getElementById('GameContainer2')
     expect(grid).toBeVisible
     const player2square0 = document.getElementById('play2_square_0')
-    expect(player1square0).toBeVisible
+    expect(player2square0).toBeVisible
 
   });
-  test("Clicking on a square changes it's ship status", async () => {
+  test("Clicking on an opponent's square changes it's hit status", async () => {
     const user = userEvent.setup()
     render(<RunGame />);
 
-    const player1square0 = document.getElementById('play1_square_0')
-    expect(player1square0).toBeVisible
+    const player2square1 = document.getElementById('play2_square_1')
+    expect(player2square1).toBeVisible
 
-    await user.click(player1square0)
+    await user.click(player2square1)
 
-    expect(player1square0).toHaveClass('ship')
+    expect(player2square1).toHaveClass('miss')
 
     // expect(player1square0).toHaveStyle('background: red')
 
