@@ -8,7 +8,8 @@ export function Welcome({changePlayState}){
     <h1>Battleships royale</h1>
       <br></br>
       <br></br>
-      <button id='BtnPlayGame' onClick={() => changePlayState('play')}>Click here to play the game!</button>
+      <button id='BtnPlayGame' onClick={() => changePlayState('Singleplayer')}>Singleplayer Game</button>
+      <button id='BtnPlayGame' onClick={() => changePlayState('Multiplayer')}>Multiplayer Game</button>
       <br></br>
     </div>
   );
