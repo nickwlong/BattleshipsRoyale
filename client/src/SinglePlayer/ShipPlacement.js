@@ -48,6 +48,17 @@ export function ShipPlacement(props) {
     }
   }
 
+  const showReadyBtn = () => {
+    if (props.play1Grid.filter(square => square.shipStatus === 'ship1').length > 0 &&
+      props.play1Grid.filter(square => square.shipStatus === 'ship2').length > 0 &&
+      props.play1Grid.filter(square => square.shipStatus === 'ship3').length > 0 &&
+      props.play1Grid.filter(square => square.shipStatus === 'ship4').length > 0) {
+        return (<button className="readyBtn" onClick={()=>{ handleReadyBtnClick();}}> Ready! </button>)
+      } else {return ''}
+
+
+  }
+
 
   return (
     <div>
@@ -57,7 +68,7 @@ export function ShipPlacement(props) {
       {isShip4Placed()}
       <button className="ships" onClick={()=>{ SelectOrientation('horizontal');}}> Horizontal </button>
       <button className="ships" onClick={()=>{ SelectOrientation('vertical');}}> Vertical </button>
-      <button className="readyBtn" onClick={()=>{ handleReadyBtnClick();}}> Ready! </button>
+      {showReadyBtn()}
 
       <h1>Your Board</h1>
       <div className="player board" id="GameContainer">
