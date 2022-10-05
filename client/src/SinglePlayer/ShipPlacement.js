@@ -12,13 +12,49 @@ export function ShipPlacement(props) {
     shipSelected = ''
   }
 
+  const isShip1Placed = () => {
+    if(props.play1Grid.filter(square => square.shipStatus === 'ship1').length > 0) {
+      shipSelected = ''
+      return ''
+    } else {
+      return <button className="ships" id="Ship1" onClick={()=>{ SelectShip(1);}}> Ship1 </button>
+    }
+  }
+
+  const isShip2Placed = () => {
+    if(props.play1Grid.filter(square => square.shipStatus === 'ship2').length > 0) {
+      shipSelected = ''
+      return ''
+    } else {
+      return <button className="ships" id="Ship2" onClick={()=>{ SelectShip(2);}}> Ship2 </button>
+    }
+  }
+
+  const isShip3Placed = () => {
+    if(props.play1Grid.filter(square => square.shipStatus === 'ship3').length > 0) {
+      shipSelected = ''
+      return ''
+    } else {
+      return <button className="ships" id="Ship3" onClick={()=>{ SelectShip(3);}}> Ship3 </button>
+    }
+  }
+
+  const isShip4Placed = () => {
+    if(props.play1Grid.filter(square => square.shipStatus === 'ship4').length > 0) {
+      shipSelected = ''
+      return ''
+    } else {
+      return <button className="ships" id="Ship4" onClick={()=>{ SelectShip(4);}}> Ship4 </button>
+    }
+  }
+
 
   return (
     <div>
-      <button className="ships" id="Ship1" onClick={()=>{ SelectShip(1);}}> Ship1 </button>
-      <button className="ships" onClick={()=>{ SelectShip(2);}}> Ship2 </button>
-      <button className="ships" onClick={()=>{ SelectShip(3);}}> Ship3 </button>
-      <button className="ships" onClick={()=>{ SelectShip(4);}}> Ship4 </button>
+      {isShip1Placed()}
+      {isShip2Placed()}
+      {isShip3Placed()}
+      {isShip4Placed()}
       <button className="ships" onClick={()=>{ SelectOrientation('horizontal');}}> Horizontal </button>
       <button className="ships" onClick={()=>{ SelectOrientation('vertical');}}> Vertical </button>
       <button className="readyBtn" onClick={()=>{ handleReadyBtnClick();}}> Ready! </button>

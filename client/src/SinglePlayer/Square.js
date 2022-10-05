@@ -55,20 +55,20 @@ export class Square extends React.Component {
           if(this.props.index === i && (shipSelected === 'ship1'|| shipSelected === 'ship2' || shipSelected === 'ship3'|| shipSelected === 'ship4')){
             return {
               ...square,
-              shipStatus: 'ship',
+              shipStatus: `${shipSelected}`,
             };
           } else if (this.props.index + 1 === i && (shipSelected === 'ship2' || shipSelected === 'ship3' || shipSelected === 'ship4')){
             return {
               ...square,
-              shipStatus: 'ship',};
+              shipStatus: `${shipSelected}`,};
           } else if (this.props.index + 2 === i && (shipSelected === 'ship3' || shipSelected === 'ship4')){
             return {
               ...square,
-              shipStatus: 'ship',};
+              shipStatus: `${shipSelected}`,};
           } else if (this.props.index + 3 === i && (shipSelected === 'ship4')){
             return {
               ...square,
-              shipStatus: 'ship',};
+              shipStatus: `${shipSelected}`,};
           } else {
             return square
           }
@@ -83,26 +83,27 @@ export class Square extends React.Component {
           if(this.props.index === i && (shipSelected === 'ship1'|| shipSelected === 'ship2' || shipSelected === 'ship3'|| shipSelected === 'ship4')){
             return {
               ...square,
-              shipStatus: 'ship',
+              shipStatus: `${shipSelected}`,
             };
           } else if (this.props.index + 4 === i && (shipSelected === 'ship2' || shipSelected === 'ship3' || shipSelected === 'ship4')){
             return {
               ...square,
-              shipStatus: 'ship',};
+              shipStatus: `${shipSelected}`,};
           } else if (this.props.index + 8 === i && (shipSelected === 'ship3' || shipSelected === 'ship4')){
             return {
               ...square,
-              shipStatus: 'ship',};
+              shipStatus: `${shipSelected}`,};
           } else if (this.props.index + 12 === i && (shipSelected === 'ship4')){
             return {
               ...square,
-              shipStatus: 'ship',};
+              shipStatus: `${shipSelected}`,};
           } else {
             return square
           }
 
         })
         this.props.setPlay1Grid(newPlay1Grid)
+        shipSelected = ''
       }
     }
   }

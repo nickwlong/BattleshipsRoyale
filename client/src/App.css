@@ -30,7 +30,16 @@ margin: auto
   transition: background-color 100ms ease-in-out;
 }
 
-.player.ship {
+.player.ship1 {
+  background: red;
+}
+.player.ship2 {
+  background: red;
+}
+.player.ship3 {
+  background: red;
+}
+.player.ship4 {
   background: red;
 }
 
