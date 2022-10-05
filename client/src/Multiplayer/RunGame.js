@@ -4,6 +4,7 @@ import { Square } from './Square';
 import { SquareOpponent } from './SquareOpponent'
 import { io } from "socket.io-client"
 
+const socket = io('http://localhost:3001') // This connects the client to the server, making a 'socket'
 
 export var shipSelected = true;
 export var shipOrient = true;
@@ -12,37 +13,11 @@ var shipSelected = 'none'
 var shipOrient = 'horizontal'
 
 export function RunMPGame() {
-  const socket = io('http://localhost:3001')
+  
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [lastPong, setLastPong] = useState(null);
   const [socketid, setSocketid] = useState('');
-
-  useEffect(() => {
-    
-    socket.on('connect', () => {
-      setSocketid(socket.id)
-      setIsConnected(true);
-    });
-
-    socket.on('disconnect', () => {
-      setIsConnected(false);
-    });
-
-    socket.on('pong', () => {
-      setLastPong(new Date().toISOString());
-    });
-
-    return () => {
-      socket.off('connect');
-      socket.off('disconnect');
-      socket.off('pong');
-    };
-
-  }, [])
-
-  const sendPing = () => {
-    socket.emit('ping');
-  }
+  const [roomId, setRoomId] = useState();
 
   const gridArraySetup = new Array(16).fill({
     shipStatus: '0',
@@ -57,14 +32,59 @@ export function RunMPGame() {
     hitStatus: '-'
   })
 
-  const player2WithShips = player2GridArray.map((square, index)=>
-    index === 4 || index === 5 || index === 6 ? { ...square, shipStatus: 'ship' } : square
-);
-  var [player2GridArray2, setGridArray2] = useState(player2WithShips)
+  //   const player2WithShips = player2GridArray.map((square, index)=>
+//     index === 4 || index === 5 || index === 6 ? { ...square, shipStatus: 'ship' } : square
+// );
+  var [player2GridArray2, setGridArray2] = useState(player2GridArray)
+
+
+  useEffect(() => {
+    
+    socket.on('connect', () => {
+      setSocketid(socket.id)
+      setIsConnected(true);
+    });
+
+    socket.on('disconnect', () => {
+      setIsConnected(false);
+    });
+
+    socket.on('receive-array', (array) => { // on receiving an update from the server, the array is set to gridArray2 (player 2's array)
+      setGridArray2(array)
+      console.log(array)
+    })
+
+    return () => {
+      socket.off('connect');
+      socket.off('disconnect');
+      socket.off('pong');
+    };
+
+  }, [])
+
+  const sendArray = () => { // Add this to 'onClick' functions to send the updated player array to other users
+    socket.emit('playerArray', gridArray, roomId)
+  }
+
+
+  const handleRoomIdChange = (event) => { // Tracks changes in the RoomID form
+    setRoomId(event.target.value);
+  }
+
+  const handleRoomIdSubmit = (event) => { // Submits the RoomID form
+    console.log('RoomId = ' + roomId)
+    event.preventDefault();
+    socket.emit('join-room', roomId)
+  }
 
   return (
     <div>
-    <button className="ships" id="Ship1" onClick={()=>{ SelectShip(1);}}> Ship1 </button>
+    <form onSubmit={handleRoomIdSubmit}>
+      <input type='text' name='RoomId' onChange={handleRoomIdChange}/>
+      <input type='submit' value="Submit Room ID"/>
+    </form>
+    <br></br>
+    <button className="ships" id="Ship1" onClick={()=>{ SelectShip(1); sendArray()}}> Ship1 </button>
     <button className="ships" onClick={()=>{ SelectShip(2);}}> Ship2 </button>
     <button className="ships" onClick={()=>{ SelectShip(3);}}> Ship3 </button>
     <button className="ships" onClick={()=>{ SelectShip(4);}}> Ship4 </button>
@@ -86,8 +106,6 @@ export function RunMPGame() {
 
     <div style={{background: 'white'}}>
         <p>Connected: { '' + isConnected + ' with id' + socketid }</p>
-        <p>Last pong: { lastPong || '-' }</p>
-        <button onClick={ sendPing }>Send ping</button>
     </div>
 
 
