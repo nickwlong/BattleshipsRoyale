@@ -35,14 +35,14 @@ export class Square extends React.Component {
       console.log("out of boundaries")
     } else if (
       //slices the array with the boxes to check depending on ship selected and orientation, then checks elements for property shipStatus to not include ship (prevents ship overlap)
-      (shipSelected === 'ship1' && shipOrient === 'horizontal' && this.props.play1Grid.slice(this.props.index,this.props.index+1).filter(square => square.shipStatus === 'ship').length > 0) ||
-      (shipSelected === 'ship2' && shipOrient === 'horizontal' && this.props.play1Grid.slice(this.props.index,this.props.index+2).filter(square => square.shipStatus === 'ship').length > 0) ||
-      (shipSelected === 'ship3' && shipOrient === 'horizontal' && this.props.play1Grid.slice(this.props.index,this.props.index+3).filter(square => square.shipStatus === 'ship').length > 0) ||
-      (shipSelected === 'ship4' && shipOrient === 'horizontal' && this.props.play1Grid.slice(this.props.index,this.props.index+4).filter(square => square.shipStatus === 'ship').length > 0) ||
-      (shipSelected === 'ship1' && shipOrient === 'vertical' && (this.props.play1Grid.slice(this.props.index,this.props.index+1).filter(square => square.shipStatus === 'ship').length > 0)) ||
-      (shipSelected === 'ship2' && shipOrient === 'vertical' && (this.props.play1Grid.slice(this.props.index,this.props.index+1).filter(square => square.shipStatus === 'ship').length > 0 || this.props.play1Grid.slice(this.props.index+4, this.props.index+5).filter(square => square.shipStatus === 'ship').length > 0)) || 
-      (shipSelected === 'ship3' && shipOrient === 'vertical' && (this.props.play1Grid.slice(this.props.index,this.props.index+1).filter(square => square.shipStatus === 'ship').length > 0 || this.props.play1Grid.slice(this.props.index+4, this.props.index+5).filter(square => square.shipStatus === 'ship').length > 0 || this.props.play1Grid.slice(this.props.index+8,this.props.index+9).filter(square => square.shipStatus === 'ship').length > 0)) ||
-      (shipSelected === 'ship4' && shipOrient === 'vertical' && (this.props.play1Grid.slice(this.props.index,this.props.index+1).filter(square => square.shipStatus === 'ship').length > 0 || this.props.play1Grid.slice(this.props.index+4, this.props.index+5).filter(square => square.shipStatus === 'ship').length > 0 || this.props.play1Grid.slice(this.props.index+8,this.props.index+9).filter(square => square.shipStatus === 'ship').length > 0 || this.props.play1Grid.slice(this.props.index+12,this.props.index+13).filter(square => square.shipStatus === 'ship').length > 0))
+      (shipSelected === 'ship1' && shipOrient === 'horizontal' && this.props.play1Grid.slice(this.props.index,this.props.index+1).filter(square => square.shipPresent === 'ship').length > 0) ||
+      (shipSelected === 'ship2' && shipOrient === 'horizontal' && this.props.play1Grid.slice(this.props.index,this.props.index+2).filter(square => square.shipPresent === 'ship').length > 0) ||
+      (shipSelected === 'ship3' && shipOrient === 'horizontal' && this.props.play1Grid.slice(this.props.index,this.props.index+3).filter(square => square.shipPresent === 'ship').length > 0) ||
+      (shipSelected === 'ship4' && shipOrient === 'horizontal' && this.props.play1Grid.slice(this.props.index,this.props.index+4).filter(square => square.shipPresent === 'ship').length > 0) ||
+      (shipSelected === 'ship1' && shipOrient === 'vertical' && (this.props.play1Grid.slice(this.props.index,this.props.index+1).filter(square => square.shipPresent === 'ship').length > 0)) ||
+      (shipSelected === 'ship2' && shipOrient === 'vertical' && (this.props.play1Grid.slice(this.props.index,this.props.index+1).filter(square => square.shipPresent === 'ship').length > 0 || this.props.play1Grid.slice(this.props.index+4, this.props.index+5).filter(square => square.shipPresent === 'ship').length > 0)) || 
+      (shipSelected === 'ship3' && shipOrient === 'vertical' && (this.props.play1Grid.slice(this.props.index,this.props.index+1).filter(square => square.shipPresent === 'ship').length > 0 || this.props.play1Grid.slice(this.props.index+4, this.props.index+5).filter(square => square.shipPresent === 'ship').length > 0 || this.props.play1Grid.slice(this.props.index+8,this.props.index+9).filter(square => square.shipPresent === 'ship').length > 0)) ||
+      (shipSelected === 'ship4' && shipOrient === 'vertical' && (this.props.play1Grid.slice(this.props.index,this.props.index+1).filter(square => square.shipPresent === 'ship').length > 0 || this.props.play1Grid.slice(this.props.index+4, this.props.index+5).filter(square => square.shipPresent === 'ship').length > 0 || this.props.play1Grid.slice(this.props.index+8,this.props.index+9).filter(square => square.shipPresent === 'ship').length > 0 || this.props.play1Grid.slice(this.props.index+12,this.props.index+13).filter(square => square.shipPresent === 'ship').length > 0))
       ){
       console.log("overlaps another ship")
     } else {
@@ -55,20 +55,28 @@ export class Square extends React.Component {
           if(this.props.index === i && (shipSelected === 'ship1'|| shipSelected === 'ship2' || shipSelected === 'ship3'|| shipSelected === 'ship4')){
             return {
               ...square,
-              shipStatus: 'ship',
+              shipStatus: `${shipSelected}`,
+              shipPresent: 'ship'
             };
           } else if (this.props.index + 1 === i && (shipSelected === 'ship2' || shipSelected === 'ship3' || shipSelected === 'ship4')){
             return {
               ...square,
-              shipStatus: 'ship',};
+              shipStatus: `${shipSelected}`,
+              shipPresent: 'ship'
+            };
           } else if (this.props.index + 2 === i && (shipSelected === 'ship3' || shipSelected === 'ship4')){
             return {
               ...square,
-              shipStatus: 'ship',};
+              shipStatus: `${shipSelected}`,
+              shipPresent: 'ship'
+            };
+
           } else if (this.props.index + 3 === i && (shipSelected === 'ship4')){
             return {
               ...square,
-              shipStatus: 'ship',};
+              shipStatus: `${shipSelected}`,
+              shipPresent: 'ship'
+            };
           } else {
             return square
           }
@@ -83,26 +91,29 @@ export class Square extends React.Component {
           if(this.props.index === i && (shipSelected === 'ship1'|| shipSelected === 'ship2' || shipSelected === 'ship3'|| shipSelected === 'ship4')){
             return {
               ...square,
-              shipStatus: 'ship',
+              shipStatus: `${shipSelected}`,
             };
           } else if (this.props.index + 4 === i && (shipSelected === 'ship2' || shipSelected === 'ship3' || shipSelected === 'ship4')){
             return {
               ...square,
-              shipStatus: 'ship',};
+              shipStatus: `${shipSelected}`,};
           } else if (this.props.index + 8 === i && (shipSelected === 'ship3' || shipSelected === 'ship4')){
             return {
               ...square,
-              shipStatus: 'ship',};
+              shipStatus: `${shipSelected}`,};
           } else if (this.props.index + 12 === i && (shipSelected === 'ship4')){
             return {
               ...square,
-              shipStatus: 'ship',};
+              shipStatus: `${shipSelected}`,};
           } else {
             return square
           }
 
         })
+
         this.props.setPlay1Grid(newPlay1Grid)
+        
+        
       }
     }
   }

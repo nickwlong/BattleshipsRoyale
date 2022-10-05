@@ -21,13 +21,15 @@ export function RunGame() {
 
   const play2GridSetupShips = play2GridSetup.map((square, index)=>
     index === 4 || index === 5 || index === 6 ? { ...square, shipStatus: 'ship' } : square
-);
+  );
   var [play2Grid, setPlay2Grid] = useState(play2GridSetupShips)
 
   const play3GridSetupShips = play2GridSetup.map((square, index)=>
   index === 12 || index === 13 || index === 14 ? { ...square, shipStatus: 'ship' } : square
-);
-var [play3Grid, setPlay3Grid] = useState(play3GridSetupShips)
+  );
+  var [play3Grid, setPlay3Grid] = useState(play3GridSetupShips)
+
+  console.log(play1Grid)
 
   return (
     <div>

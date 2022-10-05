@@ -20,6 +20,8 @@ export class SquareOpponent extends React.Component {
   
 
   handleClick () {
+    if (this.props.turnState === 'Computer1' || this.props.turnState === 'Computer2') {return null}
+
     let newGridArray = this.props.gridArray.map((square, i) => {
       if(this.props.index === i && this.props.square.shipStatus === 'ship'){
         return { ...square, hitStatus: 'hit'}
@@ -28,6 +30,8 @@ export class SquareOpponent extends React.Component {
       } else { return square }
     })
     this.props.setGridArray(newGridArray)
+    console.log(this.props.turnState)
+    this.props.setTurnState('Computer1')
   }
 
   // This handleClick can be used in the player2/3 board. On clicking the square, it would need to:
