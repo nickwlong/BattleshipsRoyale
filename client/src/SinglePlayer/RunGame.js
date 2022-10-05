@@ -16,7 +16,6 @@ export function RunGame() {
   }) // Making an array to form the grid.
   // shipStatus to store if a boat is saved in that location
   // hitStatus to store if that location has been hit or not yet. 
-
   var [gridArray, setGridArray] = useState(gridArraySetup)
 
   const player2GridArray = new Array(16).fill({
@@ -27,9 +26,6 @@ export function RunGame() {
   const player2WithShips = player2GridArray.map((square, index)=>
     index === 4 || index === 5 || index === 6 ? { ...square, shipStatus: 'ship' } : square
 );
-
-  
-
   var [player2GridArray2, setGridArray2] = useState(player2WithShips)
 
   return (

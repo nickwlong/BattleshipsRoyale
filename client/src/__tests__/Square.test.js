@@ -1,4 +1,4 @@
-import { RunGame } from "../RunGame";
+import { RunGame } from "../SinglePlayer/RunGame";
 import { findByRole, getByText, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
