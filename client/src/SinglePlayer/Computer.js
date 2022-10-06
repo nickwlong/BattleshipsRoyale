@@ -16,6 +16,6 @@ export function Computer(props) {
     }
 }
 
-return (computerTurn())
+return (<div>{computerTurn()}</div>)
 
 }

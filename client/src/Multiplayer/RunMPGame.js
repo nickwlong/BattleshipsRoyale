@@ -40,6 +40,8 @@ export function RunMPGame(props) {
     const handleRoomForm = document.getElementById('roomIdForm')
     handleRoomForm.style.display = 'none'
     alert(`You have joined room: ${props.roomId}`)
+    const connectedStatus = document.getElementById('connectedStatus')
+    connectedStatus.innerText=`You are connected to room: ${props.roomId}`
   }
 
   return (
@@ -52,7 +54,7 @@ export function RunMPGame(props) {
       
 
       <div style={{background: 'white'}}>
-          <p>Connected: { '' + isConnected + ' with id ' + socket.id }</p>
+          <p id='connectedStatus'>Connected: { '' + isConnected + ' with id ' + socket.id }</p>
       </div>
     </div>
   );
