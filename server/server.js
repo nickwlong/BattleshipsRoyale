@@ -4,23 +4,36 @@ const io = require('socket.io')(3001, {
   }
 })
 
-io.on('connection', socket => {
+let rooms = []
 
-  let connectionsLimit = 3
+io.on('connection', socket => {
 
   console.log(socket.id)
 
-  socket.on('join-room', roomId => { // Adds the user to the specified room upon joining
+  socket.on('createRoom', (roomName, callback) => {
+    const room = {
+      id: uuid,
+      name: roomName,
+      sockets: []
+    };
+    rooms[room.id]  = room;
+    // have the socket join the room they have just created
+    joinRoom(socket, room);
+    callback();
+  })
 
-    // if (io.engine.clientsCount > connectionsLimit) {
-    //   socket.emit('err', { message: 'reach the limit of connections' })
-    //   // socket.disconnect()
-    //   console.log('Disconnected...')
-    //   return
-    // }
+
+
+  socket.on('join-room', (roomId, callback) => { // Adds the user to the specified room upon joining
+
+    const room = rooms[roomId];
+    joinRoom(socket, room); 
+
     console.log('Someone is joining a room!')
     socket.join(roomId)
-  })
+    callback();
+  });
+
 
   // add conditional to check if the room is full
 
