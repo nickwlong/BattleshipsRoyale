@@ -9,6 +9,35 @@ export function RunGame(props) {
   const [socketid, setSocketid] = useState('');
   const [roomId, setRoomId] = useState();
   const [readyState, setReadyState] = useState(false)
+
+  const defaultPlayersStatus = [
+    {
+      playerNumber: 1,
+      socketid: '',
+      username: '',
+      hasShipsPlaced: false,
+      hasAllShipsDestroyed: false,
+    },
+    {
+      playerNumber: 2,
+      socketid: '',
+      username: '',
+      hasShipsPlaced: false,
+      hasAllShipsDestroyed: false,
+    },
+    {
+      playerNumber: 3,
+      socketid: '',
+      username: '',
+      hasShipsPlaced: false,
+      hasAllShipsDestroyed: false,
+    }
+  ]
+
+  const [playersStatus, setPlayersStatus] = useState()
+
+
+
   const playerGridSetup = new Array(16).fill({
     shipStatus: '0',
     hitStatus: '-'
