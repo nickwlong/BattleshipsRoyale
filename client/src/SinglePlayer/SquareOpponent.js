@@ -26,9 +26,8 @@ export class SquareOpponent extends React.Component {
 
   handleClick () {
     if (this.props.turnState === 'Computer1' || this.props.turnState === 'Computer2') {return null}
-
     let newGridArray = this.props.gridArray.map((square, i) => {
-      if(this.props.index === i && this.props.square.shipStatus === 'ship'){
+      if(this.props.index === i && ["ship","ship1","ship2","ship3","ship4"].includes(this.props.square.shipStatus)){
         return { ...square, hitStatus: 'hit'}
       } else if (this.props.index === i && this.props.square.shipStatus === '0') {
         return { ...square, hitStatus: 'miss'}
@@ -37,7 +36,6 @@ export class SquareOpponent extends React.Component {
     this.props.setGridArray(newGridArray)
     console.log(this.props.turnState)
     this.props.setTurnState('Computer1')
-    Computer();
   }
 
   // This handleClick can be used in the player2/3 board. On clicking the square, it would need to:
