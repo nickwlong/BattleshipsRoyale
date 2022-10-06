@@ -17,7 +17,7 @@ export function ShipPlacement(props) {
       shipSelected = ''
       return ''
     } else {
-      return <button className="ships" id="Ship1" onClick={()=>{ SelectShip(1);}}> Ship1 </button>
+      return <button className="ships" id="Ship1" onClick={()=>{ SelectShip(1);}}> TugBoat(1) </button>
     }
   }
 
@@ -26,7 +26,7 @@ export function ShipPlacement(props) {
       shipSelected = ''
       return ''
     } else {
-      return <button className="ships" id="Ship2" onClick={()=>{ SelectShip(2);}}> Ship2 </button>
+      return <button className="ships" id="Ship2" onClick={()=>{ SelectShip(2);}}> Destroyer(2) </button>
     }
   }
 
@@ -35,7 +35,7 @@ export function ShipPlacement(props) {
       shipSelected = ''
       return ''
     } else {
-      return <button className="ships" id="Ship3" onClick={()=>{ SelectShip(3);}}> Ship3 </button>
+      return <button className="ships" id="Ship3" onClick={()=>{ SelectShip(3);}}> Cruiser(3) </button>
     }
   }
 
@@ -44,7 +44,7 @@ export function ShipPlacement(props) {
       shipSelected = ''
       return ''
     } else {
-      return <button className="ships" id="Ship4" onClick={()=>{ SelectShip(4);}}> Ship4 </button>
+      return <button className="ships" id="Ship4" onClick={()=>{ SelectShip(4);}}> Battleship(4) </button>
     }
   }
 
