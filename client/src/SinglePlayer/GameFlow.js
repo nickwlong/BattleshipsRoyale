@@ -36,7 +36,8 @@ export function GameFlow(props) {
 //
   return(
   <div>
-    <Computer turnState={turnState} setTurnState={setTurnState} />
+    <Computer turnState={turnState} setTurnState={setTurnState} grid1Array={props.play1Grid} setGrid1Array={props.setPlay1Grid} grid2Array={props.play2Grid} setGrid2Array={props.setPlay2Grid} grid3Array={props.play3Grid} setGrid3Array={props.setPlay3Grid}/>
+    {/* computer function imports grids and turns state, and functions of setting grids and turn state */}
     <row>
       <column>
         <h1>Computer 1's Board</h1>
@@ -61,7 +62,7 @@ export function GameFlow(props) {
         <button onClick={() => {setTurnState('Player1')}}>Reset to Player's Turn</button>
 
         <h1>Your Board</h1>
-        <div className="player board" id="GameContainer">
+        <div className="player2 board" id="GameContainer2">
           {props.play1Grid.map( // maps through the array and makes a square for each of the elements in the array.
             (square, index) => (<Square checkIfGameOver={checkIfGameOver} square={square} key={`player1Board_${index}`} index={index} play1Grid={props.play1Grid} setPlay1Grid={props.setPlay1Grid} setTurnState={setTurnState} turnState={turnState}/>) // these 'tags' of square and index pass into the 'props' within the Square class component
             )}

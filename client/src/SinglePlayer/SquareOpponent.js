@@ -27,9 +27,8 @@ export class SquareOpponent extends React.Component {
 
   async handleClick () {
     if (this.props.turnState === 'Computer1' || this.props.turnState === 'Computer2') {return null}
-
     let newGridArray = this.props.gridArray.map((square, i) => {
-      if(this.props.index === i && this.props.square.shipStatus === 'ship'){
+      if(this.props.index === i && ["ship","ship1","ship2","ship3","ship4"].includes(this.props.square.shipStatus)){
         return { ...square, hitStatus: 'hit'}
       } else if (this.props.index === i && this.props.square.shipStatus === '0') {
         return { ...square, hitStatus: 'miss'}
