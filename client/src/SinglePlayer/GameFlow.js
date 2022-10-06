@@ -6,8 +6,6 @@ import { Computer } from "./Computer"
 
 export function GameFlow(props) {
   const [turnState, setTurnState] = useState('Player1')
-
-
   return(
   <div>
     <Computer turnState={turnState} setTurnState={setTurnState} />
@@ -16,7 +14,7 @@ export function GameFlow(props) {
         <h1>Computer 1's Board</h1>
         <div className="player2 board" id="GameContainer2">
           {props.play2Grid.map(
-            (square, index) => (<SquareOpponent square={square} key={`player2Board_${index}`} index={index} gridArray={props.play2Grid} setGridArray={props.setPlay2Grid} setTurnState={setTurnState} turnState={turnState}/>)
+            (square, index) => (<SquareOpponent square={square} key={`player2Board_${index}`} index={index} gridArray={props.play2Grid} setGridArray={props.setPlay2Grid} setTurnState={setTurnState} turnState={turnState} sendGrids={props.sendGrids}/>)
             )}
         </div>
       </column>
@@ -24,7 +22,7 @@ export function GameFlow(props) {
         <h1>Computer 2's Board</h1>
         <div className="player2 board" id="GameContainer2">
           {props.play3Grid.map(
-            (square, index) => (<SquareOpponent square={square} key={`player2Board_${index}`} index={index} gridArray={props.play3Grid} setGridArray={props.setPlay3Grid} setTurnState={setTurnState} turnState={turnState}/>)
+            (square, index) => (<SquareOpponent square={square} key={`player2Board_${index}`} index={index} gridArray={props.play3Grid} setGridArray={props.setPlay3Grid} setTurnState={setTurnState} turnState={turnState} sendGrids={props.sendGrids}/>)
             )}
         </div>
       </column>

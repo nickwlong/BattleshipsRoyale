@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { RunGame } from './SinglePlayer/RunGame';
-import { RunMPGame } from './Multiplayer/RunGame';
+import { RunMPGame } from './Multiplayer/RunMPGame';
 import { useState } from 'react';
 import { Welcome } from './Welcome';
 
@@ -11,10 +11,8 @@ function App() {
   const checkPlayState = () => {
     if(playState === 'Welcome') {
       return <Welcome changePlayState={ setPlayState }/>
-    } else if (playState === 'Multiplayer') {
-      return <RunMPGame/>
-    } else if (playState === 'Singleplayer') {
-      return <RunGame/>
+    } else {
+      return <RunGame playState={playState}/>
     }
   }
 

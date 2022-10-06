@@ -8,6 +8,7 @@ var shipOrient = 'horizontal'
 
 export function ShipPlacement(props) {
   const handleReadyBtnClick = () => {
+    props.sendPlayerReadyGrid()
     props.setReadyState(true)
     shipSelected = ''
   }

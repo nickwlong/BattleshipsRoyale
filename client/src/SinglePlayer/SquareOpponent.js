@@ -37,7 +37,7 @@ export class SquareOpponent extends React.Component {
     this.props.setGridArray(newGridArray)
     console.log(this.props.turnState)
     this.props.setTurnState('Computer1')
-    Computer();
+
   }
 
   // This handleClick can be used in the player2/3 board. On clicking the square, it would need to:

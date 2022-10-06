@@ -18,19 +18,19 @@ io.on('connection', socket => {
     //   console.log('Disconnected...')
     //   return
     // }
-
+    console.log('Someone is joining a room!')
     socket.join(roomId)
   })
 
   // add conditional to check if the room is full
 
-  socket.on('playerArray', (array, roomId) => {
+  socket.on('playerGridReady', (playerGrid, roomId) => {
     console.log("roomId = " + roomId)
     if (roomId === '') {
-      socket.broadcast.emit('receive-array', array)
+      socket.broadcast.emit('receive-array', playerGrid)
     } else {
-    socket.to(roomId).emit('receive-array', array)
+    socket.to(roomId).emit('receive-array', playerGrid)
     }
-    console.log(array)
+    console.log(playerGrid)
   })
 })
