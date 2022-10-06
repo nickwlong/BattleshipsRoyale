@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react"
 import { Square } from "./Square"
 import { SquareOpponent } from "./SquareOpponent"
+import { Computer } from "./Computer"
 
 
 export function GameFlow(props) {
   const [turnState, setTurnState] = useState('Player1')
 
+
   return(
   <div>
+    <Computer turnState={turnState} setTurnState={setTurnState} />
     <row>
       <column>
         <h1>Computer 1's Board</h1>
