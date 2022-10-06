@@ -2,6 +2,7 @@ import { toHaveStyle } from '@testing-library/jest-dom/dist/matchers';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Computer} from './Computer';
+import { checkIfGameOver } from './GameFlow';
 
 export var {setTurnState} = true;
 export var {turnState} = true;
@@ -24,7 +25,7 @@ export class SquareOpponent extends React.Component {
   // 
   
 
-  handleClick () {
+  async handleClick () {
     if (this.props.turnState === 'Computer1' || this.props.turnState === 'Computer2') {return null}
 
     let newGridArray = this.props.gridArray.map((square, i) => {
@@ -34,10 +35,12 @@ export class SquareOpponent extends React.Component {
         return { ...square, hitStatus: 'miss'}
       } else { return square }
     })
-    this.props.setGridArray(newGridArray)
-    console.log(this.props.turnState)
     this.props.setTurnState('Computer1')
-    Computer();
+    const wait = await this.props.setGridArray(newGridArray)
+    console.log(this.props.turnState)
+    this.props.checkIfGameOver()
+    
+    
   }
 
   // This handleClick can be used in the player2/3 board. On clicking the square, it would need to:
