@@ -2,6 +2,7 @@ import { toHaveStyle } from '@testing-library/jest-dom/dist/matchers';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Computer} from './Computer';
+import { checkIfGameOver } from './GameFlow';
 
 export var {setTurnState} = true;
 export var {turnState} = true;
@@ -24,20 +25,28 @@ export class SquareOpponent extends React.Component {
   // 
   
 
-  handleClick () {
+  async handleClick () {
     if (this.props.turnState === 'Computer1' || this.props.turnState === 'Computer2') {return null}
-
+    if (this.props.square.hitStatus === 'hit' || this.props.square.hitStatus === 'miss') {
+      alert('This square has already been hit, choose another')
+      return null}
     let newGridArray = this.props.gridArray.map((square, i) => {
-      if(this.props.index === i && this.props.square.shipStatus === 'ship'){
+      if(this.props.index === i && ["ship","ship1","ship2","ship3","ship4"].includes(this.props.square.shipStatus)){
         return { ...square, hitStatus: 'hit'}
       } else if (this.props.index === i && this.props.square.shipStatus === '0') {
         return { ...square, hitStatus: 'miss'}
       } else { return square }
     })
-    this.props.setGridArray(newGridArray)
-    console.log(this.props.turnState)
     this.props.setTurnState('Computer1')
+<<<<<<< HEAD
 
+=======
+    const wait = await this.props.setGridArray(newGridArray)
+    console.log(this.props.turnState)
+    this.props.checkIfGameOver()
+    
+    
+>>>>>>> 80a8e303d15aa00da8366ac45f196ea646a9ad98
   }
 
   // This handleClick can be used in the player2/3 board. On clicking the square, it would need to:

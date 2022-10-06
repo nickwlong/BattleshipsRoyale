@@ -67,6 +67,7 @@ export function ShipPlacement(props) {
       {isShip2Placed()}
       {isShip3Placed()}
       {isShip4Placed()}
+      {/* functions above are called for each ship button, checks the array if it exists, if it does nothing is shown, if not it shows the respective ship button */}
       <button className="ships" onClick={()=>{ SelectOrientation('horizontal');}}> Horizontal </button>
       <button className="ships" onClick={()=>{ SelectOrientation('vertical');}}> Vertical </button>
       {showReadyBtn()}
