@@ -11,6 +11,7 @@ export function GameFlow(props) {
   return(
   <div>
     <Computer turnState={turnState} setTurnState={setTurnState} grid1Array={props.play1Grid} setGrid1Array={props.setPlay1Grid} grid2Array={props.play2Grid} setGrid2Array={props.setPlay2Grid} grid3Array={props.play3Grid} setGrid3Array={props.setPlay3Grid}/>
+    {/* computer function imports grids and turns state, and functions of setting grids and turn state */}
     <row>
       <column>
         <h1>Computer 1's Board</h1>

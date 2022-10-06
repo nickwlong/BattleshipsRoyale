@@ -1,6 +1,6 @@
 
 export function Computer(props) {
-
+    //props imports gridArrays array(with elements) and setGridArray function for players (along others like turnState)
     const computerTurn = () => {
 
     if (props.turnState === 'Computer1') {
@@ -10,8 +10,10 @@ export function Computer(props) {
         if (playerPicked === 0){
 
         let indexPicked = Math.floor(Math.random() * 16);
-        
+        //picks random player and random square
         let newGridArray = props.grid1Array.map((square, i) => {
+
+            //maps array with objects, picks specific square, then returns same array but the modified square replaces original
             if(indexPicked === i && ["ship","ship1","ship2","ship3","ship4"].includes(square.shipStatus)){
                 return { ...square, hitStatus: 'hit'}
             } else if (indexPicked === i && square.shipStatus === '0') {
@@ -19,6 +21,7 @@ export function Computer(props) {
             } else { return square }
         })
         props.setGrid1Array(newGridArray)
+        //imports function from props and sets the new changed array of objects
 
     } else if (playerPicked === 1){
 
@@ -35,6 +38,7 @@ export function Computer(props) {
 
     }
         props.setTurnState('Computer2')
+        //imports setTurnState function and changes turn to Computer2
         console.log("meep1")
 
     } else if (props.turnState === 'Computer2'){
@@ -80,5 +84,6 @@ export function Computer(props) {
 }
 
 return (computerTurn())
+//Computer function is called so when it is called, it calls the computerTurn function and runs code above
 
 }
