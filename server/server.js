@@ -14,6 +14,7 @@ let rooms = []
 io.on('connection', socket => {
 
   socket.on('join-room', roomId => { // Adds the user to the specified room upon joining
+    
     let room
     if(!rooms.some((e) => e.id === roomId )) {
       room = {sockets: [socket.id], 
@@ -38,8 +39,8 @@ io.on('connection', socket => {
       room.sockets[1] === socket.id ? room.play2Grid = playerGrid : ''
       room.sockets[2] === socket.id ? room.play3Grid = playerGrid : ''
       console.log(room)
+
       }
-      
       if (room.id === roomId && room.play1Grid !== '' && room.play2Grid !== '' && room.play3Grid !== '') {
         socket.to(roomId).emit('allPlayersReadyMessage', 'allPlayersReady', room) 
         socket.emit('allPlayersReadyMessage', 'allPlayersReady', room)

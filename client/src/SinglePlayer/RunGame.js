@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ShipPlacement } from './ShipPlacement';
 import { GameFlow } from './GameFlow';
 import { RunMPGame } from '../Multiplayer/RunMPGame';
@@ -10,6 +10,22 @@ export function RunGame(props) {
   const [roomId, setRoomId] = useState();
   const [readyState, setReadyState] = useState(false)
   const [playerIndexState, setPlayerIndex] = useState()
+  const [isConnected, setIsConnected] = useState(socket.connected);
+
+
+  
+    socket.on('connect', async () => {
+      console.log(socket.id)
+      setSocketid(socket.id)
+      setIsConnected(true);
+    });
+  
+    socket.on('disconnect', () => {
+      setIsConnected(false);
+    });
+  
+    socket.on('playerJoinedRoom', message => {console.log(message)})
+  
 
   const defaultPlayersStatus = [
     {
@@ -112,9 +128,10 @@ export function RunGame(props) {
       arrayOfGrids.push(room.play3Grid)
       // index 0 is server's player 1, index 1 is server's player 2, index 2 is server's player 3
 
-
+      console.log(room.sockets)
+      console.log(socketid)
       let playerIndex = room.sockets.findIndex(socket => socket === socketid) // finds the local player's index from inside the server's sockets array
-
+      console.log(playerIndex)
       setPlayerIndex(playerIndex)
 
       let localPlayerGrid = arrayOfGrids.splice(playerIndex, 1)[0] // removes the playerGrid from the array

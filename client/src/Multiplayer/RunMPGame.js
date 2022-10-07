@@ -8,19 +8,9 @@ export const socket = io('http://localhost:3001') // This connects the client to
 
 export function RunMPGame(props) {
   
-  const [isConnected, setIsConnected] = useState(socket.connected);
+
+
   
-  socket.on('connect', async () => {
-    props.setSocketid(socket.id)
-    console.log(socket.id)
-    setIsConnected(true);
-  });
-
-  socket.on('disconnect', () => {
-    setIsConnected(false);
-  });
-
-  socket.on('playerJoinedRoom', message => {console.log(message)})
 
   const handleRoomIdChange = (event) => { // Tracks changes in the RoomID form
     props.setRoomId(event.target.value);
@@ -38,7 +28,7 @@ export function RunMPGame(props) {
 
     alert(`You have created room: ${props.roomId}`)
 
-    const connectedStatus = document.getElementById('connectedStatus')
+    const connectedStatus = document.getElementById('connectedStatus2')
     connectedStatus.innerText=`You are connected to room: ${props.roomId}`
   }
 
@@ -54,6 +44,7 @@ export function RunMPGame(props) {
 
       <div style={{background: 'white'}}>
           <p id='connectedStatus'>Connected: { '' + isConnected + ' with id ' + socket.id }</p>
+          <p id='connectedStatus2'></p>
       </div>
     </div>
   );
