@@ -95,69 +95,40 @@ export function RunGame(props) {
     console.log(arrayOfPlayerGrids)
 
     socket.emit('sendData', roomId, arrayOfPlayerGrids[0], arrayOfPlayerGrids[1], arrayOfPlayerGrids[2]) // arrayOfGrids[0] is serverPlayer1, arr..[1] is serverPlayer2, arr..[2] is serverPlayer3
-  }
+  };
 
   socket.on('receiveData', (room) => {
-      let arrayOfGrids = []
-      arrayOfGrids.push(room.play1Grid).push(room.play2Grid).push(room.play3Grid)
-      // index 0 is server's player 1, index 1 is server's player 2, index 2 is server's player 3
-      console.log(arrayOfGrids)
+    console.log('Room:' + JSON.stringify({room}))
+    let arrayOfGrids = []
+    arrayOfGrids.push(room.play1Grid)
+    arrayOfGrids.push(room.play2Grid)
+    arrayOfGrids.push(room.play3Grid)
+    // index 0 is server's player 1, index 1 is server's player 2, index 2 is server's player 3
 
-      let playerIndex = room.sockets.findIndex(socket => socket === socketid) // finds the local player's index from inside the server's sockets array
+    let playerIndex = room.sockets.findIndex(socket => socket === socketid) // finds the local player's index from inside the server's sockets array
+    setPlayerIndex(playerIndex)
 
-      setPlayerIndex(playerIndex)
+    let localPlayerGrid = arrayOfGrids.splice(playerIndex, 1)[0] // removes the playerGrid from the array
+    let localPlayer2 = arrayOfGrids[0]
+    let localPlayer3 = arrayOfGrids[1]
+    setPlay1Grid(localPlayerGrid)
+    setPlay2Grid(localPlayer2)
+    setPlay3Grid(localPlayer3)
 
-      arrayOfGrids = arrayOfGrids.filter(grid => grid !== arrayOfGrids[playerIndex])
-      arrayOfGrids.unshift(arrayOfGrids[playerIndex]) // move's the local player's grid to the front of the grids array
-      
-      setPlay1Grid(arrayOfGrids[0])
-      setPlay2Grid(arrayOfGrids[1])
-      setPlay3Grid(arrayOfGrids[2])
 
-      console.log('Arrays have been updated')
-      console.log(play2Grid)
-      console.log(play3Grid)
 
   })
 
 
 
-  socket.on('allPlayersReadyMessage', (readyStatus, room) => {
+  socket.on('allPlayersReadyMessage', (readyStatus) => {
     console.log(readyStatus)
     if(readyStatus === 'allPlayersReady') {
-      console.log('Room:' + JSON.stringify({room}))
-      let arrayOfGrids = []
-      arrayOfGrids.push(room.play1Grid)
-      arrayOfGrids.push(room.play2Grid)
-      arrayOfGrids.push(room.play3Grid)
-      // index 0 is server's player 1, index 1 is server's player 2, index 2 is server's player 3
-
-      console.log(room.sockets)
-      console.log(socketid)
-      let playerIndex = room.sockets.findIndex(socket => socket === socketid) // finds the local player's index from inside the server's sockets array
-      console.log(playerIndex)
-      setPlayerIndex(playerIndex)
-
-      let localPlayerGrid = arrayOfGrids.splice(playerIndex, 1)[0] // removes the playerGrid from the array
-      console.log(localPlayerGrid)
-      let localPlayer2 = arrayOfGrids[0]
-      let localPlayer3 = arrayOfGrids[1]
-      setPlay1Grid(localPlayerGrid)
-      setPlay2Grid(localPlayer2)
-      setPlay3Grid(localPlayer3)
-
 
       setTimeout(() => {
         setReadyState('true')
         
       }, 2000);
-
-
-      console.log('Arrays have been updated')
-      console.log(play1Grid)
-      console.log(play2Grid)
-      console.log(play3Grid)
-      
     }
   })
 

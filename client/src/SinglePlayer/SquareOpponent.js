@@ -2,7 +2,7 @@ import { toHaveStyle } from '@testing-library/jest-dom/dist/matchers';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Computer} from './Computer';
-import { checkIfGameOver } from './GameFlow';
+import {checkGameWinner} from './GameFlow';
 
 export var {setTurnState} = true;
 export var {turnState} = true;
@@ -24,7 +24,7 @@ export class SquareOpponent extends React.Component {
 
   // 
   
-
+// this async function is working with the 'let wait' variable to ensure that React doesnt move on to the next bit of code until 'handleClick' is done! -E
   async handleClick () {
     if (this.props.turnState === 'Computer1' || this.props.turnState === 'Computer2') {return null}
     if (this.props.square.hitStatus === 'hit' || this.props.square.hitStatus === 'miss') {
@@ -33,16 +33,20 @@ export class SquareOpponent extends React.Component {
     let newGridArray = this.props.gridArray.map((square, i) => {
       if(this.props.index === i && ["ship","ship1","ship2","ship3","ship4"].includes(this.props.square.shipStatus)){
         return { ...square, hitStatus: 'hit'}
+        
       } else if (this.props.index === i && this.props.square.shipStatus === '0') {
         return { ...square, hitStatus: 'miss'}
       } else { return square }
+
     })
 
-    if(this.props.playState === 'Singleplayer'){this.props.setTurnState('Computer1')}
 
     const wait = await this.props.setGridArray(newGridArray)
     console.log(this.props.turnState)
-    this.props.checkIfGameOver()
+    this.props.checkGameWinner()
+    this.props.sendData()
+    if(this.props.playState === 'Singleplayer'){this.props.setTurnState('Computer1')}
+
     
     
   }

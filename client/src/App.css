@@ -31,16 +31,16 @@ margin: auto
 }
 
 .ship1 {
-  background: red;
+  background: rgb(107, 103, 103);
 }
 .ship2 {
-  background: red;
+  background: rgb(107, 103, 103);
 }
 .ship3 {
-  background: red;
+  background: rgb(107, 103, 103);
 }
 .ship4 {
-  background: red;
+  background: rgb(107, 103, 103);
 }
 
 .hit {
@@ -49,11 +49,11 @@ margin: auto
 
 @keyframes boom {
   0% {
-    background-color: red;
+    background-color: rgb(107, 103, 103);
   }
 
   100% {
-    background-color: peru;
+    background-color: rgb(225, 19, 19);
   }
 }
 

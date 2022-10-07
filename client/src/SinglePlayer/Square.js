@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import {shipSelected} from './ShipPlacement';
 import {shipOrient} from './ShipPlacement';
 
+
 export class Square extends React.Component {  
   constructor(props) {
     super(props);

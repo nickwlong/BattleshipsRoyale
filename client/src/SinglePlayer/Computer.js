@@ -1,8 +1,7 @@
 
 export function Computer(props) {
     //props imports gridArrays array(with elements) and setGridArray function for players (along others like turnState)
-    const computerTurn = () => {
-
+    const computerTurn = async() => {
 
     if (props.turnState === 'Computer1') {
 
@@ -21,8 +20,8 @@ export function Computer(props) {
                 return { ...square, hitStatus: 'miss'}
             } else { return square }
         })
-        props.setGrid1Array(newGridArray)
-        //imports function from props and sets the new changed array of objects
+        let wait = await props.setGrid1Array(newGridArray)
+        props.checkGameWinner()
 
     } else if (playerPicked === 1){
 
@@ -35,7 +34,8 @@ export function Computer(props) {
                 return { ...square, hitStatus: 'miss'}
             } else { return square }
         })
-        props.setGrid2Array(newGridArray)
+        let wait = await props.setGrid2Array(newGridArray)
+        props.checkGameWinner()
 
     }
         props.setTurnState('Computer2')
@@ -58,7 +58,9 @@ export function Computer(props) {
                 return { ...square, hitStatus: 'miss'}
             } else { return square }
         })
-        props.setGrid1Array(newGridArray)
+
+        let wait = await props.setGrid1Array(newGridArray)
+        props.checkGameWinner()
 
     } else if (playerPicked === 1){
 
@@ -71,7 +73,9 @@ export function Computer(props) {
                 return { ...square, hitStatus: 'miss'}
             } else { return square }
         })
-        props.setGrid3Array(newGridArray)
+
+        let wait = await props.setGrid3Array(newGridArray)
+        props.checkGameWinner()
 
     }
 
