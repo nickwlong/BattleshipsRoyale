@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { ShipPlacement } from './ShipPlacement';
 import { GameFlow } from './GameFlow';
 import { RunMPGame } from '../Multiplayer/RunMPGame';
-import { socket } from "../Multiplayer/RunMPGame"
+import { io } from "socket.io-client"
 
+
+export const socket = io('http://localhost:3001') // This connects the client to the server, making a 'socket'
 
 export function RunGame(props) {
   const [socketid, setSocketid] = useState('');
@@ -12,13 +14,13 @@ export function RunGame(props) {
   const [playerIndexState, setPlayerIndex] = useState()
   const [isConnected, setIsConnected] = useState(socket.connected);
 
+  useEffect(() => {
 
-  
-    socket.on('connect', async () => {
-      console.log(socket.id)
-      setSocketid(socket.id)
-      setIsConnected(true);
-    });
+
+    console.log(socket.id)
+    setSocketid(socket.id)
+    setIsConnected(true);
+    
   
     socket.on('disconnect', () => {
       setIsConnected(false);
@@ -26,6 +28,8 @@ export function RunGame(props) {
   
     socket.on('playerJoinedRoom', message => {console.log(message)})
   
+
+  }, [])
 
   const defaultPlayersStatus = [
     {
@@ -160,7 +164,7 @@ export function RunGame(props) {
 
   return (
     <div>
-      {props.playState==='Multiplayer' ? <RunMPGame socketid={socketid} setSocketid={setSocketid} roomId={roomId} setRoomId={setRoomId}/> : ''}
+      {props.playState==='Multiplayer' ? <RunMPGame socketid={socketid} setSocketid={setSocketid} roomId={roomId} setRoomId={setRoomId} isConnected={isConnected}/> : ''}
       {readyState ? <GameFlow 
         sendGrids={sendPlayerReadyGrid}
         playState={props.playState}

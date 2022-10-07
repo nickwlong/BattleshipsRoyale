@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { Square } from '../SinglePlayer/Square';
 import { SquareOpponent } from '../SinglePlayer/SquareOpponent'
 import { io } from "socket.io-client"
+import { socket } from '../SinglePlayer/RunGame';
 
-export const socket = io('http://localhost:3001') // This connects the client to the server, making a 'socket'
 
 export function RunMPGame(props) {
   
@@ -43,7 +43,7 @@ export function RunMPGame(props) {
       
 
       <div style={{background: 'white'}}>
-          <p id='connectedStatus'>Connected: { '' + isConnected + ' with id ' + socket.id }</p>
+          <p id='connectedStatus'>Connected: { '' + props.isConnected + ' with id ' + socket.id }</p>
           <p id='connectedStatus2'></p>
       </div>
     </div>

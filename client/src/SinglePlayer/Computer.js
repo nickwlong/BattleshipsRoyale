@@ -3,6 +3,7 @@ export function Computer(props) {
     //props imports gridArrays array(with elements) and setGridArray function for players (along others like turnState)
     const computerTurn = () => {
 
+
     if (props.turnState === 'Computer1') {
 
         let playerPicked = Math.floor(Math.random() * 2);
@@ -83,6 +84,10 @@ export function Computer(props) {
     }
 }
 
-return (<div>{computerTurn()}</div>)
+setTimeout(() =>{
+    return(<div>{computerTurn()}</div>)
+}, 1000);
+//Computer function is called so when it is called, it calls the computerTurn function and runs code above
+
 
 }
