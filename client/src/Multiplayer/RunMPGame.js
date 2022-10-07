@@ -10,23 +10,17 @@ export function RunMPGame(props) {
   
   const [isConnected, setIsConnected] = useState(socket.connected);
   
-    socket.on('connect', async () => {
-      props.setSocketid(socket.id)
-      console.log(socket.id)
-      setIsConnected(true);
-    });
+  socket.on('connect', async () => {
+    props.setSocketid(socket.id)
+    console.log(socket.id)
+    setIsConnected(true);
+  });
 
-    socket.on('disconnect', () => {
-      setIsConnected(false);
-    });
+  socket.on('disconnect', () => {
+    setIsConnected(false);
+  });
 
-    socket.on('receive-array', (play1Grid, play2Grid, play3Grid) => { // on receiving an update from the server, the array is set to gridArray2 (player 2's array)
-      props.setPlay1Grid(play1Grid)
-      props.setPlay2Grid(play2Grid)
-      props.setPlay3Grid(play3Grid)
-      console.log('Grids have been updated')
-    })
-
+  socket.on('playerJoinedRoom', message => {console.log(message)})
 
   const handleRoomIdChange = (event) => { // Tracks changes in the RoomID form
     props.setRoomId(event.target.value);
@@ -36,13 +30,18 @@ export function RunMPGame(props) {
   const handleRoomIdSubmit = (event) => { // Submits the RoomID form
     console.log('RoomId = ' + props.roomId)
     event.preventDefault();
+
     socket.emit('join-room', props.roomId)
+
     const handleRoomForm = document.getElementById('roomIdForm')
     handleRoomForm.style.display = 'none'
-    alert(`You have joined room: ${props.roomId}`)
+
+    alert(`You have created room: ${props.roomId}`)
+
     const connectedStatus = document.getElementById('connectedStatus')
     connectedStatus.innerText=`You are connected to room: ${props.roomId}`
   }
+
 
   return (
     <div>

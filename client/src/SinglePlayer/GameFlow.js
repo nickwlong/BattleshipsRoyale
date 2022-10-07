@@ -8,6 +8,7 @@ export function GameFlow(props) {
   const [turnState, setTurnState] = useState('Player1')
 
   function checkIfGameOver() {
+    props.sendData()
     let numberHitsOnPlay1 = props.play1Grid.filter((square) => square.hitStatus === 'hit').length;
     let numberHitsOnPlay2 = props.play2Grid.filter((square) => square.hitStatus === 'hit').length;
     let numberHitsOnPlay3 = props.play3Grid.filter((square) => square.hitStatus === 'hit').length;
@@ -43,15 +44,15 @@ export function GameFlow(props) {
         <h1>Computer 1's Board</h1>
         <div className="player2 board" id="GameContainer2">
           {props.play2Grid.map(
-            (square, index) => (<SquareOpponent square={square} key={`player2Board_${index}`} index={index} gridArray={props.play2Grid} setGridArray={props.setPlay2Grid} setTurnState={setTurnState} turnState={turnState} sendGrids={props.sendGrids} checkIfGameOver={checkIfGameOver} />)
+            (square, index) => (<SquareOpponent square={square} key={`player2Board_${index}`} index={index} gridArray={props.play2Grid} setGridArray={props.setPlay2Grid} setTurnState={setTurnState} turnState={turnState} sendGrids={props.sendGrids} checkIfGameOver={checkIfGameOver} playState={props.playState}/>)
             )}
         </div>
       </column>
       <column>
         <h1>Computer 2's Board</h1>
-        <div className="player2 board" id="GameContainer2">
+        <div className="player3 board" id="GameContainer3">
           {props.play3Grid.map(
-            (square, index) => (<SquareOpponent square={square} key={`player2Board_${index}`} index={index} gridArray={props.play3Grid} setGridArray={props.setPlay3Grid} setTurnState={setTurnState} turnState={turnState} sendGrids={props.sendGrids} checkIfGameOver={checkIfGameOver} />)
+            (square, index) => (<SquareOpponent square={square} key={`player3Board_${index}`} index={index} gridArray={props.play3Grid} setGridArray={props.setPlay3Grid} setTurnState={setTurnState} turnState={turnState} sendGrids={props.sendGrids} checkIfGameOver={checkIfGameOver} playState={props.playState}/>)
             )}
         </div>
       </column>
@@ -62,9 +63,9 @@ export function GameFlow(props) {
         <button onClick={() => {setTurnState('Player1')}}>Reset to Player's Turn</button>
 
         <h1>Your Board</h1>
-        <div className="player2 board" id="GameContainer2">
+        <div className="player1 board" id="GameContainer1">
           {props.play1Grid.map( // maps through the array and makes a square for each of the elements in the array.
-            (square, index) => (<Square checkIfGameOver={checkIfGameOver} square={square} key={`player1Board_${index}`} index={index} play1Grid={props.play1Grid} setPlay1Grid={props.setPlay1Grid} setTurnState={setTurnState} turnState={turnState}/>) // these 'tags' of square and index pass into the 'props' within the Square class component
+            (square, index) => (<SquareOpponent checkIfGameOver={checkIfGameOver} square={square} key={`player1Board_${index}`} index={index} play1Grid={props.play1Grid} setPlay1Grid={props.setPlay1Grid} setTurnState={setTurnState} turnState={turnState} playState={props.playState}/> ) // these 'tags' of square and index pass into the 'props' within the Square class component
             )}
         </div>
       </column>

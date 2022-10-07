@@ -37,16 +37,14 @@ export class SquareOpponent extends React.Component {
         return { ...square, hitStatus: 'miss'}
       } else { return square }
     })
-    this.props.setTurnState('Computer1')
-<<<<<<< HEAD
 
-=======
+    if(this.props.playState === 'Singleplayer'){this.props.setTurnState('Computer1')}
+
     const wait = await this.props.setGridArray(newGridArray)
     console.log(this.props.turnState)
     this.props.checkIfGameOver()
     
     
->>>>>>> 80a8e303d15aa00da8366ac45f196ea646a9ad98
   }
 
   // This handleClick can be used in the player2/3 board. On clicking the square, it would need to:
