@@ -28,8 +28,9 @@ export function RunGame() {
   index === 12 || index === 13 || index === 14 ? { ...square, shipStatus: 'ship' } : square
   );
   var [play3Grid, setPlay3Grid] = useState(play3GridSetupShips)
-
+  console.log('Play1 Grid')
   console.log(play1Grid)
+  
 
   return (
     <div>
