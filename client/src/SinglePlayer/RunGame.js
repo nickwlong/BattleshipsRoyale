@@ -65,7 +65,7 @@ export function RunGame(props) {
 
 
 
-  const playerGridSetup = new Array(16).fill({
+  const playerGridSetup = new Array(49).fill({
     shipStatus: '0',
     hitStatus: '-'
   }) // Making an array to form the grid.
@@ -73,15 +73,83 @@ export function RunGame(props) {
   // hitStatus to store if that location has been hit or not yet. 
   var [play1Grid, setPlay1Grid] = useState(playerGridSetup)
 
-  const play2GridSetupShips = () => { if (props.playState==='Singleplayer') {return playerGridSetup.map((square, index)=>
-    index === 4 || index === 5 || index === 6 ? { ...square, shipStatus: 'ship' } : square
+  var play2GridSetupShips = () => {return playerGridSetup}
+  var play3GridSetupShips = () => {return playerGridSetup}
+
+
+
+
+
+  // play2GridSetupShips = (computerPlacing,shipPlacing) => {
+
+  //   if (computerPlacing === 1) {
+  //     var placed = false
+  //     while (placed === false){
+  //       let orientation = 0;
+  //       let shipStartingIndex = Math.floor(Math.random() * 49);
+  //       console.log(shipStartingIndex)
+  //       placed = true
+  //       //orientation = 0 is horizontal, orientation = 1 is vertical
+  //       if (orientation === 0){
+  //         if(shipPlacing === 2){
+  //           if ([6,13,20,27,34,41,48].includes(shipStartingIndex) === false){
+  //             console.log("meeppp")
+  //             placed = true
+  //             return playerGridSetup.map((square,index)=>
+  //             index === shipStartingIndex || index === shipStartingIndex +1 ? { ...square,shipPresent: 'ship'} : square)
+  //           }
+            
+  //         } else if (shipPlacing === 31 || shipPlacing === 32) {
+  //           if ([5,6,12,13,19,20,26,27,33,34,40,41,47,48].includes(shipStartingIndex) === false){
+  //             placed = true
+  //             return playerGridSetup.map((square,index)=>
+  //             index === shipStartingIndex || index === shipStartingIndex +1 || index === shipStartingIndex +2 ? { ...square,shipPresent: 'ship'} : square)
+  //           }
+  //         } else if (shipPlacing === 4){
+  //           if ([4,5,6,11,12,13,18,19,20,25,26,27,32,33,34,39,40,41,46,47,48].includes(shipStartingIndex) === false){
+  //             placed = true
+  //             return playerGridSetup.map((square,index)=>
+  //             index === shipStartingIndex || index === shipStartingIndex +1 || index === shipStartingIndex +2 || index === shipStartingIndex +3 ? { ...square,shipPresent: 'ship'} : square)
+  //           }
+  //         } else if (shipPlacing === 5){
+  //           if ([3,4,5,6,10,11,12,13,17,18,19,20,24,25,26,27,31,32,33,34,38,39,40,41,45,46,47,48].includes(shipStartingIndex) === false){
+  //             placed = true
+  //             return playerGridSetup.map((square,index)=>
+  //             index === shipStartingIndex || index === shipStartingIndex +1 || index === shipStartingIndex +2 || index === shipStartingIndex +3 ? { ...square,shipPresent: 'ship'} : square)
+  //           }
+  //         }
+  //       } else if (orientation === 1){
+  //         return playerGridSetup.map((square,index)=>
+  //         index === shipStartingIndex || index === shipStartingIndex +1 ? { ...square,shipStatus:'ship'} : square
+  //         )
+  //       }
+  //     }
+  //   }
+  // }
+
+
+  // [play2Grid, setPlay2Grid] = useState(play2GridSetupShips(1,2))
+
+
+
+
+
+
+
+  play2GridSetupShips = () => { if (props.playState==='Singleplayer') {return playerGridSetup.map((square, index)=>
+    index === 8 || index === 9 || index === 10 ? { ...square, shipStatus: 'ship' } : square
   )} else {return playerGridSetup}};
   var [play2Grid, setPlay2Grid] = useState(play2GridSetupShips)
 
-  const play3GridSetupShips = () => { if (props.playState==='Singleplayer') {return playerGridSetup.map((square, index)=>
+
+  play3GridSetupShips = () => { if (props.playState==='Singleplayer') {return playerGridSetup.map((square, index)=>
     index === 8 || index === 9 || index === 10 ? { ...square, shipStatus: 'ship' } : square
   )} else {return playerGridSetup}};
   var [play3Grid, setPlay3Grid] = useState(play3GridSetupShips)
+
+
+
+
 
   function sendPlayerReadyGrid() { // Add this to 'onClick' functions to send the updated player array to other users
     if (props.playState === 'Multiplayer') {socket.emit('playerGridReady', play1Grid, roomId)}
