@@ -32,7 +32,7 @@ export class SquareOpponent extends React.Component {
     let newGridArray = this.props.gridArray.map((square, i) => {
       if (
         this.props.index === i &&
-        ["ship", "ship1", "ship2", "ship3", "ship4"].includes(
+        ["ship", "ship2", "ship31", "ship32", "ship4", "ship5"].includes(
           this.props.square.shipStatus
         )
       ) {
