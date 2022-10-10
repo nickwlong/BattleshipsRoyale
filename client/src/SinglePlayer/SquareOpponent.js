@@ -51,7 +51,7 @@ export class SquareOpponent extends React.Component {
     console.log(this.props.turnState)
     this.props.checkGameWinner()
     this.props.sendData()
-    if(this.props.playState === 'Singleplayer'){this.props.setTurnState('Computer1')}
+    if(this.props.playState === 'Singleplayer'){this.props.setTurnState('Computer 1')}
 
     
     

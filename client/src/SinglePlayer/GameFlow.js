@@ -4,7 +4,7 @@ import { setTurnState, SquareOpponent } from "./SquareOpponent";
 import { Computer } from "./Computer";
 
 export function GameFlow(props) {
-  const [turnState, setTurnState] = useState("Player1");
+  const [turnState, setTurnState] = useState("Player 1");
 
   function checkGameWinner() {
     let player1Hits = props.play1Grid.filter(
@@ -45,7 +45,7 @@ export function GameFlow(props) {
 
   return(
   <div>
-      {turnState !== "game-over" ? <h1>its {turnState} turn</h1> : ""};
+      {turnState !== "game-over" ? <h1>It's {turnState}'s turn</h1> : ""}
     <Computer turnState={turnState} checkGameWinner={checkGameWinner} setTurnState={setTurnState} grid1Array={props.play1Grid} setGrid1Array={props.setPlay1Grid} grid2Array={props.play2Grid} setGrid2Array={props.setPlay2Grid} grid3Array={props.play3Grid} setGrid3Array={props.setPlay3Grid}/>
     {/* computer function imports grids and turns state, and functions of setting grids and turn state */}
     <row>
@@ -68,7 +68,7 @@ export function GameFlow(props) {
     </row>
     <row>
       <column>
-        <button onClick={() => {setTurnState('Player1')}}>Reset to Player's Turn</button>
+        <button onClick={() => {setTurnState('Player 1')}}>Reset to Player's Turn</button>
 
         <h1>Your Board</h1>
         <div className="player1 board" id="GameContainer1">
