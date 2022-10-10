@@ -1,3 +1,5 @@
+
+
 const io = require('socket.io')(3001, {
   cors: {
     origin: ['http://localhost:3000']
@@ -32,11 +34,13 @@ io.on('connection', socket => {
 
     socket[roomId] = roomId
     socket.join(roomId)
-    socket.to(roomId).emit('playerJoinedRoom', 'A player has joined your room')
+    socket.emit('playerJoinedRoom', `You have joined room: ${roomId}`, rooms.find((e) => e.id === roomId).usernames)
+    socket.to(roomId).emit('playerJoinedRoom', 'A player has joined your room', rooms.find((e) => e.id === roomId).usernames)
     if(rooms.find((e) => e.id === roomId).sockets.length === 3){
       socket.to(roomId).emit('threePlayersConnected')
       socket.emit('threePlayersConnected')
     }
+
   })
 
   // add conditional to check if the room is full
