@@ -10,13 +10,15 @@ export const socket = io('http://localhost:3001') // This connects the client to
 export function RunGame(props) {
   const [socketid, setSocketid] = useState('');
   const [roomId, setRoomId] = useState();
-  const [readyState, setReadyState] = useState(false)
+  const [readyState, setReadyState] = useState('pending')
   const [playerIndexState, setPlayerIndex] = useState()
   const [isConnected, setIsConnected] = useState(socket.connected);
+  const [turnState, setTurnState] = useState('Player 1');
+  const [username, setUsername] = useState('');
+  const [opponentNames, setOpponentNames] = useState('');
+
 
   useEffect(() => {
-
-
     console.log(socket.id)
     setSocketid(socket.id)
     setIsConnected(true);
@@ -28,8 +30,14 @@ export function RunGame(props) {
   
     socket.on('playerJoinedRoom', message => {console.log(message)})
   
+    if(props.playState === 'Singleplayer') {setReadyState('placement')}
 
   }, [])
+
+  useEffect(() => {
+    console.log(turnState)
+
+  }, [turnState])
 
   const defaultPlayersStatus = [
     {
@@ -166,7 +174,9 @@ export function RunGame(props) {
   };
 
   socket.on('receiveData', (room) => {
-    console.log('Room:' + JSON.stringify({room}))
+    
+    setTurnState(room.currentTurnPlayer)
+
     let arrayOfGrids = []
     arrayOfGrids.push(room.play1Grid)
     arrayOfGrids.push(room.play2Grid)
@@ -181,28 +191,38 @@ export function RunGame(props) {
     let localPlayer3 = arrayOfGrids[1]
     setPlay1Grid(localPlayerGrid)
     setPlay2Grid(localPlayer2)
-    setPlay3Grid(localPlayer3)
+    setPlay3Grid(localPlayer3)    
+
+
 
   })
 
 
 
-  socket.on('allPlayersReadyMessage', (readyStatus) => {
+  socket.on('allPlayersReadyMessage', (readyStatus, room) => {
     console.log(readyStatus)
     if(readyStatus === 'allPlayersReady') {
 
+      // let playerIndex = room.sockets.findIndex(socket => socket === socketid)
+      // let arrayOfNames = room.usernames
+      // arrayOfNames.splice(playerIndex, 1)
+      // setOpponentNames(arrayOfNames)
+      // console.log(opponentNames)
+
       setTimeout(() => {
-        setReadyState('true')
-        
+        setReadyState('play')
       }, 2000);
     }
   })
 
+  socket.on('threePlayersConnected', () => {
+    setReadyState('placement')
+  })
 
   return (
     <div>
-      {props.playState==='Multiplayer' ? <RunMPGame socketid={socketid} setSocketid={setSocketid} roomId={roomId} setRoomId={setRoomId} isConnected={isConnected}/> : ''}
-      {readyState ? <GameFlow 
+      {props.playState==='Multiplayer' ? <RunMPGame socketid={socketid} setSocketid={setSocketid} roomId={roomId} setRoomId={setRoomId} isConnected={isConnected} username={username} setUsername={setUsername}/> : ''}
+      {readyState === 'play' ? <GameFlow 
         sendGrids={sendPlayerReadyGrid}
         playState={props.playState}
         play1Grid={play1Grid} 
@@ -214,7 +234,13 @@ export function RunGame(props) {
         roomId={roomId} 
         setRoomId={setRoomId} 
         sendData={sendData}
-        /> : <ShipPlacement play1Grid={play1Grid} setPlay1Grid={setPlay1Grid} setReadyState={setReadyState} readyState={readyState} sendPlayerReadyGrid={sendPlayerReadyGrid} playState={props.playState}/>}
+        username={username}
+        setUsername={setUsername}
+        turnState={turnState}
+        setTurnState={setTurnState}
+        opponentNames={opponentNames}
+        /> : ''}
+        {readyState === 'placement' ? <ShipPlacement play1Grid={play1Grid} setPlay1Grid={setPlay1Grid} setReadyState={setReadyState} readyState={readyState} sendPlayerReadyGrid={sendPlayerReadyGrid} playState={props.playState}/> : ''}
     </div>
   );
 }

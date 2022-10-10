@@ -5,7 +5,7 @@ export function Computer(props) {
 
     let uniqueShot = false
         
-    if (props.turnState === 'Computer1') {
+    if (props.turnState === 'Computer 1') {
 
         while (uniqueShot === false){
 
@@ -52,11 +52,11 @@ export function Computer(props) {
     }
     }   
         props.checkGameWinner()
-        props.setTurnState('Computer2')
+        props.setTurnState('Computer 2')
         //imports setTurnState function and changes turn to Computer2
         console.log("meep1")
 
-    } else if (props.turnState === 'Computer2'){
+    } else if (props.turnState === 'Computer 2'){
 
         
         while (uniqueShot === false){
@@ -104,7 +104,7 @@ export function Computer(props) {
         }
         }   
             props.checkGameWinner()
-            props.setTurnState('Player1')
+            props.setTurnState('Player 1')
             //imports setTurnState function and changes turn to Player
             console.log("meep1")
 

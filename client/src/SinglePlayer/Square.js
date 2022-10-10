@@ -23,7 +23,7 @@ export class Square extends React.Component {
   
 
   handleClick () {
-    if (this.props.readyState) {return null} // if player is ready, they CANNOT place ships.
+    if (this.props.readyState === 'play' || this.props.readyState === 'pending') {return null} // if player is ready, they CANNOT place ships.
     if (
       //checks if button pressed is inside the array given with ship selected and orientation(if button is not then ship will not go out of bounds if placed there, quic maffs)
         (shipSelected === 'ship2' && shipOrient === 'horizontal' && [6,13,20,27,34,41,48].includes(this.props.index)) ||
