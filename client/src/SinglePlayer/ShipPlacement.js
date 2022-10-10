@@ -8,8 +8,9 @@ var shipOrient = 'horizontal'
 
 export function ShipPlacement(props) {
   const handleReadyBtnClick = () => {
-    props.setReadyState(true)
+    props.sendPlayerReadyGrid()
     shipSelected = ''
+    if(props.playState === 'Singleplayer'){props.setReadyState(true)}
   }
 
   const isShip1Placed = () => {
@@ -49,12 +50,12 @@ export function ShipPlacement(props) {
   }
 
   const showReadyBtn = () => {
-    // if (props.play1Grid.filter(square => square.shipStatus === 'ship1').length > 0 &&
-    //   props.play1Grid.filter(square => square.shipStatus === 'ship2').length > 0 &&
-    //   props.play1Grid.filter(square => square.shipStatus === 'ship3').length > 0 &&
-    //   props.play1Grid.filter(square => square.shipStatus === 'ship4').length > 0) {
+    if (props.play1Grid.filter(square => square.shipStatus === 'ship1').length > 0 &&
+      props.play1Grid.filter(square => square.shipStatus === 'ship2').length > 0 &&
+      props.play1Grid.filter(square => square.shipStatus === 'ship3').length > 0 &&
+      props.play1Grid.filter(square => square.shipStatus === 'ship4').length > 0) {
         return (<button className="readyBtn" onClick={()=>{ handleReadyBtnClick();}}> Ready! </button>)
-      //} else {return ''}
+      } else {return ''}
 
 
   }

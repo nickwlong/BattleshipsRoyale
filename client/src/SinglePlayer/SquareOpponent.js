@@ -21,18 +21,14 @@ export class SquareOpponent extends React.Component {
 
   // this.state.status => status of the square in the array
 
-  //
-
-  // this async function is working with the 'let wait' variable to ensure that React doesnt move on to the next bit of code until 'handleClick' is done! -E
-  async handleClick() {
-    if (
-      this.props.turnState === "Computer1" ||
-      this.props.turnState === "Computer2"
-    ) {
-      alert("its not your turn yet!");
-      return null;
-    }
-
+  // 
+  
+// this async function is working with the 'let wait' variable to ensure that React doesnt move on to the next bit of code until 'handleClick' is done! -E
+  async handleClick () {
+    if (this.props.turnState === 'Computer1' || this.props.turnState === 'Computer2') {alert("its not your turn yet!"); return null}
+    if (this.props.square.hitStatus === 'hit' || this.props.square.hitStatus === 'miss') {
+      alert('This square has already been hit, choose another')
+      return null}
     let newGridArray = this.props.gridArray.map((square, i) => {
       if (
         this.props.index === i &&
@@ -51,39 +47,22 @@ export class SquareOpponent extends React.Component {
       }
     });
 
-    // newGridArray.map((square,i) =>{
+    const wait = await this.props.setGridArray(newGridArray)
+    console.log(this.props.turnState)
+    this.props.checkGameWinner()
+    this.props.sendData()
+    if(this.props.playState === 'Singleplayer'){this.props.setTurnState('Computer1')}
 
-    // })
-
-    // if (newGridArray === this.props.gridArray){
-    //   console.log("already shot there")
-
-    // } else if(newGridArray != this.props.gridArray){
-
-    // the below code is not going to be processed untill handleClick is done -E
-    let wait = await this.props.setGridArray(newGridArray);
-    this.props.checkGameWinner();
-    console.log(this.props.turnState);
-    this.props.setTurnState("Computer1");
-    // }
+    
+    
   }
 
   // This handleClick can be used in the player2/3 board. On clicking the square, it would need to:
   // Check to see if this square in the player's array has a ship, if so, change hitStatus to hit
   // If it does NOT have a ship, change hitStatus to miss
 
-  render() {
-    return (
-      <div
-        className={`opponent square ${this.props.square.hitStatus}`}
-        id={`play2_square_${this.props.index}`}
-        key={`square_${this.props.index}`}
-        onClick={() => {
-          this.handleClick();
-        }}
-      >
-        {" "}
-      </div>
-    );
-  }
-}
+  render(){
+    return(
+      <div className={`opponent square ${this.props.square.hitStatus} ${this.props.square.shipStatus}`} id={`play2_square_${this.props.index}`} key={`square_${this.props.index}`} onClick={() => {this.handleClick()}}> </div>
+  )
+}}

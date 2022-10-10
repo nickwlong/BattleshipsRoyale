@@ -43,83 +43,37 @@ export function GameFlow(props) {
     return false;
   }
 
-  return (
-    <div>
+  return(
+  <div>
       {turnState !== "game-over" ? <h1>its {turnState} turn</h1> : ""};
-      <Computer
-        turnState={turnState}
-        checkGameWinner={checkGameWinner}
-        setTurnState={setTurnState}
-        grid1Array={props.play1Grid}
-        setGrid1Array={props.setPlay1Grid}
-        grid2Array={props.play2Grid}
-        setGrid2Array={props.setPlay2Grid}
-        grid3Array={props.play3Grid}
-        setGrid3Array={props.setPlay3Grid}
-      />
-      {/* computer function imports grids and turns state, and functions of setting grids and turn state */}
-      <row>
-        <column>
-          <h1>Computer 1's Board</h1>
-          <div className="player2 board" id="GameContainer2">
-            {props.play2Grid.map((square, index) => (
-              <SquareOpponent
-                checkGameWinner={checkGameWinner}
-                square={square}
-                key={`player2Board_${index}`}
-                index={index}
-                gridArray={props.play2Grid}
-                setGridArray={props.setPlay2Grid}
-                setTurnState={setTurnState}
-                turnState={turnState}
-              />
-            ))}
-          </div>
-        </column>
-        <column>
-          <h1>Computer 2's Board</h1>
-          <div className="player2 board" id="GameContainer2">
-            {props.play3Grid.map((square, index) => (
-              <SquareOpponent
-                checkGameWinner={checkGameWinner}
-                square={square}
-                key={`player2Board_${index}`}
-                index={index}
-                gridArray={props.play3Grid}
-                setGridArray={props.setPlay3Grid}
-                setTurnState={setTurnState}
-                turnState={turnState}
-              />
-            ))}
-          </div>
-        </column>
-      </row>
-      <row>
-        <column>
-          <button
-            onClick={() => {
-              setTurnState("Player1");
-            }}
-          >
-            Reset to Player's Turn
-          </button>
+    <Computer turnState={turnState} checkGameWinner={checkGameWinner} setTurnState={setTurnState} grid1Array={props.play1Grid} setGrid1Array={props.setPlay1Grid} grid2Array={props.play2Grid} setGrid2Array={props.setPlay2Grid} grid3Array={props.play3Grid} setGrid3Array={props.setPlay3Grid}/>
+    {/* computer function imports grids and turns state, and functions of setting grids and turn state */}
+    <row>
+      <column>
+        <h1>Computer 1's Board</h1>
+        <div className="player2 board" id="GameContainer2">
+          {props.play2Grid.map(
+            (square, index) => (<SquareOpponent square={square} key={`player2Board_${index}`} index={index} gridArray={props.play2Grid} setGridArray={props.setPlay2Grid} setTurnState={setTurnState} turnState={turnState} sendGrids={props.sendGrids} checkGameWinner={checkGameWinner}  playState={props.playState} sendData={props.sendData}/>)
+            )}
+        </div>
+      </column>
+      <column>
+        <h1>Computer 2's Board</h1>
+        <div className="player3 board" id="GameContainer3">
+          {props.play3Grid.map(
+            (square, index) => (<SquareOpponent square={square} key={`player3Board_${index}`} index={index} gridArray={props.play3Grid} setGridArray={props.setPlay3Grid} setTurnState={setTurnState} turnState={turnState} sendGrids={props.sendGrids} checkGameWinner={checkGameWinner} playState={props.playState} sendData={props.sendData}/>)
+            )}
+        </div>
+      </column>
+    </row>
+    <row>
+      <column>
+        <button onClick={() => {setTurnState('Player1')}}>Reset to Player's Turn</button>
 
-          <h1>Your Board</h1>
-          <div className="player2 board" id="GameContainer2">
-            {props.play1Grid.map(
-              // maps through the array and makes a square for each of the elements in the array.
-              (square, index) => (
-                <Square
-                  checkGameWinner={checkGameWinner}
-                  square={square}
-                  key={`player1Board_${index}`}
-                  index={index}
-                  play1Grid={props.play1Grid}
-                  setPlay1Grid={props.setPlay1Grid}
-                  setTurnState={setTurnState}
-                  turnState={turnState}
-                />
-              ) // these 'tags' of square and index pass into the 'props' within the Square class component
+        <h1>Your Board</h1>
+        <div className="player1 board" id="GameContainer1">
+          {props.play1Grid.map( // maps through the array and makes a square for each of the elements in the array.
+            (square, index) => (<SquareOpponent square={square} key={`player1Board_${index}`} index={index} play1Grid={props.play1Grid} setPlay1Grid={props.setPlay1Grid} setTurnState={setTurnState} turnState={turnState} sendGrids={props.sendGrids} checkGameWinner={checkGameWinner} playState={props.playState} sendData={props.sendData}/> ) // these 'tags' of square and index pass into the 'props' within the Square class component
             )}
           </div>
         </column>
