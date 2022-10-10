@@ -67,7 +67,7 @@ export function GameFlow(props) {
     </row>
     <row>
       <column>
-        <button onClick={() => {setTurnState('Player1')}}>Reset to Player's Turn</button>
+        <button onClick={() => {setTurnState('Player 1')}}>Reset to Player's Turn</button>
 
         <h1>Your Board</h1>
         <div className="player1 board" id="GameContainer1">
