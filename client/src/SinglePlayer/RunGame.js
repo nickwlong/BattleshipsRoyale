@@ -10,7 +10,7 @@ export const socket = io('http://localhost:3001') // This connects the client to
 export function RunGame(props) {
   const [socketid, setSocketid] = useState('');
   const [roomId, setRoomId] = useState();
-  const [readyState, setReadyState] = useState(false)
+  const [readyState, setReadyState] = useState('pending')
   const [playerIndexState, setPlayerIndex] = useState()
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [turnState, setTurnState] = useState('Player 1');
@@ -19,8 +19,6 @@ export function RunGame(props) {
 
 
   useEffect(() => {
-
-
     console.log(socket.id)
     setSocketid(socket.id)
     setIsConnected(true);
@@ -32,6 +30,7 @@ export function RunGame(props) {
   
     socket.on('playerJoinedRoom', message => {console.log(message)})
   
+    if(props.playState === 'Singleplayer') {setReadyState('placement')}
 
   }, [])
 
@@ -143,16 +142,19 @@ export function RunGame(props) {
       // console.log(opponentNames)
 
       setTimeout(() => {
-        setReadyState('true')
+        setReadyState('play')
       }, 2000);
     }
   })
 
+  socket.on('threePlayersConnected', () => {
+    setReadyState('placement')
+  })
 
   return (
     <div>
       {props.playState==='Multiplayer' ? <RunMPGame socketid={socketid} setSocketid={setSocketid} roomId={roomId} setRoomId={setRoomId} isConnected={isConnected} username={username} setUsername={setUsername}/> : ''}
-      {readyState ? <GameFlow 
+      {readyState === 'play' ? <GameFlow 
         sendGrids={sendPlayerReadyGrid}
         playState={props.playState}
         play1Grid={play1Grid} 
@@ -169,7 +171,8 @@ export function RunGame(props) {
         turnState={turnState}
         setTurnState={setTurnState}
         opponentNames={opponentNames}
-        /> : <ShipPlacement play1Grid={play1Grid} setPlay1Grid={setPlay1Grid} setReadyState={setReadyState} readyState={readyState} sendPlayerReadyGrid={sendPlayerReadyGrid} playState={props.playState}/>}
+        /> : ''}
+        {readyState === 'placement' ? <ShipPlacement play1Grid={play1Grid} setPlay1Grid={setPlay1Grid} setReadyState={setReadyState} readyState={readyState} sendPlayerReadyGrid={sendPlayerReadyGrid} playState={props.playState}/> : ''}
     </div>
   );
 }
