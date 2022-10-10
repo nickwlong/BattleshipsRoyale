@@ -13,17 +13,22 @@ let rooms = []
 
 io.on('connection', socket => {
 
-  socket.on('join-room', roomId => { // Adds the user to the specified room upon joining
+  socket.on('join-room', (roomId, username)=> { // Adds the user to the specified room upon joining
     
     let room
     if(!rooms.some((e) => e.id === roomId )) {
       room = {sockets: [socket.id], 
+        usernames: [username],
+        currentTurnIndex: 0,
+        currentTurnPlayer: username,
         id: roomId, 
         play1Grid: '', //player 1 is index 0 in the sockets array
         play2Grid: '', //player 2 is index 1 in the sockets array
         play3Grid: ''} //player 3 is index 2 in the sockets array
       rooms.push(room)
-    } else { rooms.find((e) => e.id === roomId).sockets.push(socket.id) }
+    } else { rooms.find((e) => e.id === roomId).sockets.push(socket.id);
+      rooms.find((e) =>e.id === roomId).usernames.push(username);
+    }
 
     socket[roomId] = roomId
     socket.join(roomId)
@@ -38,12 +43,13 @@ io.on('connection', socket => {
       room.sockets[0] === socket.id ? room.play1Grid = playerGrid : ''
       room.sockets[1] === socket.id ? room.play2Grid = playerGrid : ''
       room.sockets[2] === socket.id ? room.play3Grid = playerGrid : ''
-      console.log(room)
 
       }
       if (room.id === roomId && room.play1Grid !== '' && room.play2Grid !== '' && room.play3Grid !== '') {
-        socket.to(roomId).emit('allPlayersReadyMessage', 'allPlayersReady') 
-        socket.emit('allPlayersReadyMessage', 'allPlayersReady')
+        console.log(room)
+        room.currentTurnPlayer = room.usernames[0]
+        socket.to(roomId).emit('allPlayersReadyMessage', 'allPlayersReady', room) 
+        socket.emit('allPlayersReadyMessage', 'allPlayersReady', room)
         socket.to(roomId).emit('receiveData', room)
         socket.emit('receiveData', room)
       }
@@ -53,11 +59,12 @@ io.on('connection', socket => {
 
   socket.on('sendData', (roomId, play1Grid, play2Grid, play3Grid) => {
     rooms.forEach(room => {
-      console.log(room)
       if(room.id === roomId) {
       room.play1Grid = play1Grid 
       room.play2Grid = play2Grid 
       room.play3Grid = play3Grid 
+      room.currentTurnIndex == 2 ? room.currentTurnIndex = 0 : room.currentTurnIndex += 1
+      room.currentTurnPlayer = room.usernames[room.currentTurnIndex]
       socket.to(roomId).emit('receiveData', room)
       socket.emit('receiveData', room)
       }
