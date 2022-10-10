@@ -10,7 +10,7 @@ export function ShipPlacement(props) {
   const handleReadyBtnClick = () => {
     props.sendPlayerReadyGrid()
     shipSelected = ''
-    if(props.playState === 'Singleplayer'){props.setReadyState(true)}
+    if(props.playState === 'Singleplayer'){props.setReadyState('play')}
   }
 
   const isShip1Placed = () => {

@@ -33,6 +33,10 @@ io.on('connection', socket => {
     socket[roomId] = roomId
     socket.join(roomId)
     socket.to(roomId).emit('playerJoinedRoom', 'A player has joined your room')
+    if(rooms.find((e) => e.id === roomId).sockets.length === 3){
+      socket.to(roomId).emit('threePlayersConnected')
+      socket.emit('threePlayersConnected')
+    }
   })
 
   // add conditional to check if the room is full
