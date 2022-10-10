@@ -60,3 +60,19 @@ margin: auto
 .miss {
   background: white;
 }
+
+.otherConnectedStatus {
+  text-decoration: line-through;
+}
+
+.otherConnectedStatus.two2 {
+  text-decoration: none;
+}
+
+.otherConnectedStatus.two3 {
+  text-decoration: none;
+}
+
+.otherConnectedStatus.three3 {
+  text-decoration: none;
+}
