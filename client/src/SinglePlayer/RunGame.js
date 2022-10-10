@@ -13,7 +13,7 @@ export function RunGame(props) {
   const [readyState, setReadyState] = useState(false)
   const [playerIndexState, setPlayerIndex] = useState()
   const [isConnected, setIsConnected] = useState(socket.connected);
-  const [turnState, setTurnState] = useState();
+  const [turnState, setTurnState] = useState('Player 1');
   const [username, setUsername] = useState('');
   const [opponentNames, setOpponentNames] = useState('');
 

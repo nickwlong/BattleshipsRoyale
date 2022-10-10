@@ -45,14 +45,15 @@ export function GameFlow(props) {
   return(
   <div>
     {props.turnState !== "game-over" ? <h1>It's {props.turnState}'s turn</h1> : ""};
-    {props.gameState === 'Singleplayer' ? <Computer turnState={props.turnState} checkGameWinner={checkGameWinner} setTurnState={props.setTurnState} grid1Array={props.play1Grid} setGrid1Array={props.setPlay1Grid} grid2Array={props.play2Grid} setGrid2Array={props.setPlay2Grid} grid3Array={props.play3Grid} setGrid3Array={props.setPlay3Grid}/> : ""}
+    {props.playState === 'Singleplayer' ? <Computer turnState={props.turnState} checkGameWinner={checkGameWinner} setTurnState={props.setTurnState} grid1Array={props.play1Grid} setGrid1Array={props.setPlay1Grid} grid2Array={props.play2Grid} setGrid2Array={props.setPlay2Grid} grid3Array={props.play3Grid} setGrid3Array={props.setPlay3Grid}/> : ""}
     {/* computer function imports grids and turns state, and functions of setting grids and turn state */}
     <row>
       <column>
-        {props.gameState === 'Singleplayer' ? <h1>Computer 1's Board</h1> : <h1>{props.opponentNames[0]}'s board</h1>}
+        {props.gameState === 'Singleplayer' ? <h1>Computer 1's Board</h1> : <h1>{props.opponentNames[0]}'s b
+        oard</h1>}
         <div className="player2 board" id="GameContainer2">
           {props.play2Grid.map(
-            (square, index) => (<SquareOpponent square={square} key={`player2Board_${index}`} index={index} gridArray={props.play2Grid} setGridArray={props.setPlay2Grid} setTurnState={props.setTurnStat} turnState={props.turnState} sendGrids={props.sendGrids} checkGameWinner={checkGameWinner}  playState={props.playState} sendData={props.sendData} username={props.username} setUsername={props.setUsername}/>)
+            (square, index) => (<SquareOpponent square={square} key={`player2Board_${index}`} index={index} gridArray={props.play2Grid} setGridArray={props.setPlay2Grid} setTurnState={props.setTurnState} turnState={props.turnState} sendGrids={props.sendGrids} checkGameWinner={checkGameWinner}  playState={props.playState} sendData={props.sendData} username={props.username} setUsername={props.setUsername}/>)
             )}
         </div>
       </column>
@@ -60,7 +61,7 @@ export function GameFlow(props) {
         {props.gameState === 'Singleplayer' ? <h1>Computer 1's Board</h1> : <h1>{props.opponentNames[1]}'s board</h1>}
         <div className="player3 board" id="GameContainer3">
           {props.play3Grid.map(
-            (square, index) => (<SquareOpponent square={square} key={`player3Board_${index}`} index={index} gridArray={props.play3Grid} setGridArray={props.setPlay3Grid} setTurnState={props.setTurnStat} turnState={props.turnState} sendGrids={props.sendGrids} checkGameWinner={checkGameWinner} playState={props.playState} sendData={props.sendData} username={props.username} setUsername={props.setUsername}/>)
+            (square, index) => (<SquareOpponent square={square} key={`player3Board_${index}`} index={index} gridArray={props.play3Grid} setGridArray={props.setPlay3Grid} setTurnState={props.setTurnState} turnState={props.turnState} sendGrids={props.sendGrids} checkGameWinner={checkGameWinner} playState={props.playState} sendData={props.sendData} username={props.username} setUsername={props.setUsername}/>)
             )}
         </div>
       </column>
@@ -71,7 +72,7 @@ export function GameFlow(props) {
         <h1>Your Board</h1>
         <div className="player1 board" id="GameContainer1">
           {props.play1Grid.map( // maps through the array and makes a square for each of the elements in the array.
-          (square, index) => (<SquareOpponent square={square} key={`player3Board_${index}`} index={index} gridArray={props.play3Grid} setGridArray={props.setPlay3Grid} setTurnState={props.setTurnStat} turnState={props.turnState} sendGrids={props.sendGrids} checkGameWinner={checkGameWinner} playState={props.playState} sendData={props.sendData} username={props.username} setUsername={props.setUsername}
+          (square, index) => (<SquareOpponent square={square} key={`player3Board_${index}`} index={index} gridArray={props.play3Grid} setGridArray={props.setPlay3Grid} setTurnState={props.setTurnState} turnState={props.turnState} sendGrids={props.sendGrids} checkGameWinner={checkGameWinner} playState={props.playState} sendData={props.sendData} username={props.username} setUsername={props.setUsername}
 
           />)
             )}
