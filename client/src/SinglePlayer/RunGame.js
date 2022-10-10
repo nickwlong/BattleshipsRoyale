@@ -28,7 +28,8 @@ export function RunGame(props) {
       setIsConnected(false);
     });
   
-    socket.on('playerJoinedRoom', message => {console.log(message)})
+    socket.on('playerJoinedRoom', (message, opponentNames) => {console.log(message)
+    setOpponentNames(opponentNames)})
   
     if(props.playState === 'Singleplayer') {setReadyState('placement')}
 
@@ -153,7 +154,7 @@ export function RunGame(props) {
 
   return (
     <div>
-      {props.playState==='Multiplayer' ? <RunMPGame socketid={socketid} setSocketid={setSocketid} roomId={roomId} setRoomId={setRoomId} isConnected={isConnected} username={username} setUsername={setUsername}/> : ''}
+      {props.playState==='Multiplayer' ? <RunMPGame socketid={socketid} setSocketid={setSocketid} roomId={roomId} setRoomId={setRoomId} isConnected={isConnected} username={username} setUsername={setUsername} opponentNames={opponentNames} /> : ''}
       {readyState === 'play' ? <GameFlow 
         sendGrids={sendPlayerReadyGrid}
         playState={props.playState}
