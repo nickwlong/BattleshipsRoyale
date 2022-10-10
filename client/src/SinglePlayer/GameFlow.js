@@ -2,6 +2,11 @@ import { useEffect, useState } from "react";
 import { Square } from "./Square";
 import { setTurnState, SquareOpponent } from "./SquareOpponent";
 import { Computer } from "./Computer";
+import Confetti from "react-confetti";
+import './ModalPopUp.css';
+
+// variable to make confetti go off when Player 1 wins
+var winnerConfetti 
 
 export function GameFlow(props) {
 
@@ -27,15 +32,19 @@ export function GameFlow(props) {
       props.setTurnState("game-over");
 
       if (player1Hits !== 3) {
-        alert("Winner is Player 1");
+        // set the variable 'winnerConfetti' so confetti can go off when Player 1 wins!
+        winnerConfetti = 'Player 1'
+        CallsWinner("Player 1")
       }
       if (player2Hits !== 3) {
-        alert("Winner is Player 2");
+        winnerConfetti = 'Player 2'
+        CallsWinner("Player 2")
+
       }
       if (player3Hits !== 3) {
-        alert("Winner is Player 3");
+        winnerConfetti = 'Player 3'
+        CallsWinner("Player 3")
       }
-
       return true;
     }
 
@@ -45,6 +54,11 @@ export function GameFlow(props) {
   return(
   <div>
     {props.turnState !== "game-over" ? <h1>It's {props.turnState}'s turn</h1> : ""}
+          {/* if the 'winnerConfetti is equal to 'Player 1' the CallsWinner function is called*/}
+          {winnerConfetti === 'Player 1' ? CallsWinner("Player 1"): ""}
+          {winnerConfetti === 'Player 2' ? CallsWinner("Player 2"): ""}
+          {winnerConfetti === 'Player 3' ? CallsWinner("Player 3"): ""}
+
     {props.playState === 'Singleplayer' ? <Computer turnState={props.turnState} checkGameWinner={checkGameWinner} setTurnState={props.setTurnState} grid1Array={props.play1Grid} setGrid1Array={props.setPlay1Grid} grid2Array={props.play2Grid} setGrid2Array={props.setPlay2Grid} grid3Array={props.play3Grid} setGrid3Array={props.setPlay3Grid}/> : ""}
     {/* computer function imports grids and turns state, and functions of setting grids and turn state */}
     <row>
@@ -80,4 +94,21 @@ export function GameFlow(props) {
       </row>
     </div>
   );
+}
+// This function returns confetti with the modal popup that shows who the winner is.
+function CallsWinner (player) {
+  return (
+  <div>  
+    <Confetti/>
+      <div className='modalContainer'>
+        <div className='modalRight'>
+          <div className='content'>
+            <h1>  Winner is  {player}  🎉</h1>
+            <br></br>
+            <br></br>
+          </div>
+        </div>
+      </div>
+  </div>
+);
 }
