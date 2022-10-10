@@ -115,8 +115,6 @@ export function RunGame(props) {
     setPlay2Grid(localPlayer2)
     setPlay3Grid(localPlayer3)
 
-
-
   })
 
 

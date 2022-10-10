@@ -8,10 +8,6 @@ import { socket } from '../SinglePlayer/RunGame';
 
 export function RunMPGame(props) {
   
-
-
-  
-
   const handleRoomIdChange = (event) => { // Tracks changes in the RoomID form
     props.setRoomId(event.target.value);
     console.log(props.roomId)

@@ -42,10 +42,11 @@ io.on('connection', socket => {
 
       }
       if (room.id === roomId && room.play1Grid !== '' && room.play2Grid !== '' && room.play3Grid !== '') {
-        socket.to(roomId).emit('allPlayersReadyMessage', 'allPlayersReady', room) 
-        socket.emit('allPlayersReadyMessage', 'allPlayersReady', room)
+        socket.to(roomId).emit('allPlayersReadyMessage', 'allPlayersReady') 
+        socket.emit('allPlayersReadyMessage', 'allPlayersReady')
+        socket.to(roomId).emit('receiveData', room)
+        socket.emit('receiveData', room)
       }
-      
 
     });
   })
