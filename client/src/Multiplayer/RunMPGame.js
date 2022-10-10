@@ -10,14 +10,17 @@ export function RunMPGame(props) {
   
   const handleRoomIdChange = (event) => { // Tracks changes in the RoomID form
     props.setRoomId(event.target.value);
-    console.log(props.roomId)
+  }
+
+  const handleUsernameChange = (event) => { // Tracks changes in the RoomID form
+    props.setUsername(event.target.value);
   }
 
   const handleRoomIdSubmit = (event) => { // Submits the RoomID form
-    console.log('RoomId = ' + props.roomId)
+    console.log('RoomId = ' + props.roomId + ', Username: ' + props.username)
     event.preventDefault();
 
-    socket.emit('join-room', props.roomId)
+    socket.emit('join-room', props.roomId, props.username)
 
     const handleRoomForm = document.getElementById('roomIdForm')
     handleRoomForm.style.display = 'none'
@@ -25,14 +28,17 @@ export function RunMPGame(props) {
     alert(`You have created room: ${props.roomId}`)
 
     const connectedStatus = document.getElementById('connectedStatus2')
-    connectedStatus.innerText=`You are connected to room: ${props.roomId}`
+    connectedStatus.innerText=`You are connected to room: ${props.roomId} with username: ${props.username}`
   }
 
 
   return (
     <div>
       <form id='roomIdForm' onSubmit={handleRoomIdSubmit}>
+        <label>Room id:</label>
         <input type='text' name='RoomId' onChange={handleRoomIdChange}/>
+        <label>Username:</label>
+        <input type='text' name='username' onChange={handleUsernameChange}/>
         <input type='submit' value="Submit Room ID"/>
       </form>
       <br></br>
