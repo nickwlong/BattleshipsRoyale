@@ -1,3 +1,11 @@
+/* W E L C O M E   P A G E */
+.SingleplayerButton{
+  
+}
+
+
+
+/* G A M E */
 .board {
   width: 400px;
   height: 400px;
@@ -93,3 +101,5 @@ margin: auto
 .otherConnectedStatus.three3 {
   text-decoration: none;
 }
+
+
