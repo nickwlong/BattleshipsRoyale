@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
-import { Square } from "./Square";
-import { setTurnState, SquareOpponent } from "./SquareOpponent";
+import {SquareOpponent } from "./SquareOpponent";
 import { Computer } from "./Computer";
 import Confetti from "react-confetti";
 import './ModalPopUp.css';
@@ -11,19 +9,109 @@ var winnerConfetti
 
 export function GameFlow(props) {
 
+        //checks for ships hit and destroys them (Set property to hitfull)
+
+        var newplay1Grid;
+
+        var countship2 = props.play1Grid.filter((obj) => obj.shipStatus === "ship2" && obj.hitStatus === "hit").length;
+        if(countship2 === 2){
+          newplay1Grid = props.play1Grid.map((square, index)=>square.shipStatus === "ship2" ? { ...square, hitStatus: 'hitfull' } : square)
+          props.setPlay1Grid(newplay1Grid)
+        }
+        var countship31 = props.play1Grid.filter((obj) => obj.shipStatus === "ship31" && obj.hitStatus === "hit").length;
+        if(countship31 === 3){
+          newplay1Grid = props.play1Grid.map((square, index)=>square.shipStatus === "ship31" ? { ...square, hitStatus: 'hitfull' } : square)
+          props.setPlay1Grid(newplay1Grid)
+        }
+        var countship32 = props.play1Grid.filter((obj) => obj.shipStatus === "ship32" && obj.hitStatus === "hit").length;
+        if(countship32 === 3){
+          newplay1Grid = props.play1Grid.map((square, index)=>square.shipStatus === "ship32" ? { ...square, hitStatus: 'hitfull' } : square)
+          props.setPlay1Grid(newplay1Grid)
+        }
+        var countship4 = props.play1Grid.filter((obj) => obj.shipStatus === "ship4" && obj.hitStatus === "hit").length;
+        if(countship4 === 4){
+          newplay1Grid = props.play1Grid.map((square, index)=>square.shipStatus === "ship4" ? { ...square, hitStatus: 'hitfull' } : square)
+          props.setPlay1Grid(newplay1Grid)
+        }
+        var countship5 = props.play1Grid.filter((obj) => obj.shipStatus === "ship5" && obj.hitStatus === "hit").length;
+        if(countship5 === 5){
+          newplay1Grid = props.play1Grid.map((square, index)=>square.shipStatus === "ship5" ? { ...square, hitStatus: 'hitfull' } : square)
+          props.setPlay1Grid(newplay1Grid)
+        }
+    
+        var newplay2Grid;
+    
+         countship2 = props.play2Grid.filter((obj) => (obj.shipStatus === "ship2C" || obj.shipStatus === "ship2") && obj.hitStatus === "hit").length;
+        if(countship2 === 2){
+          newplay2Grid = props.play2Grid.map((square, index)=>(square.shipStatus === "ship2C" || square.shipStatus === "ship2") ? { ...square, hitStatus: 'hitfull' } : square)
+          props.setPlay2Grid(newplay2Grid)
+        }
+         countship31 = props.play2Grid.filter((obj) => (obj.shipStatus === "ship31C" || obj.shipStatus === "ship31") && obj.hitStatus === "hit").length;
+        if(countship31 === 3){
+          newplay2Grid = props.play2Grid.map((square, index)=>(square.shipStatus === "ship31C" || square.shipStatus === "ship31") ? { ...square, hitStatus: 'hitfull' } : square)
+          props.setPlay2Grid(newplay2Grid)
+        }
+         countship32 = props.play2Grid.filter((obj) => (obj.shipStatus === "ship32C" || obj.shipStatus === "ship32") && obj.hitStatus === "hit").length;
+        if(countship32 === 3){
+          newplay2Grid = props.play2Grid.map((square, index)=>(square.shipStatus === "ship32C" || square.shipStatus === "ship32") ? { ...square, hitStatus: 'hitfull' } : square)
+          props.setPlay2Grid(newplay2Grid)
+        }
+         countship4 = props.play2Grid.filter((obj) => (obj.shipStatus === "ship4C" || obj.shipStatus === "ship4") && obj.hitStatus === "hit").length;
+        if(countship4 === 4){
+          newplay2Grid = props.play2Grid.map((square, index)=>(square.shipStatus === "ship4C" || square.shipStatus === "ship4") ? { ...square, hitStatus: 'hitfull' } : square)
+          props.setPlay2Grid(newplay2Grid)
+        }
+         countship5 = props.play2Grid.filter((obj) => (obj.shipStatus === "ship5C" || obj.shipStatus === "ship5") && obj.hitStatus === "hit").length;
+        if(countship5 === 5){
+          newplay2Grid = props.play2Grid.map((square, index)=>(square.shipStatus === "ship5C" || square.shipStatus === "ship5") ? { ...square, hitStatus: 'hitfull' } : square)
+          props.setPlay2Grid(newplay2Grid)
+        }
+    
+         var newplay3Grid;
+    
+         countship2 = props.play3Grid.filter((obj) => (obj.shipStatus === "ship2C" || obj.shipStatus === "ship2") && obj.hitStatus === "hit").length;
+        if(countship2 === 2){
+          newplay3Grid = props.play3Grid.map((square, index)=>(square.shipStatus === "ship2C" || square.shipStatus === "ship2") ? { ...square, hitStatus: 'hitfull' } : square)
+          props.setPlay3Grid(newplay3Grid)
+        }
+         countship31 = props.play3Grid.filter((obj) => (obj.shipStatus === "ship31C" || obj.shipStatus === "ship31") && obj.hitStatus === "hit").length;
+        if(countship31 === 3){
+          newplay3Grid = props.play3Grid.map((square, index)=>(square.shipStatus === "ship31C" || square.shipStatus === "ship31") ? { ...square, hitStatus: 'hitfull' } : square)
+          props.setPlay3Grid(newplay3Grid)
+        }
+         countship32 = props.play3Grid.filter((obj) => (obj.shipStatus === "ship32C" || obj.shipStatus === "ship32") && obj.hitStatus === "hit").length;
+        if(countship32 === 3){
+          newplay3Grid = props.play3Grid.map((square, index)=>(square.shipStatus === "ship32C" || square.shipStatus === "ship32") ? { ...square, hitStatus: 'hitfull' } : square)
+          props.setPlay3Grid(newplay3Grid)
+        }
+         countship4 = props.play3Grid.filter((obj) => (obj.shipStatus === "ship4C" || obj.shipStatus === "ship4") && obj.hitStatus === "hit").length;
+        if(countship4 === 4){
+          newplay3Grid = props.play3Grid.map((square, index)=>(square.shipStatus === "ship4C" || square.shipStatus === "ship4") ? { ...square, hitStatus: 'hitfull' } : square)
+          props.setPlay3Grid(newplay3Grid)
+        }
+         countship5 = props.play3Grid.filter((obj) => (obj.shipStatus === "ship5C" || obj.shipStatus === "ship5") && obj.hitStatus === "hit").length;
+        if(countship5 === 5){
+          newplay3Grid = props.play3Grid.map((square, index)=>(square.shipStatus === "ship5C" || square.shipStatus === "ship5") ? { ...square, hitStatus: 'hitfull' } : square)
+          props.setPlay3Grid(newplay3Grid)
+        }
+
   function checkGameWinner() {
+
+
+
     let player1Hits = props.play1Grid.filter(
-      (square) => square.hitStatus === "hit"
+      (square) => square.hitStatus === "hitfull"
     ).length;
     let player2Hits = props.play2Grid.filter(
-      (square) => square.hitStatus === "hit"
+      (square) => square.hitStatus === "hitfull"
     ).length;
     let player3Hits = props.play3Grid.filter(
-      (square) => square.hitStatus === "hit"
+      (square) => square.hitStatus === "hitfull"
     ).length;
     console.log("Num Player 1 ships hit:" + player1Hits);
     console.log("Num Comp 1 ships hit:" + player2Hits);
-    console.log("Num Comp 2 ships hit:" + player3Hits);
+    console.log("Num Comp 2 ships hit:" + player3Hits)
+    
 
     if (
       (player1Hits >= 3 && player2Hits >= 3) ||
