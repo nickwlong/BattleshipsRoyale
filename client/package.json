@@ -18,7 +18,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false --coverage --verbose",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cy:open": "cypress open"
   },
   "eslintConfig": {
     "extends": [
@@ -43,6 +44,7 @@
     "@babel/preset-env": "^7.19.3",
     "@testing-library/dom": "^8.18.1",
     "@testing-library/user-event": "^14.4.3",
-    "babel-jest": "^29.1.2"
+    "babel-jest": "^29.1.2",
+    "cypress": "^10.9.0"
   }
 }
