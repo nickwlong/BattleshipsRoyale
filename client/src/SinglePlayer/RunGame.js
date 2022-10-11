@@ -170,7 +170,7 @@ export function RunGame(props) {
     arrayOfPlayerGrids.splice(playerIndexState, 0, play1Grid)
     
 
-    socket.emit('sendData', roomId, arrayOfPlayerGrids[0], arrayOfPlayerGrids[1], arrayOfPlayerGrids[2]) // arrayOfGrids[0] is serverPlayer1, arr..[1] is serverPlayer2, arr..[2] is serverPlayer3
+    socket.emit('sendData', roomId, arrayOfPlayerGrids[0], arrayOfPlayerGrids[1], arrayOfPlayerGrids[2], turnState) // arrayOfGrids[0] is serverPlayer1, arr..[1] is serverPlayer2, arr..[2] is serverPlayer3
   };
 
   socket.on('receiveData', (room) => {
@@ -218,6 +218,8 @@ export function RunGame(props) {
     setReadyState('placement')
   })
 
+
+
   return (
     <div>
      {props.playState==='Multiplayer' ? <RunMPGame socketid={socketid} setSocketid={setSocketid} roomId={roomId} setRoomId={setRoomId} isConnected={isConnected} username={username} setUsername={setUsername} opponentNames={opponentNames} /> : ''}
@@ -238,6 +240,7 @@ export function RunGame(props) {
         turnState={turnState}
         setTurnState={setTurnState}
         opponentNames={opponentNames}
+        setReadyState={setReadyState}
         /> : ''}
         {readyState === 'placement' ? <ShipPlacement play1Grid={play1Grid} setPlay1Grid={setPlay1Grid} setReadyState={setReadyState} readyState={readyState} sendPlayerReadyGrid={sendPlayerReadyGrid} playState={props.playState}/> : ''}
     </div>

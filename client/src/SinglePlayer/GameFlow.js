@@ -2,6 +2,7 @@ import {SquareOpponent } from "./SquareOpponent";
 import { Computer } from "./Computer";
 import Confetti from "react-confetti";
 import './ModalPopUp.css';
+import { socket } from "./RunGame";
 
 // variable to make confetti go off when Player 1 wins
 var winnerConfetti 
@@ -118,6 +119,7 @@ export function GameFlow(props) {
       (player3Hits >= 3 && player1Hits >= 3)
     ) {
       props.setTurnState("game-over");
+      socket.emit('gameIsOver', props.roomId)
       
       let turnHeader = document.getElementById('turnHeader')
       turnHeader.style.display = 'none'
@@ -126,11 +128,11 @@ export function GameFlow(props) {
         // set the variable 'winnerConfetti' so confetti can go off when Player 1 wins!
         winnerConfetti = 'Player 1'
         CallsWinner("Player 1")
+        console.log(props.turnState)
       }
       if (player2Hits < 3) {
         winnerConfetti = 'Player 2'
         CallsWinner("Player 2")
-
       }
       if (player3Hits < 3) {
         winnerConfetti = 'Player 3'
@@ -141,6 +143,12 @@ export function GameFlow(props) {
 
     return false;
   }
+
+  socket.on('gameOver', () => {
+    console.log('Game finished on another players turn')
+    props.setTurnState('game-over')
+    checkGameWinner()
+  })
 
   return(
   <div id='BoardsContainer'>
