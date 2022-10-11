@@ -226,6 +226,7 @@ export function RunGame(props) {
       {readyState === 'play' ? <GameFlow 
         sendGrids={sendPlayerReadyGrid}
         playState={props.playState}
+        setPlayState={props.setPlayState}
         play1Grid={play1Grid} 
         setPlay1Grid={setPlay1Grid} 
         play2Grid={play2Grid} 
