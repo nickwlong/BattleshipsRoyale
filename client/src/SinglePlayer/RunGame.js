@@ -52,9 +52,9 @@ export function RunGame(props) {
   var play3GridSetupShips = () => {return playerGridSetup}
 
 
+  //randomly pick 2 arrays for computer 1 and computer 2 to place ships
   let presetPicked1 = Math.floor(Math.random() * 7);
   let presetPicked2 = Math.floor(Math.random() * 7);
-
 
   const presetArray = [[7,8,18,25,32,39,40,41,3,4,5,6,16,23,30,37,44],
   [1,2,6,13,20,15,22,29,24,25,26,27,37,38,39,40,41],
@@ -67,7 +67,7 @@ export function RunGame(props) {
   const presetPickedC1 = presetArray[presetPicked1];
   const presetPickedC2 = presetArray[presetPicked2];
 
-
+//places the ships based on the numbers in the array picked
   play2GridSetupShips = () => { if (props.playState==='Singleplayer') {
     return playerGridSetup.map((square, index)=>{
       if ([presetPickedC1[0],presetPickedC1[1]].includes(index)){

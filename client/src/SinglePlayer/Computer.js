@@ -113,7 +113,7 @@ export function Computer(props) {
 
 setTimeout(() =>{
     return(<div>{computerTurn()}</div>)
-}, 1000);
+}, 500);
 //Computer function is called so when it is called, it calls the computerTurn function and runs code above
 
 
