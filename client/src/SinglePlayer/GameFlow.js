@@ -25,23 +25,23 @@ export function GameFlow(props) {
     console.log("Num Comp 2 ships hit:" + player3Hits);
 
     if (
-      (player1Hits === 3 && player2Hits === 3) ||
-      (player2Hits === 3 && player3Hits === 3) ||
-      (player3Hits === 3 && player1Hits === 3)
+      (player1Hits >= 3 && player2Hits >= 3) ||
+      (player2Hits >= 3 && player3Hits >= 3) ||
+      (player3Hits >= 3 && player1Hits >= 3)
     ) {
       props.setTurnState("game-over");
 
-      if (player1Hits !== 3) {
+      if (player1Hits < 3) {
         // set the variable 'winnerConfetti' so confetti can go off when Player 1 wins!
         winnerConfetti = 'Player 1'
         CallsWinner("Player 1")
       }
-      if (player2Hits !== 3) {
+      if (player2Hits < 3) {
         winnerConfetti = 'Player 2'
         CallsWinner("Player 2")
 
       }
-      if (player3Hits !== 3) {
+      if (player3Hits < 3) {
         winnerConfetti = 'Player 3'
         CallsWinner("Player 3")
       }
