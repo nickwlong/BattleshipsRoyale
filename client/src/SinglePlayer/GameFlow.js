@@ -30,6 +30,9 @@ export function GameFlow(props) {
       (player3Hits >= 3 && player1Hits >= 3)
     ) {
       props.setTurnState("game-over");
+      
+      let turnHeader = document.getElementById('turnHeader')
+      turnHeader.style.display = 'none'
 
       if (player1Hits < 3) {
         // set the variable 'winnerConfetti' so confetti can go off when Player 1 wins!
@@ -52,8 +55,8 @@ export function GameFlow(props) {
   }
 
   return(
-  <div>
-    {props.turnState !== "game-over" ? <h1>It's {props.turnState}'s turn</h1> : ""}
+  <div id='BoardsContainer'>
+    {props.turnState !== "game-over" ? <h1 id='turnHeader'>It's {props.turnState}'s turn</h1> : ""}
           {/* if the 'winnerConfetti is equal to 'Player 1' the CallsWinner function is called*/}
           {winnerConfetti === 'Player 1' ? CallsWinner("Player 1"): ""}
           {winnerConfetti === 'Player 2' ? CallsWinner("Player 2"): ""}
