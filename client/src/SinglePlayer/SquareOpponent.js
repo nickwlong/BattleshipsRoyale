@@ -28,6 +28,7 @@ export class SquareOpponent extends React.Component {
     if (this.props.square.hitStatus === 'hit' || this.props.square.hitStatus === 'miss') {
       alert('This square has already been hit, choose another')
       return null}
+    if (this.props.turnState === 'game-over') {return null}
     let newGridArray = this.props.gridArray.map((square, i) => {
       if (
         this.props.index === i &&
