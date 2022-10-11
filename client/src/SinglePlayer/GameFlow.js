@@ -2,6 +2,7 @@ import {SquareOpponent } from "./SquareOpponent";
 import { Computer } from "./Computer";
 import Confetti from "react-confetti";
 import './ModalPopUp.css';
+import { socket } from "./RunGame";
 
 // variable to make confetti go off when Player 1 wins
 var winnerConfetti 
@@ -118,6 +119,7 @@ export function GameFlow(props) {
       (player3Hits >= 3 && player1Hits >= 3)
     ) {
       props.setTurnState("game-over");
+      socket.emit('gameIsOver', props.roomId)
       
       let turnHeader = document.getElementById('turnHeader')
       turnHeader.style.display = 'none'
@@ -126,11 +128,11 @@ export function GameFlow(props) {
         // set the variable 'winnerConfetti' so confetti can go off when Player 1 wins!
         winnerConfetti = 'Player 1'
         CallsWinner("Player 1")
+        console.log(props.turnState)
       }
       if (player2Hits < 3) {
         winnerConfetti = 'Player 2'
         CallsWinner("Player 2")
-
       }
       if (player3Hits < 3) {
         winnerConfetti = 'Player 3'
@@ -140,6 +142,31 @@ export function GameFlow(props) {
     }
 
     return false;
+  }
+
+  socket.on('gameOver', () => {
+    console.log('Game finished on another players turn')
+    props.setTurnState('game-over')
+    checkGameWinner()
+  })
+
+
+  // This function returns confetti with the modal popup that shows who the winner is.
+  function CallsWinner (player) {
+    return (
+    <div>  
+      <Confetti/>
+        <div className='modalContainer'>
+          <div className='modalRight'>
+            <div className='content'>
+              <h1>  Winner is  {player}  🎉</h1>
+              <br></br>
+              <br></br>
+            </div>
+          </div>
+        </div>
+    </div>
+  );
   }
 
   return(
@@ -157,7 +184,7 @@ export function GameFlow(props) {
         {props.playState === 'Singleplayer' ? <h1>Computer 1's Board</h1> : <h1>{props.opponentNames[0]}'s board</h1>}
         <div className="player2 board" id="GameContainer2">
           {props.play2Grid.map(
-            (square, index) => (<SquareOpponent square={square} key={`player2Board_${index}`} index={index} gridArray={props.play2Grid} setGridArray={props.setPlay2Grid} setTurnState={props.setTurnState} turnState={props.turnState} sendGrids={props.sendGrids} checkGameWinner={checkGameWinner}  playState={props.playState} sendData={props.sendData} username={props.username} setUsername={props.setUsername}/>)
+            (square, index) => (<SquareOpponent square={square} key={`player2Board_${index}`} index={index} gridArray={props.play2Grid} setGridArray={props.setPlay2Grid} setTurnState={props.setTurnState} turnState={props.turnState} sendGrids={props.sendGrids} checkGameWinner={checkGameWinner}  playState={props.playState} sendData={props.sendData} username={props.username} setUsername={props.setUsername} player='opponent'/>)
             )}
         </div>
       </column>
@@ -165,7 +192,7 @@ export function GameFlow(props) {
         {props.playState === 'Singleplayer' ? <h1>Computer 2's Board</h1> : <h1>{props.opponentNames[1]}'s board</h1>}
         <div className="player3 board" id="GameContainer3">
           {props.play3Grid.map(
-            (square, index) => (<SquareOpponent square={square} key={`player3Board_${index}`} index={index} gridArray={props.play3Grid} setGridArray={props.setPlay3Grid} setTurnState={props.setTurnState} turnState={props.turnState} sendGrids={props.sendGrids} checkGameWinner={checkGameWinner} playState={props.playState} sendData={props.sendData} username={props.username} setUsername={props.setUsername}/>)
+            (square, index) => (<SquareOpponent square={square} key={`player3Board_${index}`} index={index} gridArray={props.play3Grid} setGridArray={props.setPlay3Grid} setTurnState={props.setTurnState} turnState={props.turnState} sendGrids={props.sendGrids} checkGameWinner={checkGameWinner} playState={props.playState} sendData={props.sendData} username={props.username} setUsername={props.setUsername} player='opponent'/>)
             )}
         </div>
       </column>
@@ -176,7 +203,7 @@ export function GameFlow(props) {
         <h1>Your Board</h1>
         <div className="player1 board" id="GameContainer1">
           {props.play1Grid.map( // maps through the array and makes a square for each of the elements in the array.
-          (square, index) => (<SquareOpponent square={square} key={`player3Board_${index}`} index={index} gridArray={props.play3Grid} setGridArray={props.setPlay3Grid} setTurnState={props.setTurnState} turnState={props.turnState} sendGrids={props.sendGrids} checkGameWinner={checkGameWinner} playState={props.playState} sendData={props.sendData} username={props.username} setUsername={props.setUsername}
+          (square, index) => (<SquareOpponent square={square} key={`player3Board_${index}`} index={index} gridArray={props.play3Grid} setGridArray={props.setPlay3Grid} setTurnState={props.setTurnState} turnState={props.turnState} sendGrids={props.sendGrids} checkGameWinner={checkGameWinner} playState={props.playState} sendData={props.sendData} username={props.username} setUsername={props.setUsername}  player='player'
 
           />)
             )}
@@ -185,21 +212,4 @@ export function GameFlow(props) {
       </row>
     </div>
   );
-}
-// This function returns confetti with the modal popup that shows who the winner is.
-function CallsWinner (player) {
-  return (
-  <div>  
-    <Confetti/>
-      <div className='modalContainer'>
-        <div className='modalRight'>
-          <div className='content'>
-            <h1>  Winner is  {player}  🎉</h1>
-            <br></br>
-            <br></br>
-          </div>
-        </div>
-      </div>
-  </div>
-);
 }

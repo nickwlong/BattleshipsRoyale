@@ -65,7 +65,7 @@ io.on('connection', socket => {
     });
   })
 
-  socket.on('sendData', (roomId, play1Grid, play2Grid, play3Grid) => {
+  socket.on('sendData', (roomId, play1Grid, play2Grid, play3Grid, turnState) => {
     rooms.forEach(room => {
       if(room.id === roomId) {
       room.play1Grid = play1Grid 
@@ -77,5 +77,12 @@ io.on('connection', socket => {
       socket.emit('receiveData', room)
       }
   })
+
+  socket.on('gameIsOver', (roomId) => {
+    console.log('game is over in room:' + roomId)
+    socket.emit('gameOver')
+    socket.to(roomId).emit('gameOver')
+  })
+  
 
 })})
