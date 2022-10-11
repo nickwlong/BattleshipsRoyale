@@ -82,12 +82,12 @@ margin: auto
   text-decoration: line-through;
 }
 
-.otherConnectedStatus.two2 {
-  text-decoration: none;
+.joinRoom {
+  display: none;
 }
 
-.otherConnectedStatus.two3 {
-  text-decoration: none;
+.joinRoom.playersjoined0 {
+  display: flex;
 }
 
 .otherConnectedStatus.three3 {
