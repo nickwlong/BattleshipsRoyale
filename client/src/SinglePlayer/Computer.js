@@ -35,7 +35,7 @@ export function Computer(props) {
 
         let indexPicked = Math.floor(Math.random() * 49);
         
-        let newGridArray = props.grid2Array.map((square, i) => {
+        let newGridArray = props.grid3Array.map((square, i) => {
             if(indexPicked === i && ["ship2","ship31","ship32","ship4","ship5","ship2C","ship31C","ship32C","ship4C","ship5C"].includes(square.shipStatus) && square.hitStatus !== 'hit' && square.hitStatus !== 'hitfull' && square.hitStatus !== 'miss'){
                 uniqueShot = true
                 console.log(square.hitStatus)
@@ -46,7 +46,7 @@ export function Computer(props) {
                 return { ...square, hitStatus: 'miss'}
             } else { return square }
         })
-        props.setGrid2Array(newGridArray)
+        props.setGrid3Array(newGridArray)
 
 
     }
@@ -87,7 +87,7 @@ export function Computer(props) {
     
             let indexPicked = Math.floor(Math.random() * 49);
             
-            let newGridArray = props.grid3Array.map((square, i) => {
+            let newGridArray = props.grid2Array.map((square, i) => {
                 if(indexPicked === i && ["ship2","ship31","ship32","ship4","ship5","ship2C","ship31C","ship32C","ship4C","ship5C"].includes(square.shipStatus) && square.hitStatus !== 'hit' && square.hitStatus !== 'hitfull' && square.hitStatus !== 'miss'){
                     uniqueShot = true
                     console.log(square.hitStatus)
@@ -98,7 +98,7 @@ export function Computer(props) {
                     return { ...square, hitStatus: 'miss'}
                 } else { return square }
             })
-            props.setGrid3Array(newGridArray)
+            props.setGrid2Array(newGridArray)
     
     
         }

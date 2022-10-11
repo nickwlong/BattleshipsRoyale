@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
-import { Square } from "./Square";
-import { setTurnState, SquareOpponent } from "./SquareOpponent";
+import {SquareOpponent } from "./SquareOpponent";
 import { Computer } from "./Computer";
 import Confetti from "react-confetti";
 import './ModalPopUp.css';
@@ -101,13 +99,13 @@ export function GameFlow(props) {
 
 
     let player1Hits = props.play1Grid.filter(
-      (square) => square.hitStatus === "hit"
+      (square) => square.hitStatus === "hitfull"
     ).length;
     let player2Hits = props.play2Grid.filter(
-      (square) => square.hitStatus === "hit"
+      (square) => square.hitStatus === "hitfull"
     ).length;
     let player3Hits = props.play3Grid.filter(
-      (square) => square.hitStatus === "hit"
+      (square) => square.hitStatus === "hitfull"
     ).length;
     console.log("Num Player 1 ships hit:" + player1Hits);
     console.log("Num Comp 1 ships hit:" + player2Hits);
