@@ -22,13 +22,13 @@ export class SquareOpponent extends React.Component {
   
 // this async function is working with the 'let wait' variable to ensure that React doesnt move on to the next bit of code until 'handleClick' is done! -E
   async handleClick () {
+    if (this.props.turnState === 'game-over') {return null}
     if (this.props.turnState === 'Computer 1' || this.props.turnState === 'Computer 2') {alert("its not your turn yet!"); return null}
     console.log(this.props.turnState)
     if (this.props.playState === 'Multiplayer' && this.props.turnState !== this.props.username) {alert("its not your turn yet!"); return null}
     if (this.props.square.hitStatus === 'hit' || this.props.square.hitStatus === 'miss') {
       alert('This square has already been hit, choose another')
       return null}
-    if (this.props.turnState === 'game-over') {return null}
     let newGridArray = this.props.gridArray.map((square, i) => {
       if (
         this.props.index === i &&

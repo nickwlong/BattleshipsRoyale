@@ -166,7 +166,12 @@ export function RunGame(props) {
     setPlay2Grid(localPlayer2)
     setPlay3Grid(localPlayer3)    
 
-
+    // Check to see if player is 'out'
+    // let player1Hits = localPlayerGrid.filter(
+    //   (square) => square.hitStatus === "hit"
+    // ).length;
+    
+    // if (player1Hits >= 3){sendData()}
 
   })
 
