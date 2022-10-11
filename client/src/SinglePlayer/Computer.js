@@ -18,11 +18,11 @@ export function Computer(props) {
         let newGridArray = props.grid1Array.map((square, i) => {
 
             //maps array with objects, picks specific square, then returns same array but the modified square replaces original
-            if(indexPicked === i && ["ship","ship2","ship31","ship32","ship4","ship5"].includes(square.shipStatus) && square.hitStatus != 'hit' && square.hitStatus != 'miss'){
+            if(indexPicked === i && ["ship","ship2","ship31","ship32","ship4","ship5"].includes(square.shipStatus) && square.hitStatus != 'hit' && square.hitStatus != 'hitfull' && square.hitStatus != 'miss'){
                 uniqueShot = true
                 console.log(square.hitStatus)
                 return { ...square, hitStatus: 'hit'}
-            } else if (indexPicked === i && square.shipStatus === '0' && square.hitStatus != 'hit' && square.hitStatus != 'miss') {
+            } else if (indexPicked === i && square.shipStatus === '0' && square.hitStatus != 'hit' && square.hitStatus != 'hitfull' && square.hitStatus != 'miss') {
                 uniqueShot = true
                 console.log(square.hitStatus)
                 return { ...square, hitStatus: 'miss'}
@@ -36,11 +36,11 @@ export function Computer(props) {
         let indexPicked = Math.floor(Math.random() * 49);
         
         let newGridArray = props.grid2Array.map((square, i) => {
-            if(indexPicked === i && ["ship","ship2","ship31","ship32","ship4","ship5"].includes(square.shipStatus) && square.hitStatus != 'hit' && square.hitStatus != 'miss'){
+            if(indexPicked === i && ["ship","ship2","ship31","ship32","ship4","ship5"].includes(square.shipStatus) && square.hitStatus != 'hit' && square.hitStatus != 'hitfull' && square.hitStatus != 'miss'){
                 uniqueShot = true
                 console.log(square.hitStatus)
                 return { ...square, hitStatus: 'hit'}
-            } else if (indexPicked === i && square.shipStatus === '0' && square.hitStatus != 'hit' && square.hitStatus != 'miss') {
+            } else if (indexPicked === i && square.shipStatus === '0' && square.hitStatus != 'hit' && square.hitStatus != 'hitfull' && square.hitStatus != 'miss') {
                 uniqueShot = true
                 console.log(square.hitStatus)
                 return { ...square, hitStatus: 'miss'}
@@ -70,11 +70,11 @@ export function Computer(props) {
             let newGridArray = props.grid1Array.map((square, i) => {
     
                 //maps array with objects, picks specific square, then returns same array but the modified square replaces original
-                if(indexPicked === i && ["ship","ship2","ship31","ship32","ship4","ship5"].includes(square.shipStatus) && square.hitStatus != 'hit' && square.hitStatus != 'miss'){
+                if(indexPicked === i && ["ship2","ship31","ship32","ship4","ship5","ship2C","ship31C","ship32C","ship4C","ship5C"].includes(square.shipStatus) && square.hitStatus != 'hit' && square.hitStatus != 'hitfull' && square.hitStatus != 'miss'){
                     uniqueShot = true
                     console.log(square.hitStatus)
                     return { ...square, hitStatus: 'hit'}
-                } else if (indexPicked === i && square.shipStatus === '0' && square.hitStatus != 'hit' && square.hitStatus != 'miss') {
+                } else if (indexPicked === i && square.shipStatus === '0' && square.hitStatus != 'hit' && square.hitStatus != 'hitfull' && square.hitStatus != 'miss') {
                     uniqueShot = true
                     console.log(square.hitStatus)
                     return { ...square, hitStatus: 'miss'}
@@ -88,11 +88,11 @@ export function Computer(props) {
             let indexPicked = Math.floor(Math.random() * 16);
             
             let newGridArray = props.grid3Array.map((square, i) => {
-                if(indexPicked === i && ["ship","ship2","ship31","ship32","ship4" , "ship5"].includes(square.shipStatus) && square.hitStatus != 'hit' && square.hitStatus != 'miss'){
+                if(indexPicked === i && ["ship2","ship31","ship32","ship4","ship5","ship2C","ship31C","ship32C","ship4C","ship5C"].includes(square.shipStatus) && square.hitStatus != 'hit' && square.hitStatus != 'hitfull' && square.hitStatus != 'miss'){
                     uniqueShot = true
                     console.log(square.hitStatus)
                     return { ...square, hitStatus: 'hit'}
-                } else if (indexPicked === i && square.shipStatus === '0' && square.hitStatus != 'hit' && square.hitStatus != 'miss') {
+                } else if (indexPicked === i && square.shipStatus === '0' && square.hitStatus != 'hit' && square.hitStatus != 'hitfull' && square.hitStatus != 'miss') {
                     uniqueShot = true
                     console.log(square.hitStatus)
                     return { ...square, hitStatus: 'miss'}

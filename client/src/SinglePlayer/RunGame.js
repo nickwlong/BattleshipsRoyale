@@ -73,27 +73,32 @@ export function RunGame(props) {
       if ([presetPickedC1[0],presetPickedC1[1]].includes(index)){
         return {
           ...square,
-          shipStatus: 'ship'
+          shipStatus: 'ship2C',
+          shipPreset: 'ship'
         };
       } else if([presetPickedC1[2],presetPickedC1[3],presetPickedC1[4]].includes(index)){
         return {
           ...square,
-          shipStatus: 'ship'
+          shipStatus: 'ship31C',
+          shipPreset: 'ship'
         };
       } else if([presetPickedC1[5],presetPickedC1[6],presetPickedC1[7]].includes(index)){
         return {
           ...square,
-          shipStatus: 'ship'
+          shipStatus: 'ship32C',
+          shipPreset: 'ship'
         };
       } else if([presetPickedC1[8],presetPickedC1[9],presetPickedC1[10],presetPickedC1[11]].includes(index)){
         return {
           ...square,
-          shipStatus: 'ship'
+          shipStatus: 'ship4C',
+          shipPreset: 'ship'
         };
       } else if([presetPickedC1[12],presetPickedC1[13],presetPickedC1[14],presetPickedC1[15],presetPickedC1[16]].includes(index)){
         return {
           ...square,
-          shipStatus: 'ship'
+          shipStatus: 'ship5C',
+          shipPreset: 'ship'
         };
       } else {
         return square
@@ -109,27 +114,32 @@ export function RunGame(props) {
       if ([presetPickedC2[0],presetPickedC2[1]].includes(index)){
         return {
           ...square,
-          shipStatus: 'ship'
+          shipStatus: 'ship2C',
+          shipPreset: 'ship'
         };
       } else if([presetPickedC2[2],presetPickedC2[3],presetPickedC2[4]].includes(index)){
         return {
           ...square,
-          shipStatus: 'ship'
+          shipStatus: 'ship31C',
+          shipPreset: 'ship'
         };
       } else if([presetPickedC2[5],presetPickedC2[6],presetPickedC2[7]].includes(index)){
         return {
           ...square,
-          shipStatus: 'ship'
+          shipStatus: 'ship32C',
+          shipPreset: 'ship'
         };
       } else if([presetPickedC2[8],presetPickedC2[9],presetPickedC2[10],presetPickedC2[11]].includes(index)){
         return {
           ...square,
-          shipStatus: 'ship'
+          shipStatus: 'ship4C',
+          shipPreset: 'ship'
         };
       } else if([presetPickedC2[12],presetPickedC2[13],presetPickedC2[14],presetPickedC2[15],presetPickedC2[16]].includes(index)){
         return {
           ...square,
-          shipStatus: 'ship'
+          shipStatus: 'ship5C',
+          shipPreset: 'ship'
         };
       } else {
         return square
@@ -139,20 +149,6 @@ export function RunGame(props) {
 
   var [play3Grid, setPlay3Grid] = useState(play3GridSetupShips)
 
-
-
-
-
-  //play2GridSetupShips = () => { if (props.playState==='Singleplayer') {return playerGridSetup.map((square, index)=>
-    //index === 8 || index === 9 || index === 10 ? { ...square, shipStatus: 'ship' } : square
-  //)} else {return playerGridSetup}};
-  //var [play2Grid, setPlay2Grid] = useState(play2GridSetupShips)
-
-
-  //play3GridSetupShips = () => { if (props.playState==='Singleplayer') {return playerGridSetup.map((square, index)=>
-  //   index === 8 || index === 9 || index === 10 ? { ...square, shipStatus: 'ship' } : square
-  // )} else {return playerGridSetup}};
-  // var [play3Grid, setPlay3Grid] = useState(play3GridSetupShips)
 
   function sendPlayerReadyGrid() { // Add this to 'onClick' functions to send the updated player array to other users
     if (props.playState === 'Multiplayer') {socket.emit('playerGridReady', play1Grid, roomId)}

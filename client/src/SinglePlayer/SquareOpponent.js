@@ -25,14 +25,14 @@ export class SquareOpponent extends React.Component {
     if (this.props.turnState === 'Computer 1' || this.props.turnState === 'Computer 2') {alert("its not your turn yet!"); return null}
     console.log(this.props.turnState)
     if (this.props.playState === 'Multiplayer' && this.props.turnState !== this.props.username) {alert("its not your turn yet!"); return null}
-    if (this.props.square.hitStatus === 'hit' || this.props.square.hitStatus === 'miss') {
+    if (this.props.square.hitStatus === 'hit' || this.props.square.hitStatus === 'hitfull' || this.props.square.hitStatus === 'miss') {
       alert('This square has already been hit, choose another')
       return null}
     if (this.props.turnState === 'game-over') {return null}
     let newGridArray = this.props.gridArray.map((square, i) => {
       if (
         this.props.index === i &&
-        ["ship", "ship2", "ship31", "ship32", "ship4", "ship5"].includes(
+        ["ship2","ship31","ship32","ship4","ship5","ship2C","ship31C","ship32C","ship4C","ship5C"].includes(
           this.props.square.shipStatus
         )
       ) {
@@ -47,7 +47,34 @@ export class SquareOpponent extends React.Component {
       }
     });
 
+
     const wait = await this.props.setGridArray(newGridArray)
+    var countship2 = this.props.gridArray.filter((obj) => obj.shipStatus === "ship2C" && obj.hitStatus === "hit").length;
+    if(countship2 === 2){
+      newGridArray = this.props.gridArray.map((square, index)=>square.shipStatus === "ship2C" ? { ...square, hitStatus: 'hitfull' } : square)
+      const wait = await this.props.setGridArray(newGridArray)
+    }
+    var countship31 = this.props.gridArray.filter((obj) => obj.shipStatus === "ship31C" && obj.hitStatus === "hit").length;
+    if(countship31 === 3){
+      newGridArray = this.props.gridArray.map((square, index)=>square.shipStatus === "ship31C" ? { ...square, hitStatus: 'hitfull' } : square)
+      const wait = await this.props.setGridArray(newGridArray)
+    }
+    var countship32 = this.props.gridArray.filter((obj) => obj.shipStatus === "ship32C" && obj.hitStatus === "hit").length;
+    if(countship32 === 3){
+      newGridArray = this.props.gridArray.map((square, index)=>square.shipStatus === "ship32C" ? { ...square, hitStatus: 'hitfull' } : square)
+      const wait = await this.props.setGridArray(newGridArray)
+    }
+    var countship4 = this.props.gridArray.filter((obj) => obj.shipStatus === "ship4C" && obj.hitStatus === "hit").length;
+    if(countship4 === 4){
+      newGridArray = this.props.gridArray.map((square, index)=>square.shipStatus === "ship4C" ? { ...square, hitStatus: 'hitfull' } : square)
+      const wait = await this.props.setGridArray(newGridArray)
+    }
+    var countship5 = this.props.gridArray.filter((obj) => obj.shipStatus === "ship5C" && obj.hitStatus === "hit").length;
+    if(countship5 === 5){
+      newGridArray = this.props.gridArray.map((square, index)=>square.shipStatus === "ship5C" ? { ...square, hitStatus: 'hitfull' } : square)
+      const wait = await this.props.setGridArray(newGridArray)
+    }
+
     this.props.checkGameWinner()
     this.props.sendData()
     if(this.props.playState === 'Singleplayer'){this.props.setTurnState('Computer 1')}
