@@ -22,7 +22,6 @@ export function RunGame(props) {
     console.log(socket.id)
     setSocketid(socket.id)
     setIsConnected(true);
-    
   
     socket.on('disconnect', () => {
       setIsConnected(false);
@@ -38,29 +37,6 @@ export function RunGame(props) {
     console.log(turnState)
 
   }, [turnState])
-
-  const defaultPlayersStatus = [
-    {
-      playerNumber: 1,
-      socketid: '',
-      hasShipsPlaced: false,
-      hasAllShipsDestroyed: false,
-    },
-    {
-      playerNumber: 2,
-      socketid: '',
-      hasShipsPlaced: false,
-      hasAllShipsDestroyed: false,
-    },
-    {
-      playerNumber: 3,
-      socketid: '',
-      hasShipsPlaced: false,
-      hasAllShipsDestroyed: false,
-    }
-  ]
-
-  const [playersStatus, setPlayersStatus] = useState()
 
 
 
@@ -178,10 +154,6 @@ export function RunGame(props) {
   // )} else {return playerGridSetup}};
   // var [play3Grid, setPlay3Grid] = useState(play3GridSetupShips)
 
-
-
-
-
   function sendPlayerReadyGrid() { // Add this to 'onClick' functions to send the updated player array to other users
     if (props.playState === 'Multiplayer') {socket.emit('playerGridReady', play1Grid, roomId)}
     console.log('Sending updated grid')
@@ -200,7 +172,7 @@ export function RunGame(props) {
     arrayOfPlayerGrids.push(play2Grid)
     arrayOfPlayerGrids.push(play3Grid)
     arrayOfPlayerGrids.splice(playerIndexState, 0, play1Grid)
-    console.log(arrayOfPlayerGrids)
+    
 
     socket.emit('sendData', roomId, arrayOfPlayerGrids[0], arrayOfPlayerGrids[1], arrayOfPlayerGrids[2]) // arrayOfGrids[0] is serverPlayer1, arr..[1] is serverPlayer2, arr..[2] is serverPlayer3
   };
