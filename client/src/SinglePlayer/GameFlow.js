@@ -118,8 +118,10 @@ export function GameFlow(props) {
       (player2Hits >= 3 && player3Hits >= 3) ||
       (player3Hits >= 3 && player1Hits >= 3)
     ) {
-      props.setTurnState("game-over");
-      socket.emit('gameIsOver', props.roomId)
+
+      if ( props.turnState !== 'game-over'){
+        socket.emit('gameIsOver', props.roomId)
+      }
       
       let turnHeader = document.getElementById('turnHeader')
       turnHeader.style.display = 'none'
@@ -161,11 +163,12 @@ export function GameFlow(props) {
             <div className='content'>
               <h1>  Winner is  {player}  🎉</h1>
               <br></br>
-              {/* <button onClick ={ () => {
+              <button onClick ={ () => {
               socket.disconnect()
+              socket.connect()
               props.setReadyState('pending')
               props.setPlayState('Welcome')
-              }}></button> */}
+              }}>Play Again</button>
               <br></br>
             </div>
           </div>
