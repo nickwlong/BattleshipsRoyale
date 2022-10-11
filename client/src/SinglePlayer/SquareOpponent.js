@@ -1,8 +1,4 @@
-import { toHaveStyle } from "@testing-library/jest-dom/dist/matchers";
 import React from "react";
-import ReactDOM from "react-dom";
-import { Computer } from "./Computer";
-import { checkGameWinner } from "./GameFlow";
 
 export class SquareOpponent extends React.Component {
   constructor(props) {
@@ -49,7 +45,7 @@ export class SquareOpponent extends React.Component {
     });
 
 
-    const wait = await this.props.setGridArray(newGridArray)
+    await this.props.setGridArray(newGridArray)
 
     this.props.checkGameWinner()
     this.props.sendData()
