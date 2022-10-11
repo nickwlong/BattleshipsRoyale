@@ -5,6 +5,6 @@ describe('Ships', () => {
       cy.contains('Singleplayer Game').click()
       cy.contains('TugBoat(1)').click()
     //   cy.contains('#play1_square_0').click()
-      cy.get('div[id="#play1_square_0"]').click()
+      cy.get('div[id="play1_square_0"]').click()
     })
 })
