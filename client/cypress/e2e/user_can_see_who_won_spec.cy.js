@@ -15,13 +15,18 @@ describe('shoot', () => {
       cy.contains('Ready!').click()
 
       //user can fire at opponent
-      cy.get('div[id="play2_square_8"]').wait(1000).click({multiple: true})
-      cy.get('div[id="play2_square_9"]').wait(1000).click({multiple: true})
-      cy.get('div[id="play2_square_10"]').wait(1000).click({multiple: true})
-
+      cy.get('div[id="play2_square_8"]').wait(2001).click({multiple: true})
+      cy.get('div[id="play2_square_9"]').wait(2001).click({multiple: true})
+      cy.get('div[id="play2_square_10"]').wait(2001).click({multiple: true})
+      cy.get('div[id="play2_square_15"]').wait(2001).click({multiple: true})
+      cy.get('div[id="play2_square_12"]').wait(2001).click({multiple: true})
+      cy.get('div[id="play2_square_2"]').wait(2001).click({multiple: true})
+      cy.get('div[id="play2_square_5"]').wait(2001).click({multiple: true})
+      cy.get('div[id="play2_square_3"]').wait(2001).click({multiple: true})
+      cy.get('div[id="play2_square_20"]').wait(2001).click({multiple: true})
 
       //user can see who won
-      cy.contains('Winner is Player 1 🎉')
+      cy.contains('Winner is Player')
     })
 
   
