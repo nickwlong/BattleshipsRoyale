@@ -28,8 +28,7 @@ export function RunGame(props) {
       setIsConnected(false);
     });
   
-    socket.on('playerJoinedRoom', (message, opponentNames) => {console.log(message)
-    setOpponentNames(opponentNames)})
+    socket.on('playerJoinedRoom', message => {console.log(message)})
   
     if(props.playState === 'Singleplayer') {setReadyState('placement')}
 
@@ -77,75 +76,107 @@ export function RunGame(props) {
   var play3GridSetupShips = () => {return playerGridSetup}
 
 
+  let presetPicked1 = Math.floor(Math.random() * 7);
+  let presetPicked2 = Math.floor(Math.random() * 7);
 
 
+  const presetArray = [[7,8,18,25,32,39,40,41,3,4,5,6,16,23,30,37,44],
+  [1,2,6,13,20,15,22,29,24,25,26,27,37,38,39,40,41],
+  [26,27,23,30,37,4,5,6,8,9,10,11,44,45,46,47,48],
+  [23,24,5,12,29,0,7,14,38,39,40,41,15,22,29,36,43],
+  [28,29,2,9,16,0,7,14,13,20,27,34,4,11,18,25,32],
+  [3,10,43,44,45,33,40,47,17,18,19,20,1,8,15,22,29],
+  [30,31,0,1,2,21,28,35,9,10,11,12,20,27,34,41,48]];
 
-  // play2GridSetupShips = (computerPlacing,shipPlacing) => {
-
-  //   if (computerPlacing === 1) {
-  //     var placed = false
-  //     while (placed === false){
-  //       let orientation = 0;
-  //       let shipStartingIndex = Math.floor(Math.random() * 49);
-  //       console.log(shipStartingIndex)
-  //       placed = true
-  //       //orientation = 0 is horizontal, orientation = 1 is vertical
-  //       if (orientation === 0){
-  //         if(shipPlacing === 2){
-  //           if ([6,13,20,27,34,41,48].includes(shipStartingIndex) === false){
-  //             console.log("meeppp")
-  //             placed = true
-  //             return playerGridSetup.map((square,index)=>
-  //             index === shipStartingIndex || index === shipStartingIndex +1 ? { ...square,shipPresent: 'ship'} : square)
-  //           }
-            
-  //         } else if (shipPlacing === 31 || shipPlacing === 32) {
-  //           if ([5,6,12,13,19,20,26,27,33,34,40,41,47,48].includes(shipStartingIndex) === false){
-  //             placed = true
-  //             return playerGridSetup.map((square,index)=>
-  //             index === shipStartingIndex || index === shipStartingIndex +1 || index === shipStartingIndex +2 ? { ...square,shipPresent: 'ship'} : square)
-  //           }
-  //         } else if (shipPlacing === 4){
-  //           if ([4,5,6,11,12,13,18,19,20,25,26,27,32,33,34,39,40,41,46,47,48].includes(shipStartingIndex) === false){
-  //             placed = true
-  //             return playerGridSetup.map((square,index)=>
-  //             index === shipStartingIndex || index === shipStartingIndex +1 || index === shipStartingIndex +2 || index === shipStartingIndex +3 ? { ...square,shipPresent: 'ship'} : square)
-  //           }
-  //         } else if (shipPlacing === 5){
-  //           if ([3,4,5,6,10,11,12,13,17,18,19,20,24,25,26,27,31,32,33,34,38,39,40,41,45,46,47,48].includes(shipStartingIndex) === false){
-  //             placed = true
-  //             return playerGridSetup.map((square,index)=>
-  //             index === shipStartingIndex || index === shipStartingIndex +1 || index === shipStartingIndex +2 || index === shipStartingIndex +3 ? { ...square,shipPresent: 'ship'} : square)
-  //           }
-  //         }
-  //       } else if (orientation === 1){
-  //         return playerGridSetup.map((square,index)=>
-  //         index === shipStartingIndex || index === shipStartingIndex +1 ? { ...square,shipStatus:'ship'} : square
-  //         )
-  //       }
-  //     }
-  //   }
-  // }
+  const presetPickedC1 = presetArray[presetPicked1];
+  const presetPickedC2 = presetArray[presetPicked2];
 
 
-  // [play2Grid, setPlay2Grid] = useState(play2GridSetupShips(1,2))
-
-
-
-
-
-
-
-  play2GridSetupShips = () => { if (props.playState==='Singleplayer') {return playerGridSetup.map((square, index)=>
-    index === 8 || index === 9 || index === 10 ? { ...square, shipStatus: 'ship' } : square
+  play2GridSetupShips = () => { if (props.playState==='Singleplayer') {
+    return playerGridSetup.map((square, index)=>{
+      if ([presetPickedC1[0],presetPickedC1[1]].includes(index)){
+        return {
+          ...square,
+          shipStatus: 'ship'
+        };
+      } else if([presetPickedC1[2],presetPickedC1[3],presetPickedC1[4]].includes(index)){
+        return {
+          ...square,
+          shipStatus: 'ship'
+        };
+      } else if([presetPickedC1[5],presetPickedC1[6],presetPickedC1[7]].includes(index)){
+        return {
+          ...square,
+          shipStatus: 'ship'
+        };
+      } else if([presetPickedC1[8],presetPickedC1[9],presetPickedC1[10],presetPickedC1[11]].includes(index)){
+        return {
+          ...square,
+          shipStatus: 'ship'
+        };
+      } else if([presetPickedC1[12],presetPickedC1[13],presetPickedC1[14],presetPickedC1[15],presetPickedC1[16]].includes(index)){
+        return {
+          ...square,
+          shipStatus: 'ship'
+        };
+      } else {
+        return square
+      }
+    }
   )} else {return playerGridSetup}};
+
   var [play2Grid, setPlay2Grid] = useState(play2GridSetupShips)
 
 
-  play3GridSetupShips = () => { if (props.playState==='Singleplayer') {return playerGridSetup.map((square, index)=>
-    index === 8 || index === 9 || index === 10 ? { ...square, shipStatus: 'ship' } : square
+  play3GridSetupShips = () => { if (props.playState==='Singleplayer') {
+    return playerGridSetup.map((square, index)=>{
+      if ([presetPickedC2[0],presetPickedC2[1]].includes(index)){
+        return {
+          ...square,
+          shipStatus: 'ship'
+        };
+      } else if([presetPickedC2[2],presetPickedC2[3],presetPickedC2[4]].includes(index)){
+        return {
+          ...square,
+          shipStatus: 'ship'
+        };
+      } else if([presetPickedC2[5],presetPickedC2[6],presetPickedC2[7]].includes(index)){
+        return {
+          ...square,
+          shipStatus: 'ship'
+        };
+      } else if([presetPickedC2[8],presetPickedC2[9],presetPickedC2[10],presetPickedC2[11]].includes(index)){
+        return {
+          ...square,
+          shipStatus: 'ship'
+        };
+      } else if([presetPickedC2[12],presetPickedC2[13],presetPickedC2[14],presetPickedC2[15],presetPickedC2[16]].includes(index)){
+        return {
+          ...square,
+          shipStatus: 'ship'
+        };
+      } else {
+        return square
+      }
+    }
   )} else {return playerGridSetup}};
+
   var [play3Grid, setPlay3Grid] = useState(play3GridSetupShips)
+
+
+
+
+
+  //play2GridSetupShips = () => { if (props.playState==='Singleplayer') {return playerGridSetup.map((square, index)=>
+    //index === 8 || index === 9 || index === 10 ? { ...square, shipStatus: 'ship' } : square
+  //)} else {return playerGridSetup}};
+  //var [play2Grid, setPlay2Grid] = useState(play2GridSetupShips)
+
+
+  //play3GridSetupShips = () => { if (props.playState==='Singleplayer') {return playerGridSetup.map((square, index)=>
+  //   index === 8 || index === 9 || index === 10 ? { ...square, shipStatus: 'ship' } : square
+  // )} else {return playerGridSetup}};
+  // var [play3Grid, setPlay3Grid] = useState(play3GridSetupShips)
 
 
 
@@ -222,7 +253,7 @@ export function RunGame(props) {
 
   return (
     <div>
-      {props.playState==='Multiplayer' ? <RunMPGame socketid={socketid} setSocketid={setSocketid} roomId={roomId} setRoomId={setRoomId} isConnected={isConnected} username={username} setUsername={setUsername} opponentNames={opponentNames} /> : ''}
+      {props.playState==='Multiplayer' ? <RunMPGame socketid={socketid} setSocketid={setSocketid} roomId={roomId} setRoomId={setRoomId} isConnected={isConnected} username={username} setUsername={setUsername}/> : ''}
       {readyState === 'play' ? <GameFlow 
         sendGrids={sendPlayerReadyGrid}
         playState={props.playState}

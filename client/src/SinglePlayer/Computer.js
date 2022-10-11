@@ -33,7 +33,7 @@ export function Computer(props) {
 
     } else if (playerPicked === 1){
 
-        let indexPicked = Math.floor(Math.random() * 16);
+        let indexPicked = Math.floor(Math.random() * 49);
         
         let newGridArray = props.grid2Array.map((square, i) => {
             if(indexPicked === i && ["ship","ship2","ship31","ship32","ship4","ship5"].includes(square.shipStatus) && square.hitStatus != 'hit' && square.hitStatus != 'miss'){
