@@ -12,7 +12,7 @@ function App() {
     if(playState === 'Welcome') {
       return <Welcome changePlayState={ setPlayState }/>
     } else {
-      return <RunGame playState={playState}/>
+      return <RunGame playState={playState} setPlayState={setPlayState}/>
     }
   }
 

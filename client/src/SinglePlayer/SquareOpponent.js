@@ -1,8 +1,4 @@
-import { toHaveStyle } from "@testing-library/jest-dom/dist/matchers";
 import React from "react";
-import ReactDOM from "react-dom";
-import { Computer } from "./Computer";
-import { checkGameWinner } from "./GameFlow";
 
 export class SquareOpponent extends React.Component {
   constructor(props) {
@@ -21,18 +17,19 @@ export class SquareOpponent extends React.Component {
   // 
   
 // this async function is working with the 'let wait' variable to ensure that React doesnt move on to the next bit of code until 'handleClick' is done! -E
-  async handleClick () {
+  async handleClick (event) {
+    if (this.props.turnState === 'game-over') {return null}
+    if (event.target.parentElement.classList[0] === ('player1')) {
+      return null
+    }
     if (this.props.turnState === 'Computer 1' || this.props.turnState === 'Computer 2') {alert("its not your turn yet!"); return null}
-    console.log(this.props.turnState)
     if (this.props.playState === 'Multiplayer' && this.props.turnState !== this.props.username) {alert("its not your turn yet!"); return null}
-    if (this.props.square.hitStatus === 'hit' || this.props.square.hitStatus === 'miss') {
-      alert('This square has already been hit, choose another')
-      return null}
+    if (this.props.square.hitStatus === 'hit' || this.props.square.hitStatus === 'hitfull' || this.props.square.hitStatus === 'miss') {alert('This square has already been hit, choose another');return null}
     if (this.props.turnState === 'game-over') {return null}
     let newGridArray = this.props.gridArray.map((square, i) => {
       if (
         this.props.index === i &&
-        ["ship", "ship2", "ship31", "ship32", "ship4", "ship5"].includes(
+        ["ship2","ship31","ship32","ship4","ship5","ship2C","ship31C","ship32C","ship4C","ship5C"].includes(
           this.props.square.shipStatus
         )
       ) {
@@ -47,7 +44,9 @@ export class SquareOpponent extends React.Component {
       }
     });
 
-    const wait = await this.props.setGridArray(newGridArray)
+
+    await this.props.setGridArray(newGridArray)
+
     this.props.checkGameWinner()
     this.props.sendData()
     if(this.props.playState === 'Singleplayer'){this.props.setTurnState('Computer 1')}
@@ -62,6 +61,6 @@ export class SquareOpponent extends React.Component {
 
   render(){
     return(
-      <div className={`opponent square ${this.props.square.hitStatus} ${this.props.square.shipStatus}`} id={`play2_square_${this.props.index}`} key={`square_${this.props.index}`} onClick={() => {this.handleClick()}}> </div>
+      <div className={`${this.props.player} square ${this.props.square.hitStatus} ${this.props.square.shipStatus}`} id={`play2_square_${this.props.index}`} key={`square_${this.props.index}`} onClick={this.handleClick}> </div>
   )
 }}

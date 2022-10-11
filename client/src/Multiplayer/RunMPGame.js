@@ -53,8 +53,8 @@ export function RunMPGame(props) {
         </div>
       </column>
       <column style={{flex: "20%", padding: "20px", background: "white"}}>
-        <h2 className={`otherConnectedStatus two${props.opponentNames.length}`}>Player 2 connected</h2>
-        <h2 className={`otherConnectedStatus three${props.opponentNames.length}`} >Player 3 connected</h2>
+        <h2 className={`joinRoom playersJoined${props.opponentNames.length}`}>Join a room</h2>
+        <h2 className={`otherConnectedStatus three${props.opponentNames.length}`}>Players connected: {props.opponentNames.length}</h2>
       </column>
     </row>
   );

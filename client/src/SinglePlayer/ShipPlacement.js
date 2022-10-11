@@ -65,13 +65,17 @@ export function ShipPlacement(props) {
     //   props.play1Grid.filter(square => square.shipStatus === 'ship4').length > 0 &&
     //   props.play1Grid.filter(square => square.shipStatus === 'ship5').length > 0) {
 
-        return (<button className="readyBtn" onClick={()=>{ handleReadyBtnClick(); hideResetBtn()}}> Ready! </button>)
+        return (<button className="readyBtn" onClick={()=>{ handleReadyBtnClick(); hideAllBtn()}}> Ready! </button>)
       // } else {return ''}
   }
 
-  const hideResetBtn = () => {
+  const hideAllBtn = () => {
     let resetBtn = document.getElementById('resetBtn')
     resetBtn.style.display = 'none'
+    let horizontalBtn = document.getElementById('horizontalBtn')
+    horizontalBtn.style.display = 'none'
+    let verticalBtn = document.getElementById('verticalBtn')
+    verticalBtn.style.display = 'none'
   }
 
   const playerGridSetup = new Array(49).fill({
@@ -88,8 +92,8 @@ export function ShipPlacement(props) {
       {isShip4Placed()}
       {isShip5Placed()}
       {/* functions above are called for each ship button, checks the array if it exists, if it does nothing is shown, if not it shows the respective ship button */}
-      <button className="ships" onClick={()=>{ SelectOrientation('horizontal');}}> Horizontal </button>
-      <button className="ships" onClick={()=>{ SelectOrientation('vertical');}}> Vertical </button>
+      <button className="ships" id="horizontalBtn" onClick={()=>{ SelectOrientation('horizontal');}}> Horizontal </button>
+      <button className="ships" id="verticalBtn" onClick={()=>{ SelectOrientation('vertical');}}> Vertical </button>
       <button className="ships" id="resetBtn" onClick={()=>{ props.setPlay1Grid(playerGridSetup);}}> Reset all ship places </button>
       {showReadyBtn()}
 
