@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 describe('Ships', () => {
     it('User can select ships and place on board ', () => {
+      // user selects ships 
       cy.visit('http://localhost:3000/')
       cy.contains('Singleplayer Game').click()
       cy.contains('TugBoat(1)').click()
