@@ -21,8 +21,8 @@ margin: auto
 }
 
 .square {
-  width: 25%;
-  height: 25%;
+  width: 14.28%;
+  height: 14.28%;
   box-sizing: border-box;
   background: skyblue;
   border: 1px solid black;
@@ -30,16 +30,19 @@ margin: auto
   transition: background-color 100ms ease-in-out;
 }
 
-.ship1 {
-  background: rgb(107, 103, 103);
-}
 .ship2 {
   background: rgb(107, 103, 103);
 }
-.ship3 {
+.ship31 {
+  background: rgb(107, 103, 103);
+}
+.ship32 {
   background: rgb(107, 103, 103);
 }
 .ship4 {
+  background: rgb(107, 103, 103);
+}
+.ship5 {
   background: rgb(107, 103, 103);
 }
 
@@ -59,4 +62,20 @@ margin: auto
 
 .miss {
   background: white;
+}
+
+.otherConnectedStatus {
+  text-decoration: line-through;
+}
+
+.otherConnectedStatus.two2 {
+  text-decoration: none;
+}
+
+.otherConnectedStatus.two3 {
+  text-decoration: none;
+}
+
+.otherConnectedStatus.three3 {
+  text-decoration: none;
 }

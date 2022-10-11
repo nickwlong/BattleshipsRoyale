@@ -10,16 +10,7 @@ export function ShipPlacement(props) {
   const handleReadyBtnClick = () => {
     props.sendPlayerReadyGrid()
     shipSelected = ''
-    if(props.playState === 'Singleplayer'){props.setReadyState(true)}
-  }
-
-  const isShip1Placed = () => {
-    if(props.play1Grid.filter(square => square.shipStatus === 'ship1').length > 0) {
-      shipSelected = ''
-      return ''
-    } else {
-      return <button className="ships" id="Ship1" onClick={()=>{ SelectShip(1);}}> TugBoat(1) </button>
-    }
+    if(props.playState === 'Singleplayer'){props.setReadyState('play')}
   }
 
   const isShip2Placed = () => {
@@ -31,16 +22,25 @@ export function ShipPlacement(props) {
     }
   }
 
-  const isShip3Placed = () => {
-    if(props.play1Grid.filter(square => square.shipStatus === 'ship3').length > 0) {
+  const isShip31Placed = () => {
+    if(props.play1Grid.filter(square => square.shipStatus === 'ship31').length > 0) {
       shipSelected = ''
       return ''
     } else {
-      return <button className="ships" id="Ship3" onClick={()=>{ SelectShip(3);}}> Cruiser(3) </button>
+      return <button className="ships" id="Ship31" onClick={()=>{ SelectShip(31);}}> Cruiser(3) </button>
     }
   }
 
-  const isShip4Placed = () => {
+  const isShip32Placed = () => {
+    if(props.play1Grid.filter(square => square.shipStatus === 'ship32').length > 0) {
+      shipSelected = ''
+      return ''
+    } else {
+      return <button className="ships" id="Ship32" onClick={()=>{ SelectShip(32);}}> Submarine(3) </button>
+    }
+  }
+
+  const isShip4Placed = () => { 
     if(props.play1Grid.filter(square => square.shipStatus === 'ship4').length > 0) {
       shipSelected = ''
       return ''
@@ -49,27 +49,48 @@ export function ShipPlacement(props) {
     }
   }
 
-  const showReadyBtn = () => {
-    if (props.play1Grid.filter(square => square.shipStatus === 'ship1').length > 0 &&
-      props.play1Grid.filter(square => square.shipStatus === 'ship2').length > 0 &&
-      props.play1Grid.filter(square => square.shipStatus === 'ship3').length > 0 &&
-      props.play1Grid.filter(square => square.shipStatus === 'ship4').length > 0) {
-        return (<button className="readyBtn" onClick={()=>{ handleReadyBtnClick();}}> Ready! </button>)
-      } else {return ''}
-
-
+  const isShip5Placed = () => {
+    if(props.play1Grid.filter(square => square.shipStatus === 'ship5').length > 0) {
+      shipSelected = ''
+      return ''
+    } else {
+      return <button className="ships" id="Ship5" onClick={()=>{ SelectShip(5);}}> Carrier(5) </button>
+    }
   }
+
+  const showReadyBtn = () => {
+    // if (props.play1Grid.filter(square => square.shipStatus === 'ship2').length > 0 &&
+    //   props.play1Grid.filter(square => square.shipStatus === 'ship31').length > 0 &&
+    //   props.play1Grid.filter(square => square.shipStatus === 'ship32').length > 0 &&
+    //   props.play1Grid.filter(square => square.shipStatus === 'ship4').length > 0 &&
+    //   props.play1Grid.filter(square => square.shipStatus === 'ship5').length > 0) {
+
+        return (<button className="readyBtn" onClick={()=>{ handleReadyBtnClick(); hideResetBtn()}}> Ready! </button>)
+      // } else {return ''}
+  }
+
+  const hideResetBtn = () => {
+    let resetBtn = document.getElementById('resetBtn')
+    resetBtn.style.display = 'none'
+  }
+
+  const playerGridSetup = new Array(49).fill({
+    shipStatus: '0',
+    hitStatus: '-'
+  })
 
 
   return (
     <div>
-      {isShip1Placed()}
       {isShip2Placed()}
-      {isShip3Placed()}
+      {isShip31Placed()}
+      {isShip32Placed()}
       {isShip4Placed()}
+      {isShip5Placed()}
       {/* functions above are called for each ship button, checks the array if it exists, if it does nothing is shown, if not it shows the respective ship button */}
       <button className="ships" onClick={()=>{ SelectOrientation('horizontal');}}> Horizontal </button>
       <button className="ships" onClick={()=>{ SelectOrientation('vertical');}}> Vertical </button>
+      <button className="ships" id="resetBtn" onClick={()=>{ props.setPlay1Grid(playerGridSetup);}}> Reset all ship places </button>
       {showReadyBtn()}
 
       <h1>Your Board</h1>
@@ -85,21 +106,25 @@ export function ShipPlacement(props) {
 
 function SelectShip(shiptype){
 
-  if (shiptype === 1){
-
-  shipSelected = 'ship1';
-
-  } else if (shiptype === 2){
+  if (shiptype === 2){
 
     shipSelected = 'ship2';
 
-  } else if (shiptype === 3){
+  } else if (shiptype === 31){
 
-    shipSelected = 'ship3';
+    shipSelected = 'ship31';
+
+  } else if (shiptype === 32){
+
+    shipSelected = 'ship32';
 
   } else if (shiptype === 4){
 
     shipSelected = 'ship4';
+
+  } else if (shiptype === 5){
+
+    shipSelected = 'ship5';
 
   }
 
