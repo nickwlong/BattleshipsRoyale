@@ -123,10 +123,6 @@ export function RunGame(props) {
   )} else {return playerGridSetup}};
   var [play3Grid, setPlay3Grid] = useState(play3GridSetupShips)
 
-
-
-
-
   function sendPlayerReadyGrid() { // Add this to 'onClick' functions to send the updated player array to other users
     if (props.playState === 'Multiplayer') {socket.emit('playerGridReady', play1Grid, roomId)}
     console.log('Sending updated grid')
