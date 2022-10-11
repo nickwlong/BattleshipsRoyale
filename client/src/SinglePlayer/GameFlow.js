@@ -178,7 +178,7 @@ export function GameFlow(props) {
   }
   return(
   <div id='BoardsContainer'>
-    {props.turnState !== "game-over" ? <h1 id='turnHeader'>It's {props.turnState}'s turn</h1> : ""}
+    {props.turnState !== "game-over" ? <h1 className="layerTurn" id='turnHeader'>It's {props.turnState}'s turn</h1> : ""}
           {/* if the 'winnerConfetti is equal to 'Player 1' the CallsWinner function is called*/}
           {winnerConfetti === 'Player 1' ? CallsWinner("Player 1"): ""}
           {winnerConfetti === 'Player 2' ? CallsWinner("Player 2"): ""}
