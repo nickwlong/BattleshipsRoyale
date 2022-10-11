@@ -23,3 +23,21 @@
   margin-top: 3rem;
   padding: 1rem 2rem;
 }
+
+
+.PlayAgain {
+  -webkit-border-radius: 19;
+  -moz-border-radius: 19;
+  border-radius: 19px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: skyblue;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.PlayAgain:hover {
+  background: rgb(109, 188, 219);
+  text-decoration: none;
+}
