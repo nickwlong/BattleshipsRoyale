@@ -34,10 +34,12 @@ io.on('connection', socket => {
         id: roomId, 
         play1Grid: '', //player 1 is index 0 in the sockets array
         play2Grid: '', //player 2 is index 1 in the sockets array
-        play3Grid: ''} //player 3 is index 2 in the sockets array
+        play3Grid: '',
+        playersStatus: ['notOut']} //player 3 is index 2 in the sockets array
       rooms.push(room)
     } else { rooms.find((e) => e.id === roomId).sockets.push(socket.id);
       rooms.find((e) =>e.id === roomId).usernames.push(username);
+      rooms.find((e) =>e.id === roomId).playersStatus.push('notOut');
     }
 
     socket[roomId] = roomId
@@ -76,13 +78,26 @@ io.on('connection', socket => {
   socket.on('sendData', (roomId, play1Grid, play2Grid, play3Grid, turnState) => {
     rooms.forEach(room => {
       if(room.id === roomId) {
-      room.play1Grid = play1Grid 
-      room.play2Grid = play2Grid 
-      room.play3Grid = play3Grid 
-      room.currentTurnIndex == 2 ? room.currentTurnIndex = 0 : room.currentTurnIndex += 1
-      room.currentTurnPlayer = room.usernames[room.currentTurnIndex]
-      socket.to(roomId).emit('receiveData', room)
-      socket.emit('receiveData', room)
+
+        room.play1Grid = play1Grid 
+        let player1Hits = play1Grid.filter((square) => square.hitStatus === "hitfull").length;
+        if (player1Hits >= 3) {room.playersStatus[0] = 'out'} // if the player is 'out', don't let them play.
+
+        room.play2Grid = play2Grid 
+        let player2Hits = play2Grid.filter((square) => square.hitStatus === "hitfull").length;
+        if (player2Hits >= 3) {room.playersStatus[1] = 'out'} // if the player is 'out', don't let them play.
+
+        room.play3Grid = play3Grid 
+        let player3Hits = play3Grid.filter((square) => square.hitStatus === "hitfull").length;
+        if (player3Hits >= 3) {room.playersStatus[2] = 'out'} // if the player is 'out', don't let them play.
+
+        room.currentTurnIndex == 2 ? room.currentTurnIndex = 0 : room.currentTurnIndex += 1 // update turn to next player
+
+        if(room.playersStatus[room.currentTurnIndex] === 'out'){room.currentTurnIndex == 2 ? room.currentTurnIndex = 0 : room.currentTurnIndex += 1} // if the player is out, skip to the next player
+
+        room.currentTurnPlayer = room.usernames[room.currentTurnIndex]
+        socket.to(roomId).emit('receiveData', room)
+        socket.emit('receiveData', room)
       }
   })
 

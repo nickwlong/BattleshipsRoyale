@@ -155,7 +155,7 @@ export function RunGame(props) {
     console.log('Sending updated grid')
   }
 
-  function sendData() {
+  async function sendData() {
     // if index 0 is local player, local1 = server1, local2 = server2, local3 = server3
     // if index 1 is local player, local1 = server2, local2 = server1, local3 = server3
     // if index 2 is local player, local1 = server3, local2 = server1, local3 = server2
@@ -169,11 +169,10 @@ export function RunGame(props) {
     arrayOfPlayerGrids.push(play3Grid)
     arrayOfPlayerGrids.splice(playerIndexState, 0, play1Grid)
     
-
     socket.emit('sendData', roomId, arrayOfPlayerGrids[0], arrayOfPlayerGrids[1], arrayOfPlayerGrids[2], turnState) // arrayOfGrids[0] is serverPlayer1, arr..[1] is serverPlayer2, arr..[2] is serverPlayer3
   };
 
-  socket.on('receiveData', (room) => {
+  socket.on('receiveData', async (room) => {
     
     setTurnState(room.currentTurnPlayer)
 
@@ -183,7 +182,7 @@ export function RunGame(props) {
     arrayOfGrids.push(room.play3Grid)
     // index 0 is server's player 1, index 1 is server's player 2, index 2 is server's player 3
 
-    let playerIndex = room.sockets.findIndex(socket => socket === socketid) // finds the local player's index from inside the server's sockets array
+    let playerIndex = await room.sockets.findIndex(socket => socket === socketid) // finds the local player's index from inside the server's sockets array
     setPlayerIndex(playerIndex)
 
     let localPlayerGrid = arrayOfGrids.splice(playerIndex, 1)[0] // removes the playerGrid from the array
@@ -210,9 +209,6 @@ export function RunGame(props) {
   socket.on('allPlayersReadyMessage', (readyStatus) => {
     console.log(readyStatus)
     if(readyStatus === 'allPlayersReady') {
-
-
-
       setTimeout(() => {
         setReadyState('play')
       }, 2000);
@@ -220,7 +216,6 @@ export function RunGame(props) {
   })
 
   socket.on('threePlayersConnected', (room) => {
-
     console.log(opponentNames)
     setReadyState('placement')
   })
