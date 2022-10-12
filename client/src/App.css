@@ -222,8 +222,6 @@ margin: auto
   text-shadow: horizontal-offset vertical-offset blur color;
 }
 
-/* the below css code is for the turn message to glow when its player 1's go */
-/* 
 @keyframes glowing {
   0% {
     text-shadow: 2px 5px 20px rgba(77, 7, 7, 0.526);
@@ -241,8 +239,7 @@ margin: auto
   color: #ffffff;
   font-size: 35px;
   animation: glowing 900ms infinite;
-   */
-/* } */
+}
 
 
 .responsive-grids{
