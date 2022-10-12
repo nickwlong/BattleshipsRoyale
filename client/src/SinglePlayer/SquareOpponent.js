@@ -13,9 +13,6 @@ export class SquareOpponent extends React.Component {
     if (this.props.turnState === 'game-over') {return null} // prevents play if it is 'game-over'
     if (event.target.parentElement.classList[0] === ('player1')) {return null} // prevents play if this board belongs to local player
 
-    let player1Hits = await this.props.player1Grid.filter((square) => square.hitStatus === "hitfull").length;
-    if (player1Hits >= 3) {this.props.sendData(); return null; } // if the player is 'out', don't let them play.
-
     if (this.props.turnState === 'Computer 1' || this.props.turnState === 'Computer 2') {alert("its not your turn yet!"); return null} // if it is the computer's don't, can't play
     if (this.props.playState === 'Multiplayer' && this.props.turnState !== this.props.username) {alert("its not your turn yet!"); return null} // if it is not the player's turn in MP, can't play
     if (this.props.square.hitStatus === 'hit' || this.props.square.hitStatus === 'hitfull' || this.props.square.hitStatus === 'miss') {alert('This square has already been hit, choose another');return null} // if the square is already hit or missed, can't play on it. 
