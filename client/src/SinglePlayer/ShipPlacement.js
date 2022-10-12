@@ -5,6 +5,7 @@ export var shipOrient = true;
 
 var shipSelected = 'none'
 var shipOrient = 'horizontal'
+var hidAllButtons = false;
 
 export function ShipPlacement(props) {
   const handleReadyBtnClick = () => {
@@ -76,12 +77,20 @@ export function ShipPlacement(props) {
     horizontalBtn.style.display = 'none'
     let verticalBtn = document.getElementById('verticalBtn')
     verticalBtn.style.display = 'none'
+    hidAllButtons = true;
   }
 
   const playerGridSetup = new Array(49).fill({
     shipStatus: '0',
     hitStatus: '-'
   })
+
+  const showWaitingForOthers = () => {
+    console.log(hidAllButtons)
+    if (hidAllButtons === true){
+      return (<div className="waiting"> Waiting for others </div>)
+    }
+  }
 
 
   return (
@@ -96,6 +105,7 @@ export function ShipPlacement(props) {
       <button className="ships" id="verticalBtn" onClick={()=>{ SelectOrientation('vertical');}}> Vertical </button>
       <button className="ships" id="resetBtn" onClick={()=>{ props.setPlay1Grid(playerGridSetup);}}> Reset all ship places </button>
       {showReadyBtn()}
+      {showWaitingForOthers()}
 
       <h1>Your Board</h1>
       <div className="player board" id="GameContainer">
