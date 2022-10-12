@@ -179,7 +179,8 @@ export function GameFlow(props) {
   }
   return(
   <div id='BoardsContainer'>
-    {props.turnState !== "game-over" ? <h1 className="playerTurn" id='turnHeader'>It's {props.turnState}'s turn</h1> : ""}
+    {props.turnState !== "game-over" ? ((props.turnState === 'Player 1'? <h1 className="Player1turn" id='Player1Turn'>It's your turn</h1>: "")||(<h1 className="playerTurn" id='turnHeader'>It's {props.turnState}'s turn</h1>)) : ""}
+        
           {/* if the 'winnerConfetti is equal to 'Player 1' the CallsWinner function is called*/}
           {winnerConfetti === 'Player 1' ? CallsWinner("Player 1"): ""}
           {winnerConfetti === 'Player 2' ? CallsWinner("Player 2"): ""}
@@ -187,7 +188,7 @@ export function GameFlow(props) {
 
     {props.playState === 'Singleplayer' ? <Computer turnState={props.turnState} checkGameWinner={checkGameWinner} setTurnState={props.setTurnState} grid1Array={props.play1Grid} setGrid1Array={props.setPlay1Grid} grid2Array={props.play2Grid} setGrid2Array={props.setPlay2Grid} grid3Array={props.play3Grid} setGrid3Array={props.setPlay3Grid}/> : ""}
     {/* computer function imports grids and turns state, and functions of setting grids and turn state */}
-    <container className='responsive-grid'>
+    <container className='responsive-grids'>
       <column>
         {props.playState === 'Singleplayer' ? <div><h1>Computer 1's Board</h1>
         <div className="player2 board" id="GameContainer2">
@@ -253,9 +254,8 @@ export function GameFlow(props) {
           </div>}
       </column>
     </container>
-    <container className='responsive-grid'>
+    <container className='responsive-grids'>
       <column>
-
         <h1>Your Board</h1>
         <div className="player1 board" id="GameContainer1">
           {props.play1Grid.map( // maps through the array and makes a square for each of the elements in the array.
