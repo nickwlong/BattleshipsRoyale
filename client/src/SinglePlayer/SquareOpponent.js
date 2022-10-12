@@ -1,31 +1,26 @@
+
 import React from "react";
 
 export class SquareOpponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      hitStatus: this.props.square.hitStatus,
-      index: this.props.index,
-    };
+
     this.handleClick = this.handleClick.bind(this);
   }
-
-  // this.props.index => the index within the grid array
-
-  // this.state.status => status of the square in the array
-
-  // 
   
 // this async function is working with the 'let wait' variable to ensure that React doesnt move on to the next bit of code until 'handleClick' is done! -E
   async handleClick (event) {
-    if (this.props.turnState === 'game-over') {return null}
-    if (event.target.parentElement.classList[0] === ('player1')) {
-      return null
-    }
-    if (this.props.turnState === 'Computer 1' || this.props.turnState === 'Computer 2') {alert("its not your turn yet!"); return null}
-    if (this.props.playState === 'Multiplayer' && this.props.turnState !== this.props.username) {alert("its not your turn yet!"); return null}
-    if (this.props.square.hitStatus === 'hit' || this.props.square.hitStatus === 'hitfull' || this.props.square.hitStatus === 'miss') {alert('This square has already been hit, choose another');return null}
-    if (this.props.turnState === 'game-over') {return null}
+    if (this.props.turnState === 'game-over') {return null} // prevents play if it is 'game-over'
+    if (event.target.parentElement.classList[0] === ('player1')) {return null} // prevents play if this board belongs to local player
+
+    let player1Hits = await this.props.player1Grid.filter((square) => square.hitStatus === "hitfull").length;
+    if (player1Hits >= 3) {this.props.sendData(); return null; } // if the player is 'out', don't let them play.
+
+    if (this.props.turnState === 'Computer 1' || this.props.turnState === 'Computer 2') {alert("its not your turn yet!"); return null} // if it is the computer's don't, can't play
+    if (this.props.playState === 'Multiplayer' && this.props.turnState !== this.props.username) {alert("its not your turn yet!"); return null} // if it is not the player's turn in MP, can't play
+    if (this.props.square.hitStatus === 'hit' || this.props.square.hitStatus === 'hitfull' || this.props.square.hitStatus === 'miss') {alert('This square has already been hit, choose another');return null} // if the square is already hit or missed, can't play on it. 
+
+    // on click, checks for the ship status and assigns hit or miss:
     let newGridArray = this.props.gridArray.map((square, i) => {
       if (
         this.props.index === i &&
@@ -44,20 +39,16 @@ export class SquareOpponent extends React.Component {
       }
     });
 
-
+    // updates the gridState with the outcome.
     await this.props.setGridArray(newGridArray)
 
+    // checks for a winner and sends the updated data
     this.props.checkGameWinner()
     this.props.sendData()
-    if(this.props.playState === 'Singleplayer'){this.props.setTurnState('Computer 1')}
+    if(this.props.playState === 'Singleplayer'){this.props.setTurnState('Computer 1')} // changes turn from Player 1 to Computer 1 if singleplayer
 
-    
-    
   }
 
-  // This handleClick can be used in the player2/3 board. On clicking the square, it would need to:
-  // Check to see if this square in the player's array has a ship, if so, change hitStatus to hit
-  // If it does NOT have a ship, change hitStatus to miss
 
   render(){
     return(
