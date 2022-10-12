@@ -32,7 +32,14 @@ export function RunGame(props) {
   
     socket.on('playerJoinedRoom', message => {console.log(message)})
   
-    if(props.playState === 'Singleplayer') {setReadyState('placement')}
+    if(props.playState === 'Singleplayer') {setReadyState('placement');
+      setOpponentNames(['Player 1', 'Computer 1', 'Computer 2']);
+      setPlayerIndex(0);
+      setUsername('Player 1');
+      setOpponent1Index(1);
+      setOpponent2Index(2);
+    }
+    
 
   }, [])
 

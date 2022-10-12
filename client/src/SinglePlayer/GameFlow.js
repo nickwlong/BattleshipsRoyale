@@ -118,26 +118,26 @@ export function GameFlow(props) {
       (player3Hits >= 3 && player1Hits >= 3)
     ) {
 
-      if ( props.turnState !== 'game-over'){
-        socket.emit('gameIsOver', props.roomId)
-      }
+
       
       let turnHeader = document.getElementById('turnHeader')
       turnHeader.style.display = 'none'
 
       if (player1Hits < 3) {
         // set the variable 'winnerConfetti' so confetti can go off when Player 1 wins!
-        winnerConfetti = 'Player 1'
-        CallsWinner("Player 1")
-        console.log(props.turnState)
+        winnerConfetti = props.opponentNames[props.playerIndexState]
+        // CallsWinner(props.opponentNames[props.playerIndexState])
       }
       if (player2Hits < 3) {
-        winnerConfetti = 'Player 2'
-        CallsWinner("Player 2")
+        winnerConfetti = props.opponentNames[props.opponent1Index]
+        // CallsWinner(props.opponentNames[props.opponent1Index])
       }
       if (player3Hits < 3) {
-        winnerConfetti = 'Player 3'
-        CallsWinner("Player 3")
+        winnerConfetti = props.opponentNames[props.opponent2Index]
+        // CallsWinner(props.opponentNames[props.opponent2Index])
+      }
+      if ( props.turnState !== 'game-over'){
+        socket.emit('gameIsOver', props.roomId)
       }
       return true;
     }
@@ -154,13 +154,14 @@ export function GameFlow(props) {
 
   // This function returns confetti with the modal popup that shows who the winner is.
   function CallsWinner (player) {
+
     return (
     <div>  
       <Confetti/>
         <div className='modalContainer'>
           <div className='modalRight'>
             <div className='content'>
-              <h1>  Winner is  {player}  🎉</h1>
+              {player === props.username ? <h1> 🎉 You are the winner! 🎉 </h1> : <h1>  {player} is the winner! 🎉</h1>}
               <br></br>
               {playAgainBtn()}
               <br></br>
@@ -183,11 +184,11 @@ export function GameFlow(props) {
   
   return(
   <div id='BoardsContainer'>
-    {props.turnState !== "game-over" ? <h1 className="playerTurn" id='turnHeader'>It's {props.turnState}'s turn</h1> : ""}
+    {props.turnState !== "game-over" ? <h1 className="playerTurn" id='turnHeader'>It's {props.turnState}'s turn</h1> : CallsWinner(winnerConfetti)}
           {/* if the 'winnerConfetti is equal to 'Player 1' the CallsWinner function is called*/}
-          {winnerConfetti === 'Player 1' ? CallsWinner("Player 1"): ""}
-          {winnerConfetti === 'Player 2' ? CallsWinner("Player 2"): ""}
-          {winnerConfetti === 'Player 3' ? CallsWinner("Player 3"): ""}
+          {/* {winnerConfetti === props.opponentNames[props.playerIndexState] ? CallsWinner(props.opponentNames[props.playerIndexState]) : ""}
+          {winnerConfetti === props.opponentNames[props.opponent1Index] ? CallsWinner(props.opponentNames[props.opponent1Index]) : ""}
+          {winnerConfetti === props.opponentNames[props.opponent2Index] ? CallsWinner(props.opponentNames[props.opponent2Index]) : ""} */}
 
     {props.playState === 'Singleplayer' ? <Computer turnState={props.turnState} checkGameWinner={checkGameWinner} setTurnState={props.setTurnState} grid1Array={props.play1Grid} setGrid1Array={props.setPlay1Grid} grid2Array={props.play2Grid} setGrid2Array={props.setPlay2Grid} grid3Array={props.play3Grid} setGrid3Array={props.setPlay3Grid}/> : ""}
     {/* computer function imports grids and turns state, and functions of setting grids and turn state */}
