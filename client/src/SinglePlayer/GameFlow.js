@@ -5,7 +5,7 @@ import './ModalPopUp.css';
 import { socket } from "./RunGame";
 
 // variable to make confetti go off when Player 1 wins
-var winnerConfetti 
+var winnerConfetti
 
 export function GameFlow(props) {
         //checks for ships hit and destroys them (Set property to hitfull)
