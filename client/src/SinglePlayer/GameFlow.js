@@ -162,12 +162,7 @@ export function GameFlow(props) {
             <div className='content'>
               <h1>  Winner is  {player}  🎉</h1>
               <br></br>
-              <button onClick ={ () => {
-              socket.disconnect()
-              socket.connect()
-              props.setReadyState('pending')
-              props.setPlayState('Welcome')
-              }}>Play Again</button>
+              {playAgainBtn()}
               <br></br>
             </div>
           </div>
@@ -175,6 +170,25 @@ export function GameFlow(props) {
     </div>
   );
   }
+
+  function playAgainBtn(){
+      return(<button onClick ={ () => {
+
+        socket.disconnect()
+        socket.connect()
+
+
+        const playerGridSetup = new Array(49).fill({
+          shipStatus: '0',
+          hitStatus: '-'
+        })
+        props.setPlay1Grid(playerGridSetup)
+        props.setReadyState('pending')
+        props.setPlayState('Welcome')
+      }
+      }>Play Again</button>)
+    }
+  
   return(
   <div id='BoardsContainer'>
     {props.turnState !== "game-over" ? <h1 id='turnHeader'>It's {props.turnState}'s turn</h1> : ""}
