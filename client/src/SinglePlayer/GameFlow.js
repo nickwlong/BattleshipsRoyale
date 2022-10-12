@@ -163,7 +163,7 @@ export function GameFlow(props) {
             <div className='content'>
               <h1>  Winner is  {player}  🎉</h1>
               <br></br>
-              <button className="play-Again" onClick ={ () => {
+              <button className="PlayAgain" onClick ={ () => {
               socket.disconnect()
               socket.connect()
               props.setReadyState('pending')
