@@ -198,15 +198,12 @@ export function RunGame(props) {
 
 
 
-  socket.on('allPlayersReadyMessage', (readyStatus, room) => {
+
+  socket.on('allPlayersReadyMessage', (readyStatus) => {
     console.log(readyStatus)
     if(readyStatus === 'allPlayersReady') {
 
-      // let playerIndex = room.sockets.findIndex(socket => socket === socketid)
-      // let arrayOfNames = room.usernames
-      // arrayOfNames.splice(playerIndex, 1)
-      // setOpponentNames(arrayOfNames)
-      // console.log(opponentNames)
+
 
       setTimeout(() => {
         setReadyState('play')
@@ -214,10 +211,14 @@ export function RunGame(props) {
     }
   })
 
-  socket.on('threePlayersConnected', () => {
+  socket.on('threePlayersConnected', (room) => {
+
+    console.log(opponentNames)
     setReadyState('placement')
   })
 
+  socket.on('playerJoinedRoom', (message, opponentNames) => {console.log(message)
+    setOpponentNames(opponentNames)})
 
 
   return (
@@ -226,6 +227,7 @@ export function RunGame(props) {
       {readyState === 'play' ? <GameFlow 
         sendGrids={sendPlayerReadyGrid}
         playState={props.playState}
+        setPlayState={props.setPlayState}
         play1Grid={play1Grid} 
         setPlay1Grid={setPlay1Grid} 
         play2Grid={play2Grid} 
