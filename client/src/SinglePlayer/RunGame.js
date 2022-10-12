@@ -193,11 +193,19 @@ export function RunGame(props) {
     setPlay2Grid(localPlayer2)
     setPlay3Grid(localPlayer3)    
 
+    let arrayOfNames = room.usernames
+    console.log('ArrayOfNames' + arrayOfNames)
+    let playerName = arrayOfNames.splice(playerIndex, 1)[0]
+    console.log('Spliced name ' + playerName)
+    let newArrayOfNames = []
+    newArrayOfNames.push(playerName)
+    console.log('arrayOfNames after splice ' + arrayOfNames)
+    newArrayOfNames.push(...arrayOfNames)
+    console.log('arrayOfNames after push ' + arrayOfNames)
+    console.log(newArrayOfNames)
+
 
   })
-
-
-
 
   socket.on('allPlayersReadyMessage', (readyStatus) => {
     console.log(readyStatus)

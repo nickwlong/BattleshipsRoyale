@@ -1,12 +1,24 @@
 .board {
-  width: 400px;
-  height: 400px;
+  width: 300px;
+  height: 300px;
   border: 2px solid black;
-  margin: 1em 2em 2em 1em;
+  /* margin: 1em 2em 2em 1em; */
   display: flex;
   flex-wrap: wrap;
   margin: auto;
+  background: rgba(255, 255, 255, 0.396);
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 50%);
+  scroll-snap-align: start;
+  transition: all 0.2s;
+  padding: 15px;
+}
 
+
+
+.board:hover {
+color: var(--white);
+background: var(--orange);
 }
 
 row {
@@ -28,6 +40,10 @@ margin: auto
   border: 1px solid black;
   cursor: crosshair;
   transition: background-color 100ms ease-in-out;
+}
+
+.square:hover{
+  background: rgba(95, 146, 166, 0.474);
 }
 
 .player.ship2 {
@@ -67,6 +83,10 @@ margin: auto
 @keyframes boomfull {
   0% {
     background-color: rgb(225, 19, 19);
+  }
+
+  50% {
+    background-color: rgb(225, 167, 19);
   }
 
   100% {
