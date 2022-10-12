@@ -35,7 +35,7 @@
   background: skyblue;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
-}
+  border: none;}
 
 .PlayAgain:hover {
   background: rgb(109, 188, 219);
