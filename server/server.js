@@ -106,6 +106,16 @@ io.on('connection', socket => {
     socket.emit('gameOver')
     socket.to(roomId).emit('gameOver')
   })
+
+  socket.on('close-room', (roomId) => {
+    console.log(roomId + ' is being closed')
+    const idFinder = (room) => {room.id === roomId}
+    let roomIndex = rooms.findIndex(idFinder)
+    console.log(roomIndex)
+    rooms.pop(roomIndex)
+    console.log(rooms)
+    io.in(roomId).socketsLeave(roomId)
+  })
   
 
 })})

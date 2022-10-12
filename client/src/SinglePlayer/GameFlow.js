@@ -175,7 +175,7 @@ export function GameFlow(props) {
   function playAgainBtn(){
       return(<button onClick ={ () => {
 
-        socket.emit('Close-room')
+        socket.emit('close-room', props.roomId)
         window.location.reload(true);
       }
       }>Play Again</button>)
