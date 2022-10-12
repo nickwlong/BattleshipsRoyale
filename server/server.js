@@ -1,6 +1,14 @@
+const express = require('express');
+const socketIO = require('socket.io');
 
+const PORT = process.env.PORT || 3001;
+const INDEX = '/index.html';
 
-const io = require('socket.io')(3001, {
+const server = express()
+  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+
+const io = require('socket.io')(server, {
   cors: {
     origin: ['http://localhost:3000']
   }
@@ -20,7 +28,7 @@ io.on('connection', socket => {
     let room
     if(!rooms.some((e) => e.id === roomId )) {
       room = {sockets: [socket.id], 
-        usernames: [username],
+        usernames: [username], 
         currentTurnIndex: 0,
         currentTurnPlayer: username,
         id: roomId, 
@@ -97,6 +105,16 @@ io.on('connection', socket => {
     console.log('game is over in room:' + roomId)
     socket.emit('gameOver')
     socket.to(roomId).emit('gameOver')
+  })
+
+  socket.on('close-room', (roomId) => {
+    console.log(roomId + ' is being closed')
+    const idFinder = (room) => {room.id === roomId}
+    let roomIndex = rooms.findIndex(idFinder)
+    console.log(roomIndex)
+    rooms.pop(roomIndex)
+    console.log(rooms)
+    io.in(roomId).socketsLeave(roomId)
   })
   
 
