@@ -3,9 +3,11 @@ import { Computer } from "./Computer";
 import Confetti from "react-confetti";
 import './ModalPopUp.css';
 import { socket } from "./RunGame";
+import { useEffect } from "react";
 
 // variable to make confetti go off when Player 1 wins
 var winnerConfetti
+
 
 export function GameFlow(props) {
         //checks for ships hit and destroys them (Set property to hitfull)
@@ -111,6 +113,8 @@ export function GameFlow(props) {
     console.log("Num Comp 1 ships hit:" + player2Hits);
     console.log("Num Comp 2 ships hit:" + player3Hits)
     
+  
+
 
     if (
       (player1Hits >= 3 && player2Hits >= 3) ||
@@ -118,8 +122,6 @@ export function GameFlow(props) {
       (player3Hits >= 3 && player1Hits >= 3)
     ) {
 
-
-      
       let turnHeader = document.getElementById('turnHeader')
       turnHeader.style.display = 'none'
 
@@ -181,15 +183,24 @@ export function GameFlow(props) {
       }
       }>Play Again</button>)
     }
-  
+    
+  function playwin1(){
+      if (props.turnState === props.username && props.turnState !== "game-over"){
+        console.log('Players go!')
+        return(
+        <h1 className="Player1turn" id='turnHeader'>It's your turn</h1>)
+      }
+      else if (props.turnState !== props.username && props.turnState !== "game-over") {
+        console.log('Opponents go!')
+        return (<h1 className="playerTurn" id='turnHeader'>It's {props.turnState}'s turn</h1>)
+      }}
+
+
+
   return(
   <div id='BoardsContainer'>
-    {props.turnState !== "game-over" ? <h1 className="playerTurn" id='turnHeader'>It's {props.turnState}'s turn</h1> : CallsWinner(winnerConfetti)}
-          {/* if the 'winnerConfetti is equal to 'Player 1' the CallsWinner function is called*/}
-          {/* {winnerConfetti === props.opponentNames[props.playerIndexState] ? CallsWinner(props.opponentNames[props.playerIndexState]) : ""}
-          {winnerConfetti === props.opponentNames[props.opponent1Index] ? CallsWinner(props.opponentNames[props.opponent1Index]) : ""}
-          {winnerConfetti === props.opponentNames[props.opponent2Index] ? CallsWinner(props.opponentNames[props.opponent2Index]) : ""} */}
-
+    {playwin1()}
+    {props.turnState === 'game-over' ? CallsWinner(winnerConfetti) : ''}
     {props.playState === 'Singleplayer' ? <Computer turnState={props.turnState} checkGameWinner={checkGameWinner} setTurnState={props.setTurnState} grid1Array={props.play1Grid} setGrid1Array={props.setPlay1Grid} grid2Array={props.play2Grid} setGrid2Array={props.setPlay2Grid} grid3Array={props.play3Grid} setGrid3Array={props.setPlay3Grid}/> : ""}
     {/* computer function imports grids and turns state, and functions of setting grids and turn state */}
     <container className='responsive-grids'>
