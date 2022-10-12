@@ -3,9 +3,11 @@ import { Computer } from "./Computer";
 import Confetti from "react-confetti";
 import './ModalPopUp.css';
 import { socket } from "./RunGame";
+import { useEffect } from "react";
 
 // variable to make confetti go off when Player 1 wins
 var winnerConfetti
+
 
 export function GameFlow(props) {
         //checks for ships hit and destroys them (Set property to hitfull)
@@ -111,17 +113,15 @@ export function GameFlow(props) {
     console.log("Num Comp 1 ships hit:" + player2Hits);
     console.log("Num Comp 2 ships hit:" + player3Hits)
     
+    let turnHeader = document.getElementById('turnHeader')
+    turnHeader.style.display = 'none'
+
 
     if (
       (player1Hits >= 3 && player2Hits >= 3) ||
       (player2Hits >= 3 && player3Hits >= 3) ||
       (player3Hits >= 3 && player1Hits >= 3)
     ) {
-
-
-      
-      let turnHeader = document.getElementById('turnHeader')
-      turnHeader.style.display = 'none'
 
       if (player1Hits < 3) {
         // set the variable 'winnerConfetti' so confetti can go off when Player 1 wins!
@@ -182,9 +182,11 @@ export function GameFlow(props) {
       }>Play Again</button>)
     }
   
+  
+
   return(
   <div id='BoardsContainer'>
-    {props.turnState !== "game-over" ? <h1 className="playerTurn" id='turnHeader'>It's {props.turnState}'s turn</h1> : CallsWinner(winnerConfetti)}
+    {props.turnState !== "game-over" ? <h1 className="playerTurn" id='turnHeader'>It's {props.turnState}'s turn!</h1> : CallsWinner(winnerConfetti)}
           {/* if the 'winnerConfetti is equal to 'Player 1' the CallsWinner function is called*/}
           {/* {winnerConfetti === props.opponentNames[props.playerIndexState] ? CallsWinner(props.opponentNames[props.playerIndexState]) : ""}
           {winnerConfetti === props.opponentNames[props.opponent1Index] ? CallsWinner(props.opponentNames[props.opponent1Index]) : ""}
