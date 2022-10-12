@@ -78,13 +78,24 @@
 .board {
   width: 300px;
   height: 300px;
-  border: 1.5px solid black;
-  margin: 1em 2em 2em 1em;
+  border: 2px solid black;
+  /* margin: 1em 2em 2em 1em; */
   display: flex;
   flex-wrap: wrap;
   margin: auto;
-
+  background: rgba(255, 255, 255, 0.396);
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 50%);
+  scroll-snap-align: start;
+  transition: all 0.2s;
+  padding: 10px;
 }
+
+.board:hover, .shipPlacement-PlayerBoard:hover {
+  color: var(--white);
+  background: var(--orange);
+  }
+
 
 row {
 display: flex;
@@ -105,6 +116,10 @@ margin: auto
   border: 1px solid black;
   cursor: crosshair;
   transition: background-color 100ms ease-in-out;
+}
+
+.square:hover{
+  background: rgba(95, 146, 166, 0.474);
 }
 
 .player.ship2, .shipPlacement-PlayerBoard {
