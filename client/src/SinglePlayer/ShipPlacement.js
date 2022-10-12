@@ -107,8 +107,9 @@ export function ShipPlacement(props) {
       {showReadyBtn()}
       {showWaitingForOthers()}
 
-      <h1>Your Board</h1>
-      <div className="player board" id="GameContainer">
+      <h1 className='boardTitle'>Your Board</h1>
+      <br></br>
+      <div className="shipPlacement-PlayerBoard" id="GameContainer">
         {props.play1Grid.map( // maps through the array and makes a square for each of the elements in the array.
           (square, index) => (<Square square={square} key={`player1Board_${index}`} index={index} play1Grid={props.play1Grid} setPlay1Grid={props.setPlay1Grid} readyState={props.readyState}/>) // these 'tags' of square and index pass into the 'props' within the Square class component
           )}
