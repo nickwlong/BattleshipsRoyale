@@ -28,7 +28,7 @@ io.on('connection', socket => {
     let room
     if(!rooms.some((e) => e.id === roomId )) {
       room = {sockets: [socket.id], 
-        usernames: [username],
+        usernames: [username], 
         currentTurnIndex: 0,
         currentTurnPlayer: username,
         id: roomId, 

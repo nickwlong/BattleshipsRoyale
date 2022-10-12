@@ -16,6 +16,9 @@ export function RunGame(props) {
   const [turnState, setTurnState] = useState('Player 1');
   const [username, setUsername] = useState('');
   const [opponentNames, setOpponentNames] = useState('');
+  const [playerStatuses, setPlayerStatuses] = useState([])
+  const [opponent1Index, setOpponent1Index] = useState()
+  const [opponent2Index, setOpponent2Index] = useState()
 
 
   useEffect(() => {
@@ -184,6 +187,9 @@ export function RunGame(props) {
 
     let playerIndex = await room.sockets.findIndex(socket => socket === socketid) // finds the local player's index from inside the server's sockets array
     setPlayerIndex(playerIndex)
+    if (playerIndex === 0){setOpponent1Index(1); setOpponent2Index(2)}
+    if (playerIndex === 1){setOpponent1Index(0); setOpponent2Index(2)}
+    if (playerIndex === 2){setOpponent1Index(0); setOpponent2Index(1)}
 
     let localPlayerGrid = arrayOfGrids.splice(playerIndex, 1)[0] // removes the playerGrid from the array
     let localPlayer2 = arrayOfGrids[0]
@@ -192,18 +198,7 @@ export function RunGame(props) {
     setPlay2Grid(localPlayer2)
     setPlay3Grid(localPlayer3)    
 
-    let arrayOfNames = room.usernames
-    console.log('ArrayOfNames' + arrayOfNames)
-    let playerName = arrayOfNames.splice(playerIndex, 1)[0]
-    console.log('Spliced name ' + playerName)
-    let newArrayOfNames = []
-    newArrayOfNames.push(playerName)
-    console.log('arrayOfNames after splice ' + arrayOfNames)
-    newArrayOfNames.push(...arrayOfNames)
-    console.log('arrayOfNames after push ' + arrayOfNames)
-    console.log(newArrayOfNames)
-
-
+    setPlayerStatuses(room.playersStatus)
   })
 
   socket.on('allPlayersReadyMessage', (readyStatus) => {
@@ -246,6 +241,10 @@ export function RunGame(props) {
         setTurnState={setTurnState}
         opponentNames={opponentNames}
         setReadyState={setReadyState}
+        playerStatuses={playerStatuses}
+        playerIndexState={playerIndexState}
+        opponent1Index={opponent1Index}
+        opponent2Index={opponent2Index}
         /> : ''}
         {readyState === 'placement' ? <ShipPlacement play1Grid={play1Grid} setPlay1Grid={setPlay1Grid} setReadyState={setReadyState} readyState={readyState} sendPlayerReadyGrid={sendPlayerReadyGrid} playState={props.playState}/> : ''}
     </div>
