@@ -20,8 +20,8 @@ A real-time [battleship game](https://en.wikipedia.org/wiki/Battleship_(game)), 
   <dd>• A Cruiser, which is 3 tiles long </dd>
   <dd>• A Submarine, which is 3 tiles long </dd>
   <dd>• A Destroyer, which is 2 tiles long </dd>
-  <dd></dd>
-
+</dl>
+<dl>
   <dd> Each ship can be placed either horizontally or vertically on the board, and cannot be placed partially off the board.</dd>
   <dd> Each player then takes turns picking a tile on the opposing player’s grid, taking a shot at that tile.</dd>
   <dd> The Battle Grid identifies a miss with white, a hit with red, and a sunken ship with black.</dd>
