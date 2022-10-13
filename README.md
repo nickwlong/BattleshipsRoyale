@@ -14,7 +14,7 @@ A real-time [battleship game](https://en.wikipedia.org/wiki/Battleship_(game)), 
 # About the Game <a name="about"></a>
 
 <dl>
-  <dt>Each player has a 7x7 board on which the player is able to place 5 ships:</dt>
+  <dd>Each player has a 7x7 board on which the player is able to place 5 ships:</dd>
   <dd>• A Carrier, which is 5 tiles long </dd>
   <dd>• A Battleship, which is 4 tiles long </dd>
   <dd>• A Cruiser, which is 3 tiles long </dd>
