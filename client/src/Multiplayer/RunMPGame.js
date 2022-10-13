@@ -4,6 +4,7 @@ import { Square } from '../SinglePlayer/Square';
 import { SquareOpponent } from '../SinglePlayer/SquareOpponent'
 import { io } from "socket.io-client"
 import { socket } from '../SinglePlayer/RunGame';
+import { Chatbox } from './Chatbox';
 
 
 export function RunMPGame(props) {
@@ -17,22 +18,29 @@ export function RunMPGame(props) {
   }
 
   const handleRoomIdSubmit = (event) => { // Submits the RoomID form
+
     console.log('RoomId = ' + props.roomId + ', Username: ' + props.username)
     event.preventDefault();
 
-    socket.emit('join-room', props.roomId, props.username)
+    socket.emit('join-room', props.roomId, props.username, (response) => {
+      console.log(response)
+      if(response.status === 'room full'){
+        alert('The room is already full! Join another')
+        return null
+      } else if(response.status === 'ok') {
+        const handleRoomForm = document.getElementById('roomIdForm')
+        handleRoomForm.style.display = 'none'
     
-
-    const handleRoomForm = document.getElementById('roomIdForm')
-    handleRoomForm.style.display = 'none'
-
-    alert(`You have created room: ${props.roomId}`)
-
-    const connectedStatus = document.getElementById('connectedStatus2')
-    connectedStatus.innerText=`You are connected to room: ${props.roomId} with username: ${props.username}`
+        alert(`You have joined room: ${props.roomId}`)
+    
+        const connectedStatus = document.getElementById('connectedStatus2')
+        connectedStatus.innerText=`You are connected to room: ${props.roomId} with username: ${props.username}`
+      }
+    })
   }
 
   return (
+    <div>
     <row>
       <column style={{flex: "70%"}}>
         <div>
@@ -57,5 +65,7 @@ export function RunMPGame(props) {
         <h2 className={`otherConnectedStatus three${props.opponentNames.length}`}>Players connected: {props.opponentNames.length}</h2>
       </column>
     </row>
+    
+    </div>
   );
 }

@@ -19,6 +19,7 @@ export function Computer(props) {
         if (playerPicked === 0){
 
         let indexPicked = Math.floor(Math.random() * 49);
+        if(props.testState==='test'){indexPicked = Math.floor(Math.random() * 12);}
         //picks random player and random square
         let newGridArray = props.grid1Array.map((square, i) => {
 
@@ -71,6 +72,8 @@ export function Computer(props) {
             if (playerPicked === 0){
     
             let indexPicked = Math.floor(Math.random() * 49);
+            if(props.testState==='test'){indexPicked = Math.floor(Math.random() * 12);}
+
             //picks random player and random square
             let newGridArray = props.grid1Array.map((square, i) => {
     

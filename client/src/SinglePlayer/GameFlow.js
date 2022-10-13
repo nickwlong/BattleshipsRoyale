@@ -4,6 +4,7 @@ import Confetti from "react-confetti";
 import './ModalPopUp.css';
 import { socket } from "./RunGame";
 import { useEffect } from "react";
+import { Chatbox } from "../Multiplayer/Chatbox";
 
 // variable to make confetti go off when Player 1 wins
 var winnerConfetti
@@ -14,7 +15,7 @@ export function GameFlow(props) {
 
         var newplay1Grid;
 
-        var winningSquareCount = 17
+        var winningSquareCount = 3
         if(props.testState === 'test'){winningSquareCount = 3}
 
         var countship2 = props.play1Grid.filter((obj) => obj.shipStatus === "ship2" && obj.hitStatus === "hit").length;
@@ -143,6 +144,8 @@ export function GameFlow(props) {
         winnerConfetti = props.opponentNames[props.opponent2Index]
         // CallsWinner(props.opponentNames[props.opponent2Index])
       }
+      console.log(props.opponentNames)
+      console.log('winnerConfetti for: ' + winnerConfetti)
       if ( props.turnState !== 'game-over'){
         socket.emit('gameIsOver', props.roomId)
       }
@@ -153,7 +156,6 @@ export function GameFlow(props) {
   }
 
   socket.on('gameOver', () => {
-    console.log('Game finished on another players turn')
     props.setTurnState('game-over')
     checkGameWinner()
   })
@@ -191,12 +193,12 @@ export function GameFlow(props) {
     
   function playwin1(){
       if (props.turnState === props.username && props.turnState !== "game-over"){
-        console.log('Players go!')
+        
         return(
         <h1 className="Player1turn" id='turnHeader'>It's your turn</h1>)
       }
       else if (props.turnState !== props.username && props.turnState !== "game-over") {
-        console.log('Opponents go!')
+        
         return (<h1 className="playerTurn" id='turnHeader'>It's {props.turnState}'s turn</h1>)
       }}
 
@@ -239,6 +241,7 @@ export function GameFlow(props) {
           </div>
         </column>
       </container>
+      {props.playState === 'Multiplayer' ? <Chatbox roomId={props.roomId} username={props.username} messages={props.messages} setMessages={props.setMessages}/> : ''}
     </div>
   );
 }

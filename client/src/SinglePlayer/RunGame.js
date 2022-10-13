@@ -18,11 +18,11 @@ export function RunGame(props) {
   const [opponentNames, setOpponentNames] = useState('');
   const [playerStatuses, setPlayerStatuses] = useState([])
   const [opponent1Index, setOpponent1Index] = useState()
+  const [messages, setMessages] = useState([])
   const [opponent2Index, setOpponent2Index] = useState()
 
 
   useEffect(() => {
-    console.log(socket.id)
     setSocketid(socket.id)
     setIsConnected(true);
   
@@ -44,7 +44,7 @@ export function RunGame(props) {
   }, [])
 
   useEffect(() => {
-    console.log(turnState)
+    console.log(turnState + "'s go!")
 
   }, [turnState])
 
@@ -216,7 +216,6 @@ export function RunGame(props) {
   })
 
   socket.on('allPlayersReadyMessage', (readyStatus) => {
-    console.log(readyStatus)
     if(readyStatus === 'allPlayersReady') {
       setTimeout(() => {
         setReadyState('play')
@@ -229,7 +228,7 @@ export function RunGame(props) {
     setReadyState('placement')
   })
 
-  socket.on('playerJoinedRoom', (message, opponentNames) => {console.log(message)
+  socket.on('playerJoinedRoom', (message, opponentNames) => {
     setOpponentNames(opponentNames)})
 
 
@@ -260,6 +259,8 @@ export function RunGame(props) {
         opponent1Index={opponent1Index}
         opponent2Index={opponent2Index}
         testState={props.testState}
+        messages={messages}
+        setMessages={setMessages}
         /> : ''}
         {readyState === 'placement' ? <ShipPlacement play1Grid={play1Grid} setPlay1Grid={setPlay1Grid} setReadyState={setReadyState} readyState={readyState} sendPlayerReadyGrid={sendPlayerReadyGrid} playState={props.playState}/> : ''}
     </div>

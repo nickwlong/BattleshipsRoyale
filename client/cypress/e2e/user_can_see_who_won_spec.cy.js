@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 describe('shoot', () => {
-    it('User can shoot at oppontents ', () => {
+    it('User can shoot at opponents to win ', () => {
         // user clicks sp and places ships
       cy.visit('http://localhost:3000/')
       cy.contains('Test').click()
@@ -26,6 +26,31 @@ describe('shoot', () => {
       //user can see who won
       cy.get('#winnerCard').should('be.visible')
     })
+
+    it('User can lose', () => {
+      // user clicks sp and places ships
+    cy.visit('http://localhost:3000/')
+    cy.contains('Test').click()
+    cy.contains('Cruiser(3)').click()
+    cy.get('div[id="play1_square_0"]').click()
+    cy.contains('Ready!').click()
+
+    //user can fire at opponent
+    cy.get('div[id="play3_square_0"]').wait(10).click({multiple: true})
+    cy.get('div[id="play3_square_1"]').wait(10).click({multiple: true})
+    cy.get('div[id="play3_square_2"]').wait(10).click({multiple: true})
+    cy.get('div[id="play3_square_3"]').wait(10).click({multiple: true})
+    cy.get('div[id="play3_square_4"]').wait(10).click({multiple: true})
+    cy.get('div[id="play3_square_5"]').wait(10).click({multiple: true})
+    cy.get('div[id="play3_square_6"]').wait(10).click({multiple: true})
+    cy.get('div[id="play3_square_7"]').wait(10).click({multiple: true})
+    cy.get('div[id="play3_square_8"]').wait(10).click({multiple: true})
+
+
+    //user can see who won
+    cy.get('#winnerCard').should('be.visible')
+  })
+
 
   
 })
