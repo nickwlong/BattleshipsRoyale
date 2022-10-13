@@ -23,10 +23,12 @@ let rooms = []
 
 io.on('connection', socket => {
 
-  socket.on('join-room', (roomId, username)=> { // Adds the user to the specified room upon joining
+  socket.on('join-room', (roomId, username, callback)=> { // Adds the user to the specified room upon joining
     
     let room
-    if(!rooms.some((e) => e.id === roomId )) {
+    if (rooms.find((e) => e.id === roomId) && rooms.find((e) => e.id === roomId).sockets.length >= 3) {callback({
+      status: "room full" }); return null}
+    else if(!rooms.some((e) => e.id === roomId )) {
       room = {sockets: [socket.id], 
         usernames: [username], 
         currentTurnIndex: 0,
@@ -35,8 +37,10 @@ io.on('connection', socket => {
         play1Grid: '', //player 1 is index 0 in the sockets array
         play2Grid: '', //player 2 is index 1 in the sockets array
         play3Grid: '',
-        playersStatus: ['notOut']} //player 3 is index 2 in the sockets array
+        playersStatus: ['notOut'], //player 3 is index 2 in the sockets array
+        chatMessages: []}
       rooms.push(room)
+      console.log(room)
     } else { rooms.find((e) => e.id === roomId).sockets.push(socket.id);
       rooms.find((e) =>e.id === roomId).usernames.push(username);
       rooms.find((e) =>e.id === roomId).playersStatus.push('notOut');
@@ -49,8 +53,19 @@ io.on('connection', socket => {
     if(rooms.find((e) => e.id === roomId).sockets.length === 3){
       socket.to(roomId).emit('threePlayersConnected')
       socket.emit('threePlayersConnected')
-    }
+    };
+    callback({status: 'ok'})
+  })
 
+  socket.on('message', (message, username, roomId) => {
+      rooms.forEach(room => {
+        if(room.id === roomId) {
+          let newMessage = `${username}: ${message}`
+          room.chatMessages.push(newMessage)
+          console.log(room.chatMessages)
+          socket.emit('messageIn', room)
+          socket.to(roomId).emit('messageIn', room)
+      }})
   })
 
   // add conditional to check if the room is full
@@ -106,16 +121,7 @@ io.on('connection', socket => {
     socket.emit('gameOver')
     socket.to(roomId).emit('gameOver')
   })
-
-  socket.on('close-room', (roomId) => {
-    console.log(roomId + ' is being closed')
-    const idFinder = (room) => {room.id === roomId}
-    let roomIndex = rooms.findIndex(idFinder)
-    console.log(roomIndex)
-    rooms.pop(roomIndex)
-    console.log(rooms)
-    io.in(roomId).socketsLeave(roomId)
-  })
+  
   
 
 })})
