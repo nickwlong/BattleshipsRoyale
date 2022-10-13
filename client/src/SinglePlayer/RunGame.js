@@ -78,7 +78,7 @@ export function RunGame(props) {
   const presetPickedC2 = presetArray[presetPicked2];
 
 //places the ships based on the numbers in the array picked
-  play2GridSetupShips = () => { if (props.playState==='Singleplayer') {
+  play2GridSetupShips = () => { if (props.playState==='Singleplayer' && props.testState !== 'test') {
     return playerGridSetup.map((square, index)=>{
       if ([presetPickedC1[0],presetPickedC1[1]].includes(index)){
         return {
@@ -114,12 +114,16 @@ export function RunGame(props) {
         return square
       }
     }
-  )} else {return playerGridSetup}};
+  )} else if (props.testState === 'test') {
+    return playerGridSetup.map((square, index) =>
+    index === 0 || index === 1 || index === 2 ? { ...square, shipStatus: 'ship31C', shipPreset: 'ship' } : square
+    );
+  } else {return playerGridSetup}};
 
   var [play2Grid, setPlay2Grid] = useState(play2GridSetupShips)
 
 
-  play3GridSetupShips = () => { if (props.playState==='Singleplayer') {
+  play3GridSetupShips = () => { if (props.playState==='Singleplayer' && props.testState !== 'test') {
     return playerGridSetup.map((square, index)=>{
       if ([presetPickedC2[0],presetPickedC2[1]].includes(index)){
         return {
@@ -155,7 +159,10 @@ export function RunGame(props) {
         return square
       }
     }
-  )} else {return playerGridSetup}};
+  )} else if (props.testState === 'test') {
+    return playerGridSetup.map((square, index) =>
+    index === 0 || index === 1 || index === 2 ? { ...square, shipStatus: 'ship31C', shipPreset: 'ship' } : square
+    )} else {return playerGridSetup}};
 
   var [play3Grid, setPlay3Grid] = useState(play3GridSetupShips)
 
@@ -252,6 +259,7 @@ export function RunGame(props) {
         playerIndexState={playerIndexState}
         opponent1Index={opponent1Index}
         opponent2Index={opponent2Index}
+        testState={props.testState}
         /> : ''}
         {readyState === 'placement' ? <ShipPlacement play1Grid={play1Grid} setPlay1Grid={setPlay1Grid} setReadyState={setReadyState} readyState={readyState} sendPlayerReadyGrid={sendPlayerReadyGrid} playState={props.playState}/> : ''}
     </div>

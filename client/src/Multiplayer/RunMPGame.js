@@ -38,9 +38,9 @@ export function RunMPGame(props) {
         <div>
           <form id='roomIdForm' onSubmit={handleRoomIdSubmit}>
             <label>Room id:</label>
-            <input type='text' name='RoomId' id='RoomIdinput' onChange={handleRoomIdChange}/>
+            <input type='text' name='RoomId' id='roomIdInput' onChange={handleRoomIdChange}/>
             <label>Username:</label>
-            <input type='text' name='username' onChange={handleUsernameChange}/>
+            <input type='text' name='username' id='usernameInput' onChange={handleUsernameChange}/>
             <input type='submit' value="Submit Room ID"/>
           </form>
           <br></br>
