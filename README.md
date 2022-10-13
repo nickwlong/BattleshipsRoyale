@@ -1,8 +1,9 @@
 # battleships_royale
 A real-time [battleship game](https://en.wikipedia.org/wiki/Battleship_(game)), built with [React](https://reactjs.org/) and [Socket.IO](https://socket.io/).
 
+<br>
 [Play Here](https://battleshipsroyale.herokuapp.com/)
-
+<br>
 
 # Table of contents
 1. [About the game](#about)
@@ -21,6 +22,7 @@ A real-time [battleship game](https://en.wikipedia.org/wiki/Battleship_(game)), 
   <dd>• A Submarine, which is 3 tiles long </dd>
   <dd>• A Destroyer, which is 2 tiles long </dd>
 </dl>
+<br>
 <dl>
   <dd> Each ship can be placed either horizontally or vertically on the board, and cannot be placed partially off the board.</dd>
   <dd> Each player then takes turns picking a tile on the opposing player’s grid, taking a shot at that tile.</dd>
