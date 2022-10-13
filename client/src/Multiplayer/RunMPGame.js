@@ -37,22 +37,26 @@ export function RunMPGame(props) {
       <column style={{flex: "70%"}}>
         <div>
           <form id='roomIdForm' onSubmit={handleRoomIdSubmit}>
-            <label>Room id:</label>
+            <label style={{fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '25px' , alignContent: 'center'}}>Room id: </label>
             <input type='text' name='RoomId' id='RoomIdinput' onChange={handleRoomIdChange}/>
-            <label>Username:</label>
+            <label style={{fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '25px' }}> Username: </label>
+            <br></br>
+            <br></br>
             <input type='text' name='username' onChange={handleUsernameChange}/>
-            <input type='submit' value="Submit Room ID"/>
+            <br></br>
+            <br></br>
+            <input style={{fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '25px' }} type='submit' value=" Submit Room ID"/>
           </form>
           <br></br>
           
 
-          <div style={{background: 'white'}}>
+          <div style={{background:'transparent', fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '25px' }}>
               <p id='connectedStatus'>Connected: { '' + props.isConnected + ' with id ' + socket.id }</p>
               <p id='connectedStatus2'></p>
           </div>
         </div>
       </column>
-      <column style={{flex: "20%", padding: "20px", background: "white"}}>
+      <column style={{flex: "20%", padding: "20px", background: "transparent", fontFamily: "Copperplate", "Papyrus":  "fantasy"}}>
         <h2 className={`joinRoom playersJoined${props.opponentNames.length}`}>Join a room</h2>
         <h2 className={`otherConnectedStatus three${props.opponentNames.length}`}>Players connected: {props.opponentNames.length}</h2>
       </column>
