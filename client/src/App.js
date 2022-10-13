@@ -33,7 +33,6 @@ function App() {
     <div>
       {checkPlayState()}
       <br></br>
-      <br></br>
     <div className='MusicButtons'>
       <button className ="MusicButton" onClick={() => start()}>♫</button>
       <button className ="MuteButton" onClick={() => stop()}>🔇</button>

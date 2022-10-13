@@ -45,28 +45,26 @@ export function RunMPGame(props) {
       <column style={{flex: "100%"}}>
         <div>
         <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
           <form id='roomIdForm' onSubmit={handleRoomIdSubmit}>
+          <div className='RoomID-div'>
             <label style={{fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '30px', padding: '16px', color:'#ffffff'}}>Room id:</label>
-            <input style={{padding: '10px', fontSize: '20px', fontFamily: "Copperplate", "Papyrus":  "fantasy"}}type='text' name='RoomId' id='RoomIdinput' onChange={handleRoomIdChange}/>
-            <br></br>
-            <br></br>
+            <input className='input-box' style={{padding: '10px', fontSize: '20px'}}type='text' name='RoomId' id='RoomIdinput' onChange={handleRoomIdChange}/>
+          </div>
+          <div className='Username-div'>
             <label style={{fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '30px', color:'#ffffff'}}>Username: </label>
-            <input style={{padding: '10px', fontSize: '20px', fontFamily: "Copperplate", "Papyrus":  "fantasy"}} type='text' name='username' onChange={handleUsernameChange}/>
-            <br></br>
-            <br></br>
-            <input  className="SubmitRoom"style={{fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '30px'}} type='submit' value=" Submit Room ID"/>
-          </form>
-          <br></br>
-          
+            <input className='input-box' style={{padding: '10px', fontSize: '20px'}} type='text' name='username' onChange={handleUsernameChange}/>
+          </div>  
 
-          <div style={{background:'transparent', fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '30px', color:'#ffffff'}}>
-              <p id='connectedStatus'>Connected: { '' + props.isConnected + ' with id ' + socket.id }</p>
-              <p id='connectedStatus2'></p>
+            <input  className="SubmitRoom"style={{fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '25px'}} type='submit' value=" Submit Room ID"/>
+          </form>
+        
+          <div style={{background:'transparent', fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '25px', color:'#ffffff'}}>
+              <div className='connection-status' id='connectedStatus'>Connected: { '' + props.isConnected + ' with id ' + socket.id }</div>
+              <div id='connectedStatus2'></div>
               <h2 className={`joinRoom playersJoined${props.opponentNames.length}`}>Join a room</h2>
-        <h2 className={`otherConnectedStatus three${props.opponentNames.length}`}>Players connected: {props.opponentNames.length}</h2>
+              <div className='players-connected'>
+              <div className={`otherConnectedStatus three${props.opponentNames.length}`}>Players connected: {props.opponentNames.length}</div>
+              </div>
           </div>
         </div>
       </column>
