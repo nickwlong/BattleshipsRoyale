@@ -240,7 +240,7 @@ export function GameFlow(props) {
           </div>
         </column>
       </container>
-      <Chatbox roomId={props.roomId} username={props.username}/>
+      {props.playState === 'Multiplayer' ? <Chatbox roomId={props.roomId} username={props.username}/> : ''}
     </div>
   );
 }
