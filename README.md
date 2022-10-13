@@ -1,8 +1,10 @@
-# Battleships Royale ⚓️
+# Battleships Royale ⛴
 A real-time [battleship game](https://en.wikipedia.org/wiki/Battleship_(game)), built with [React](https://reactjs.org/) and [Socket.IO](https://socket.io/). 
 
 
 [Play Here](https://battleshipsroyale.herokuapp.com/)
+
+
 # Table of contents
 1. [About the game](#about)
 2. [Player modes](#player-modes)
@@ -11,7 +13,6 @@ A real-time [battleship game](https://en.wikipedia.org/wiki/Battleship_(game)), 
 3. [Getting started](#getting-started)
 
 # About the Game <a name="about"></a>
-
 <dl>
   <dd>Each player has a 7x7 board on which the player is able to place 5 ships:</dd>
   <dd>• A Carrier, which is 5 tiles long </dd>
@@ -29,6 +30,7 @@ A real-time [battleship game](https://en.wikipedia.org/wiki/Battleship_(game)), 
   <dd> The player with the most ships remaining wins!</dd>
 </dl>
 
+
 # Player Modes <a name="player-modes"></a>
   ## Single Player <a name="single-player"></a>
   In single player mode you will be playing against two computers.
@@ -38,6 +40,7 @@ A real-time [battleship game](https://en.wikipedia.org/wiki/Battleship_(game)), 
   <dd>To play with your pairs you need to join the same room.</dd>
   <dd>The first person to join a room will create the room.</dd>
   <dd>The game will not start untill all players have placed their ships and clicked on ready.</dd>
+
 
 # Getting Started <a name="getting-started"></a>
 <dl>
