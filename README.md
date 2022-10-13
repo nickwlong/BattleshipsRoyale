@@ -1,8 +1,7 @@
 # battleships_royale
 A real-time [battleship game](https://en.wikipedia.org/wiki/Battleship_(game)), built with [React](https://reactjs.org/) and [Socket.IO](https://socket.io/). 
-<pre>
-
-</pre>
+-
+-
 [Play Here](https://battleshipsroyale.herokuapp.com/)
 # Table of contents
 1. [About the game](#about)
