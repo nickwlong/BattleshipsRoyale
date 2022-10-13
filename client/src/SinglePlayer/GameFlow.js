@@ -3,14 +3,19 @@ import { Computer } from "./Computer";
 import Confetti from "react-confetti";
 import './ModalPopUp.css';
 import { socket } from "./RunGame";
+import { useEffect } from "react";
 
 // variable to make confetti go off when Player 1 wins
 var winnerConfetti
+
 
 export function GameFlow(props) {
         //checks for ships hit and destroys them (Set property to hitfull)
 
         var newplay1Grid;
+
+        var winningSquareCount = 17
+        if(props.testState === 'test'){winningSquareCount = 3}
 
         var countship2 = props.play1Grid.filter((obj) => obj.shipStatus === "ship2" && obj.hitStatus === "hit").length;
         if(countship2 === 2){
@@ -93,6 +98,8 @@ export function GameFlow(props) {
           newplay3Grid = props.play3Grid.map((square, index)=>(square.shipStatus === "ship5C" || square.shipStatus === "ship5") ? { ...square, hitStatus: 'hitfull' } : square)
           props.setPlay3Grid(newplay3Grid)
         }
+        console.log(props.play2Grid)
+        console.log(props.play3Grid)
 
   function checkGameWinner() {
 
@@ -111,28 +118,28 @@ export function GameFlow(props) {
     console.log("Num Comp 1 ships hit:" + player2Hits);
     console.log("Num Comp 2 ships hit:" + player3Hits)
     
+  
+
 
     if (
-      (player1Hits >= 3 && player2Hits >= 3) ||
-      (player2Hits >= 3 && player3Hits >= 3) ||
-      (player3Hits >= 3 && player1Hits >= 3)
+      (player1Hits >= winningSquareCount && player2Hits >= winningSquareCount) ||
+      (player2Hits >= winningSquareCount && player3Hits >= winningSquareCount) ||
+      (player3Hits >= winningSquareCount && player1Hits >= winningSquareCount)
     ) {
 
-
-      
       let turnHeader = document.getElementById('turnHeader')
       turnHeader.style.display = 'none'
 
-      if (player1Hits < 3) {
+      if (player1Hits < winningSquareCount) {
         // set the variable 'winnerConfetti' so confetti can go off when Player 1 wins!
         winnerConfetti = props.opponentNames[props.playerIndexState]
         // CallsWinner(props.opponentNames[props.playerIndexState])
       }
-      if (player2Hits < 3) {
+      if (player2Hits < winningSquareCount) {
         winnerConfetti = props.opponentNames[props.opponent1Index]
         // CallsWinner(props.opponentNames[props.opponent1Index])
       }
-      if (player3Hits < 3) {
+      if (player3Hits < winningSquareCount) {
         winnerConfetti = props.opponentNames[props.opponent2Index]
         // CallsWinner(props.opponentNames[props.opponent2Index])
       }
@@ -160,7 +167,7 @@ export function GameFlow(props) {
       <Confetti/>
         <div className='modalContainer'>
           <div className='modalRight'>
-            <div className='content'>
+            <div className='content' id='winnerCard'>
               {player === props.username ? <h1> 🎉 You are the winner! 🎉 </h1> : <h1>  {player} is the winner! 🎉</h1>}
               <br></br>
               {playAgainBtn()}
@@ -181,31 +188,40 @@ export function GameFlow(props) {
       }
       }>Play Again</button>)
     }
-  
+    
+  function playwin1(){
+      if (props.turnState === props.username && props.turnState !== "game-over"){
+        console.log('Players go!')
+        return(
+        <h1 className="Player1turn" id='turnHeader'>It's your turn</h1>)
+      }
+      else if (props.turnState !== props.username && props.turnState !== "game-over") {
+        console.log('Opponents go!')
+        return (<h1 className="playerTurn" id='turnHeader'>It's {props.turnState}'s turn</h1>)
+      }}
+
+
+
   return(
   <div id='BoardsContainer'>
-    {props.turnState !== "game-over" ? <h1 className="playerTurn" id='turnHeader'>It's {props.turnState}'s turn</h1> : CallsWinner(winnerConfetti)}
-          {/* if the 'winnerConfetti is equal to 'Player 1' the CallsWinner function is called*/}
-          {/* {winnerConfetti === props.opponentNames[props.playerIndexState] ? CallsWinner(props.opponentNames[props.playerIndexState]) : ""}
-          {winnerConfetti === props.opponentNames[props.opponent1Index] ? CallsWinner(props.opponentNames[props.opponent1Index]) : ""}
-          {winnerConfetti === props.opponentNames[props.opponent2Index] ? CallsWinner(props.opponentNames[props.opponent2Index]) : ""} */}
-
-    {props.playState === 'Singleplayer' ? <Computer turnState={props.turnState} checkGameWinner={checkGameWinner} setTurnState={props.setTurnState} grid1Array={props.play1Grid} setGrid1Array={props.setPlay1Grid} grid2Array={props.play2Grid} setGrid2Array={props.setPlay2Grid} grid3Array={props.play3Grid} setGrid3Array={props.setPlay3Grid}/> : ""}
+    {playwin1()}
+    {props.turnState === 'game-over' ? CallsWinner(winnerConfetti) : ''}
+    {props.playState === 'Singleplayer' ? <Computer turnState={props.turnState} checkGameWinner={checkGameWinner} setTurnState={props.setTurnState} grid1Array={props.play1Grid} setGrid1Array={props.setPlay1Grid} grid2Array={props.play2Grid} setGrid2Array={props.setPlay2Grid} grid3Array={props.play3Grid} setGrid3Array={props.setPlay3Grid} testState={props.testState}/> : ""}
     {/* computer function imports grids and turns state, and functions of setting grids and turn state */}
     <container className='responsive-grids'>
       <column>
-        {props.playState === 'Singleplayer' ? <h1>Computer 1's Board</h1> : <h1>{props.opponentNames[props.opponent1Index]}'s board</h1>}
+        {props.playState === 'Singleplayer' ? <h1>Computer 1's Board</h1> : <h1 className="player-board-title">{props.opponentNames[props.opponent1Index]}'s board</h1>}
         <div className={`player2 board ${props.playerStatuses[props.opponent1Index]}`} id="GameContainer2">
           {props.play2Grid.map(
-            (square, index) => (<SquareOpponent square={square} key={`player2Board_${index}`} index={index} gridArray={props.play2Grid} setGridArray={props.setPlay2Grid} setTurnState={props.setTurnState} turnState={props.turnState} sendGrids={props.sendGrids} checkGameWinner={checkGameWinner}  playState={props.playState} sendData={props.sendData} username={props.username} setUsername={props.setUsername} player='opponent' player1Grid={props.play1Grid}/>)
+            (square, index) => (<SquareOpponent square={square} key={`player2Board_${index}`} index={index} gridArray={props.play2Grid} setGridArray={props.setPlay2Grid} setTurnState={props.setTurnState} turnState={props.turnState} sendGrids={props.sendGrids} checkGameWinner={checkGameWinner}  playState={props.playState} sendData={props.sendData} username={props.username} setUsername={props.setUsername} player='opponent' number='play2' player1Grid={props.play1Grid}/>)
             )}
         </div>
       </column>
       <column>
-        {props.playState === 'Singleplayer' ? <h1>Computer 2's Board</h1> : <h1>{props.opponentNames[props.opponent2Index]}'s board</h1>}
+        {props.playState === 'Singleplayer' ? <h1>Computer 2's Board</h1> : <h1 className="player-board-title">{props.opponentNames[props.opponent2Index]}'s board</h1>}
         <div className={`player3 board ${props.playerStatuses[props.opponent2Index]}`}  id="GameContainer3">
           {props.play3Grid.map(
-            (square, index) => (<SquareOpponent square={square} key={`player3Board_${index}`} index={index} gridArray={props.play3Grid} setGridArray={props.setPlay3Grid} setTurnState={props.setTurnState} turnState={props.turnState} sendGrids={props.sendGrids} checkGameWinner={checkGameWinner} playState={props.playState} sendData={props.sendData} username={props.username} setUsername={props.setUsername} player='opponent' player1Grid={props.play1Grid}/>)
+            (square, index) => (<SquareOpponent square={square} key={`player3Board_${index}`} index={index} gridArray={props.play3Grid} setGridArray={props.setPlay3Grid} setTurnState={props.setTurnState} turnState={props.turnState} sendGrids={props.sendGrids} checkGameWinner={checkGameWinner} playState={props.playState} sendData={props.sendData} username={props.username} setUsername={props.setUsername} player='opponent' number='play3' player1Grid={props.play1Grid}/>)
             )}
         </div>
       </column>
@@ -213,10 +229,10 @@ export function GameFlow(props) {
     <container className='responsive-grids'>
       <column>
 
-        {props.playerStatuses[props.playerIndexState] === 'out' ? <h1>All of your ships have been destroyed!</h1> : <h1>Your Board</h1>}
+        {props.playerStatuses[props.playerIndexState] === 'out' ? <h1>All of your ships have been destroyed!</h1> : <h1 className="player-board-title">Your Board</h1>}
         <div className={`player1 board ${props.playerStatuses[props.playerIndexState]}`} id="GameContainer1">
           {props.play1Grid.map( // maps through the array and makes a square for each of the elements in the array.
-          (square, index) => (<SquareOpponent square={square} player1Grid={props.play1Grid} key={`player3Board_${index}`} index={index} gridArray={props.play3Grid} setGridArray={props.setPlay3Grid} setTurnState={props.setTurnState} turnState={props.turnState} sendGrids={props.sendGrids} checkGameWinner={checkGameWinner} playState={props.playState} sendData={props.sendData} username={props.username} setUsername={props.setUsername}  player='player' 
+          (square, index) => (<SquareOpponent square={square} player1Grid={props.play1Grid} key={`player3Board_${index}`} index={index} gridArray={props.play3Grid} setGridArray={props.setPlay3Grid} setTurnState={props.setTurnState} turnState={props.turnState} sendGrids={props.sendGrids} checkGameWinner={checkGameWinner} playState={props.playState} sendData={props.sendData} username={props.username} setUsername={props.setUsername} number='play1'  player='player' 
 
           />)
             )}

@@ -8,23 +8,24 @@ import sound from './SinglePlayer/gamesound.wav'
 
 function App() {
   const [playState, setPlayState] = useState('Welcome')
- 
-
-    let audio = new Audio(sound)
-    const start = () => {
-      audio.loop = true;
-      audio.play()
-    }
+  const [testState, setTestState] = useState('')
+  let audio = new Audio(sound)
+  const start = () => {
+    audio.loop = true;
+    audio.play()
   
-    const stop = () => {
-      audio.pause()
-    }
+  }
+
+  const stop = () => {
+    audio.pause()
+  }
+
 
   const checkPlayState = () => {
     if(playState === 'Welcome') {
-      return <Welcome changePlayState={ setPlayState }/>
+      return <Welcome setPlayState={ setPlayState } setTestState={setTestState} />
     } else {
-      return <RunGame playState={playState} setPlayState={setPlayState}/>
+      return <RunGame playState={playState} setPlayState={setPlayState} testState={testState} />
     }
   }
 

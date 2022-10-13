@@ -1,6 +1,10 @@
 
 export function Computer(props) {
     //props imports gridArrays array(with elements) and setGridArray function for players (along others like turnState)
+
+    var timeDelay = 500
+    if(props.testState === 'test'){timeDelay = 1}
+
     const computerTurn = async() => {
 
     let uniqueShot = false
@@ -10,6 +14,7 @@ export function Computer(props) {
         while (uniqueShot === false){
 
         let playerPicked = Math.floor(Math.random() * 2);
+        if(props.testState==='test'){playerPicked = 0}
 
         if (playerPicked === 0){
 
@@ -62,7 +67,7 @@ export function Computer(props) {
         while (uniqueShot === false){
 
             let playerPicked = Math.floor(Math.random() * 2);
-    
+            if(props.testState==='test'){playerPicked = 0}
             if (playerPicked === 0){
     
             let indexPicked = Math.floor(Math.random() * 49);
@@ -113,8 +118,6 @@ export function Computer(props) {
 
 setTimeout(() =>{
     return(<div>{computerTurn()}</div>)
-}, 500);
+}, timeDelay);
 //Computer function is called so when it is called, it calls the computerTurn function and runs code above
-
-
 }

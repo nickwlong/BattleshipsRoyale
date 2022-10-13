@@ -34,31 +34,33 @@ export function RunMPGame(props) {
 
   return (
     <row>
-      <column style={{flex: "70%"}}>
+      <column style={{flex: "100%"}}>
         <div>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
           <form id='roomIdForm' onSubmit={handleRoomIdSubmit}>
-            <label style={{fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '25px' , alignContent: 'center'}}>Room id: </label>
-            <input type='text' name='RoomId' id='RoomIdinput' onChange={handleRoomIdChange}/>
-            <label style={{fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '25px' }}> Username: </label>
+            <label style={{fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '30px', padding: '16px', color:'#ffffff'}}>Room id:</label>
+            <input style={{padding: '10px', fontSize: '20px', fontFamily: "Copperplate", "Papyrus":  "fantasy"}}type='text' name='RoomId' id='RoomIdinput' onChange={handleRoomIdChange}/>
             <br></br>
             <br></br>
-            <input type='text' name='username' onChange={handleUsernameChange}/>
+            <label style={{fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '30px', color:'#ffffff'}}>Username: </label>
+            <input style={{padding: '10px', fontSize: '20px', fontFamily: "Copperplate", "Papyrus":  "fantasy"}} type='text' name='username' onChange={handleUsernameChange}/>
             <br></br>
             <br></br>
-            <input style={{fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '25px' }} type='submit' value=" Submit Room ID"/>
+            <input  className="SubmitRoom"style={{fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '30px'}} type='submit' value=" Submit Room ID"/>
           </form>
           <br></br>
           
 
-          <div style={{background:'transparent', fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '25px' }}>
+          <div style={{background:'transparent', fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '30px', color:'#ffffff'}}>
               <p id='connectedStatus'>Connected: { '' + props.isConnected + ' with id ' + socket.id }</p>
               <p id='connectedStatus2'></p>
+              <h2 className={`joinRoom playersJoined${props.opponentNames.length}`}>Join a room</h2>
+        <h2 className={`otherConnectedStatus three${props.opponentNames.length}`}>Players connected: {props.opponentNames.length}</h2>
           </div>
         </div>
-      </column>
-      <column style={{flex: "20%", padding: "20px", background: "transparent", fontFamily: "Copperplate", "Papyrus":  "fantasy"}}>
-        <h2 className={`joinRoom playersJoined${props.opponentNames.length}`}>Join a room</h2>
-        <h2 className={`otherConnectedStatus three${props.opponentNames.length}`}>Players connected: {props.opponentNames.length}</h2>
       </column>
     </row>
   );

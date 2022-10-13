@@ -69,7 +69,7 @@ export function RunGame(props) {
   const presetArray = [[7,8,18,25,32,39,40,41,3,4,5,6,16,23,30,37,44],
   [1,2,6,13,20,15,22,29,24,25,26,27,37,38,39,40,41],
   [26,27,23,30,37,4,5,6,8,9,10,11,44,45,46,47,48],
-  [23,24,5,12,29,0,7,14,38,39,40,41,15,22,29,36,43],
+  [23,24,5,12,19,0,7,14,38,39,40,41,15,22,29,36,43],
   [28,29,2,9,16,0,7,14,13,20,27,34,4,11,18,25,32],
   [3,10,43,44,45,33,40,47,17,18,19,20,1,8,15,22,29],
   [30,31,0,1,2,21,28,35,9,10,11,12,20,27,34,41,48]];
@@ -78,7 +78,7 @@ export function RunGame(props) {
   const presetPickedC2 = presetArray[presetPicked2];
 
 //places the ships based on the numbers in the array picked
-  play2GridSetupShips = () => { if (props.playState==='Singleplayer') {
+  play2GridSetupShips = () => { if (props.playState==='Singleplayer' && props.testState !== 'test') {
     return playerGridSetup.map((square, index)=>{
       if ([presetPickedC1[0],presetPickedC1[1]].includes(index)){
         return {
@@ -114,12 +114,16 @@ export function RunGame(props) {
         return square
       }
     }
-  )} else {return playerGridSetup}};
+  )} else if (props.testState === 'test') {
+    return playerGridSetup.map((square, index) =>
+    index === 0 || index === 1 || index === 2 ? { ...square, shipStatus: 'ship31C', shipPreset: 'ship' } : square
+    );
+  } else {return playerGridSetup}};
 
   var [play2Grid, setPlay2Grid] = useState(play2GridSetupShips)
 
 
-  play3GridSetupShips = () => { if (props.playState==='Singleplayer') {
+  play3GridSetupShips = () => { if (props.playState==='Singleplayer' && props.testState !== 'test') {
     return playerGridSetup.map((square, index)=>{
       if ([presetPickedC2[0],presetPickedC2[1]].includes(index)){
         return {
@@ -155,7 +159,10 @@ export function RunGame(props) {
         return square
       }
     }
-  )} else {return playerGridSetup}};
+  )} else if (props.testState === 'test') {
+    return playerGridSetup.map((square, index) =>
+    index === 0 || index === 1 || index === 2 ? { ...square, shipStatus: 'ship31C', shipPreset: 'ship' } : square
+    )} else {return playerGridSetup}};
 
   var [play3Grid, setPlay3Grid] = useState(play3GridSetupShips)
 
@@ -252,6 +259,7 @@ export function RunGame(props) {
         playerIndexState={playerIndexState}
         opponent1Index={opponent1Index}
         opponent2Index={opponent2Index}
+        testState={props.testState}
         /> : ''}
         {readyState === 'placement' ? <ShipPlacement play1Grid={play1Grid} setPlay1Grid={setPlay1Grid} setReadyState={setReadyState} readyState={readyState} sendPlayerReadyGrid={sendPlayerReadyGrid} playState={props.playState}/> : ''}
     </div>
