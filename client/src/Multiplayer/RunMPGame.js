@@ -4,6 +4,7 @@ import { Square } from '../SinglePlayer/Square';
 import { SquareOpponent } from '../SinglePlayer/SquareOpponent'
 import { io } from "socket.io-client"
 import { socket } from '../SinglePlayer/RunGame';
+import { Chatbox } from './Chatbox';
 
 
 export function RunMPGame(props) {
@@ -33,6 +34,7 @@ export function RunMPGame(props) {
   }
 
   return (
+    <div>
     <row>
       <column style={{flex: "100%"}}>
         <div>
@@ -63,5 +65,7 @@ export function RunMPGame(props) {
         </div>
       </column>
     </row>
+    
+    </div>
   );
 }
