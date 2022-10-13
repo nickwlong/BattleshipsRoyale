@@ -6,7 +6,6 @@ import { useState } from 'react';
 var message
 
 export function Chatbox (props) {
-  const [messages, setMessages] = useState([])
   const handleTextBoxChange = (event) => { // Tracks changes in the RoomID form
     message = (event.target.value);
   }
@@ -21,7 +20,7 @@ export function Chatbox (props) {
 
   socket.on('messageIn', (room) => {
     let fiveMessages = room.chatMessages.slice(-6,-1)
-    setMessages(fiveMessages)
+    props.setMessages(fiveMessages)
   })
 
 
@@ -29,7 +28,7 @@ export function Chatbox (props) {
   return(
     <div className='chatBox'>
         <ul id="messages">
-          {messages.map(
+          {props.messages.map(
               (message) => (<Message message={message}/>)
           )}
         </ul>
