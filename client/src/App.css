@@ -339,6 +339,14 @@ margin: auto
   text-shadow: horizontal-offset vertical-offset blur color;
 }
 
+.destroyed-ship-message{
+  position: relative;
+  color: #ffffff;
+  font-family: Copperplate, Papyrus, fantasy;
+  font-size: 30px;
+  text-shadow: 2px 4px 3px rgba(0,0,0,0.6);
+  text-shadow: horizontal-offset vertical-offset blur color;
+}
 
 
 .board.out {

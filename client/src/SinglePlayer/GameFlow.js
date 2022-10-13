@@ -230,7 +230,7 @@ export function GameFlow(props) {
     </container>
     <container className='responsive-grids'>
       <column className = 'your-board-div'>
-        {props.playerStatuses[props.playerIndexState] === 'out' ? <h1 className="player-board-title" >All of your ships have <br></br> been destroyed!</h1> : <h1 className="player-board-title">Your Board</h1>}
+        {props.playerStatuses[props.playerIndexState] === 'out' ? <h1 className="destroyed-ship-message" >All of your ships have <br></br> been destroyed!</h1> : <h1 className="player-board-title">Your Board</h1>}
         <div className={`player1 board ${props.playerStatuses[props.playerIndexState]}`} id="GameContainer1">
           {props.play1Grid.map( // maps through the array and makes a square for each of the elements in the array.
           (square, index) => (<SquareOpponent square={square} player1Grid={props.play1Grid} key={`player3Board_${index}`} index={index} gridArray={props.play3Grid} setGridArray={props.setPlay3Grid} setTurnState={props.setTurnState} turnState={props.turnState} sendGrids={props.sendGrids} checkGameWinner={checkGameWinner} playState={props.playState} sendData={props.sendData} username={props.username} setUsername={props.setUsername} number='play1'  player='player' 
