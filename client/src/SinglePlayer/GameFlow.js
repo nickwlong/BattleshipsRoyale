@@ -4,6 +4,7 @@ import Confetti from "react-confetti";
 import './ModalPopUp.css';
 import { socket } from "./RunGame";
 import { useEffect } from "react";
+import { Chatbox } from "../Multiplayer/Chatbox";
 
 // variable to make confetti go off when Player 1 wins
 var winnerConfetti
@@ -14,7 +15,7 @@ export function GameFlow(props) {
 
         var newplay1Grid;
 
-        var winningSquareCount = 17
+        var winningSquareCount = 3
         if(props.testState === 'test'){winningSquareCount = 3}
 
         var countship2 = props.play1Grid.filter((obj) => obj.shipStatus === "ship2" && obj.hitStatus === "hit").length;
@@ -237,6 +238,7 @@ export function GameFlow(props) {
           </div>
         </column>
       </container>
+      <Chatbox roomId={props.roomId} username={props.username}/>
     </div>
   );
 }
