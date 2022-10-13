@@ -52,7 +52,7 @@ export function RunMPGame(props) {
           </div>
           <div className='Username-div'>
             <label style={{fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '30px', color:'#ffffff'}}>Username: </label>
-            <input className='input-box' style={{padding: '10px', fontSize: '20px'}} type='text' name='username' onChange={handleUsernameChange}/>
+            <input className='input-box' style={{padding: '10px', fontSize: '20px'}} type='text' name='username'  id='usernameInput' onChange={handleUsernameChange}/>
           </div>  
 
             <input  className="SubmitRoom"style={{fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '25px'}} type='submit' value=" Submit Room ID"/>
