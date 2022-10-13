@@ -1,71 +1,47 @@
 # battleships_royale
-# Getting Started with Create React App
+A real-time [battleship game](https://en.wikipedia.org/wiki/Battleship_(game)), built with [React](https://reactjs.org/) and [Socket.IO](https://socket.io/).
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Play Here](https://battleshipsroyale.herokuapp.com/)
 
-## Available Scripts
 
-In the project directory, you can run:
+# Table of contents
+1. [About the game](#about)
+2. [Player modes](#player-modes)
+    1. [Single player](#single-player)
+    2. [Multi player](#multi-player)
+3. [Getting started](#getting-started)
 
-### `npm start`
+# H1 About the Game <a name="about"></a>
+  Each player has a 7x7 board on which the player is able to place 5 ships:
+    • A Carrier, which is 5 tiles long
+    • A Battleship, which is 4 tiles long
+    • A Cruiser, which is 3 tiles long
+    • A Submarine, which is 3 tiles long
+    • A Destroyer, which is 2 tiles long
+  
+  Each ship can be placed either horizontally or vertically on the board, and cannot be placed partially off the board.
+  Each player then takes turns picking a tile on the opposing player’s grid, taking a shot at that tile.
+  The Battle Grid identifies a miss with white, a hit with red, and a sunken ship with black. 
+  You can not hit the same spot twice.
+  The player with the most ships remaining wins!
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Player Modes <a name="player-modes"></a>
 
-### `npm test`
+  ## H2 Single Player <a name="single-player"></a>
+        In single player mode you will be playing against two computers.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  ## H2 Multi Player <a name="multi-player"></a>
+        In multi player you will play against your pairs. 
+        To play with your pairs you need to join the same room.
+        The first person to join a room will create the room.
+        The game will not start untill all players have placed their ships and clicked on ready.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# H1 Getting Started <a name="getting-started"></a>
+    • Clone this project to your computer
+    • cd to the folder where this project is cloned
+    • Install all dependencies with npm install command
+    • Install confetti with npm install react-confetti comman in the client folder
+    • Run the Socket.IO server with npm run command on the server and client folder
+    • Run the app in the development mode with npm start command
+    • Open the broswer and visit: http://localhost:3000
