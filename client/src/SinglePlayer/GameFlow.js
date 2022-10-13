@@ -95,6 +95,8 @@ export function GameFlow(props) {
           newplay3Grid = props.play3Grid.map((square, index)=>(square.shipStatus === "ship5C" || square.shipStatus === "ship5") ? { ...square, hitStatus: 'hitfull' } : square)
           props.setPlay3Grid(newplay3Grid)
         }
+        console.log(props.play2Grid)
+        console.log(props.play3Grid)
 
   function checkGameWinner() {
 
