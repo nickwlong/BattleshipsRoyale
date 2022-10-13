@@ -54,6 +54,7 @@ io.on('connection', socket => {
       socket.to(roomId).emit('threePlayersConnected')
       socket.emit('threePlayersConnected')
     };
+    console.log('join room Got here!!!')
     callback({status: 'ok'})
   })
 
