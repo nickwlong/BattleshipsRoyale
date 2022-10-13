@@ -47,7 +47,7 @@ A real-time [battleship game](https://en.wikipedia.org/wiki/Battleship_(game)), 
   <dd>• Clone this project to your computer</dd>
   <dd>• cd to the folder where this project is cloned.</dd>
   <dd>• Install all dependencies with npm install command.</dd>
-  <dd>• Install confetti with npm install react-confetti comman in the client folder.</dd>
+  <dd>• Install React Confetti with npm install react-confetti comman in the client folder.</dd>
   <dd>• Run the Socket.IO server with npm run command on the server and client folder.</dd>
   <dd>• Run the app in the development mode with npm start command.</dd>
   <dd>• Open the broswer and visit: http://localhost:3000</dd>
