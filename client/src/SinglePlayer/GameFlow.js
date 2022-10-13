@@ -142,6 +142,8 @@ export function GameFlow(props) {
         winnerConfetti = props.opponentNames[props.opponent2Index]
         // CallsWinner(props.opponentNames[props.opponent2Index])
       }
+      console.log(props.opponentNames)
+      console.log('winnerConfetti for: ' + winnerConfetti)
       if ( props.turnState !== 'game-over'){
         socket.emit('gameIsOver', props.roomId)
       }
@@ -238,7 +240,7 @@ export function GameFlow(props) {
           </div>
         </column>
       </container>
-      {props.playState === 'Multiplayer' ? <Chatbox roomId={props.roomId} username={props.username}/> : ''}
+      {props.playState === 'Multiplayer' ? <Chatbox roomId={props.roomId} username={props.username} messages={props.messages} setMessages={props.setMessages}/> : ''}
     </div>
   );
 }
