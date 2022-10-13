@@ -23,7 +23,6 @@ export function RunGame(props) {
 
 
   useEffect(() => {
-    console.log(socket.id)
     setSocketid(socket.id)
     setIsConnected(true);
   
@@ -45,7 +44,7 @@ export function RunGame(props) {
   }, [])
 
   useEffect(() => {
-    console.log(turnState)
+    console.log(turnState + "'s go!")
 
   }, [turnState])
 
@@ -217,7 +216,6 @@ export function RunGame(props) {
   })
 
   socket.on('allPlayersReadyMessage', (readyStatus) => {
-    console.log(readyStatus)
     if(readyStatus === 'allPlayersReady') {
       setTimeout(() => {
         setReadyState('play')
@@ -230,7 +228,7 @@ export function RunGame(props) {
     setReadyState('placement')
   })
 
-  socket.on('playerJoinedRoom', (message, opponentNames) => {console.log(message)
+  socket.on('playerJoinedRoom', (message, opponentNames) => {
     setOpponentNames(opponentNames)})
 
 

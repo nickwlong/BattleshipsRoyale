@@ -156,7 +156,6 @@ export function GameFlow(props) {
   }
 
   socket.on('gameOver', () => {
-    console.log('Game finished on another players turn')
     props.setTurnState('game-over')
     checkGameWinner()
   })
@@ -194,12 +193,12 @@ export function GameFlow(props) {
     
   function playwin1(){
       if (props.turnState === props.username && props.turnState !== "game-over"){
-        console.log('Players go!')
+        
         return(
         <h1 className="Player1turn" id='turnHeader'>It's your turn</h1>)
       }
       else if (props.turnState !== props.username && props.turnState !== "game-over") {
-        console.log('Opponents go!')
+        
         return (<h1 className="playerTurn" id='turnHeader'>It's {props.turnState}'s turn</h1>)
       }}
 
