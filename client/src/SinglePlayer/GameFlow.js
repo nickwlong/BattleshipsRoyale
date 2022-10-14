@@ -15,7 +15,7 @@ export function GameFlow(props) {
 
         var newplay1Grid;
 
-        var winningSquareCount = 3
+        var winningSquareCount = 17
         if(props.testState === 'test'){winningSquareCount = 3}
 
         var countship2 = props.play1Grid.filter((obj) => obj.shipStatus === "ship2" && obj.hitStatus === "hit").length;
