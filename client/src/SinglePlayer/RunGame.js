@@ -189,9 +189,9 @@ export function RunGame(props) {
     socket.emit('sendData', roomId, arrayOfPlayerGrids[0], arrayOfPlayerGrids[1], arrayOfPlayerGrids[2], turnState) // arrayOfGrids[0] is serverPlayer1, arr..[1] is serverPlayer2, arr..[2] is serverPlayer3
   };
 
-  socket.on('receiveData', async (room) => {
+  socket.on('receiveData', async (room, serverTurnState) => {
     
-    setTurnState(room.currentTurnPlayer)
+    if(serverTurnState !== 'game-over'){setTurnState(room.currentTurnPlayer)}
 
     let arrayOfGrids = []
     arrayOfGrids.push(room.play1Grid)

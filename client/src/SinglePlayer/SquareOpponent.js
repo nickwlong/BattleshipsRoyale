@@ -40,8 +40,8 @@ export class SquareOpponent extends React.Component {
     await this.props.setGridArray(newGridArray)
 
     // checks for a winner and sends the updated data
-    this.props.checkGameWinner()
-    this.props.sendData()
+    if(this.props.checkGameWinner() === false){this.props.sendData()}
+    
     if(this.props.playState === 'Singleplayer'){this.props.setTurnState('Computer 1')} // changes turn from Player 1 to Computer 1 if singleplayer
 
   }

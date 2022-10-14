@@ -15,7 +15,7 @@ export function GameFlow(props) {
 
         var newplay1Grid;
 
-        var winningSquareCount = 3
+        var winningSquareCount = 17
         if(props.testState === 'test'){winningSquareCount = 3}
 
         var countship2 = props.play1Grid.filter((obj) => obj.shipStatus === "ship2" && obj.hitStatus === "hit").length;
@@ -99,12 +99,9 @@ export function GameFlow(props) {
           newplay3Grid = props.play3Grid.map((square, index)=>(square.shipStatus === "ship5C" || square.shipStatus === "ship5") ? { ...square, hitStatus: 'hitfull' } : square)
           props.setPlay3Grid(newplay3Grid)
         }
-        console.log(props.play2Grid)
-        console.log(props.play3Grid)
+
 
   function checkGameWinner() {
-
-
 
     let player1Hits = props.play1Grid.filter(
       (square) => square.hitStatus === "hitfull"
@@ -119,9 +116,6 @@ export function GameFlow(props) {
     console.log("Num Comp 1 ships hit:" + player2Hits);
     console.log("Num Comp 2 ships hit:" + player3Hits)
     
-  
-
-
     if (
       (player1Hits >= winningSquareCount && player2Hits >= winningSquareCount) ||
       (player2Hits >= winningSquareCount && player3Hits >= winningSquareCount) ||
@@ -130,24 +124,24 @@ export function GameFlow(props) {
 
       let turnHeader = document.getElementById('turnHeader')
       turnHeader.style.display = 'none'
-
-      if (player1Hits < winningSquareCount) {
-        // set the variable 'winnerConfetti' so confetti can go off when Player 1 wins!
-        winnerConfetti = props.opponentNames[props.playerIndexState]
-        // CallsWinner(props.opponentNames[props.playerIndexState])
-      }
-      if (player2Hits < winningSquareCount) {
-        winnerConfetti = props.opponentNames[props.opponent1Index]
-        // CallsWinner(props.opponentNames[props.opponent1Index])
-      }
-      if (player3Hits < winningSquareCount) {
-        winnerConfetti = props.opponentNames[props.opponent2Index]
-        // CallsWinner(props.opponentNames[props.opponent2Index])
-      }
-      console.log(props.opponentNames)
-      console.log('winnerConfetti for: ' + winnerConfetti)
+      if(props.playState === 'Singleplayer'){
+        if (player1Hits < winningSquareCount) {
+          // set the variable 'winnerConfetti' so confetti can go off when Player 1 wins!
+          winnerConfetti = props.opponentNames[props.playerIndexState]
+          // CallsWinner(props.opponentNames[props.playerIndexState])
+        }
+        if (player2Hits < winningSquareCount) {
+          winnerConfetti = props.opponentNames[props.opponent1Index]
+          // CallsWinner(props.opponentNames[props.opponent1Index])
+        }
+        if (player3Hits < winningSquareCount) {
+          winnerConfetti = props.opponentNames[props.opponent2Index]
+          // CallsWinner(props.opponentNames[props.opponent2Index])
+        }}
+ 
       if ( props.turnState !== 'game-over'){
         socket.emit('gameIsOver', props.roomId)
+        
       }
       return true;
     }
@@ -156,8 +150,31 @@ export function GameFlow(props) {
   }
 
   socket.on('gameOver', () => {
+
+    let player1Hits = props.play1Grid.filter(
+      (square) => square.hitStatus === "hitfull"
+    ).length;
+    let player2Hits = props.play2Grid.filter(
+      (square) => square.hitStatus === "hitfull"
+    ).length;
+    let player3Hits = props.play3Grid.filter(
+      (square) => square.hitStatus === "hitfull"
+    ).length;
+
+    if (player1Hits < winningSquareCount) {
+      // set the variable 'winnerConfetti' so confetti can go off when Player 1 wins!
+      winnerConfetti = props.opponentNames[props.playerIndexState]
+      // CallsWinner(props.opponentNames[props.playerIndexState])
+    }
+    if (player2Hits < winningSquareCount) {
+      winnerConfetti = props.opponentNames[props.opponent1Index]
+      // CallsWinner(props.opponentNames[props.opponent1Index])
+    }
+    if (player3Hits < winningSquareCount) {
+      winnerConfetti = props.opponentNames[props.opponent2Index]
+      // CallsWinner(props.opponentNames[props.opponent2Index])
+    }
     props.setTurnState('game-over')
-    checkGameWinner()
   })
 
 
