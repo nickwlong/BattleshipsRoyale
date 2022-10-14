@@ -137,19 +137,45 @@ margin-bottom: 30px;
   padding: 10px 20px 10px 20px;
   border: none;
 } */
+
+.multiplayer-title{
+  position: relative;
+  margin-top: 40px;
+  color: #ffffff;
+  font-family: Copperplate, Papyrus, fantasy;
+  font-size: 80px;
+  text-shadow: 2px 4px 3px rgba(0,0,0,0.6);
+  text-shadow: horizontal-offset vertical-offset blur color;
+}
 .Username-div{
-  margin-bottom: 30px;
+  margin-bottom: 70px;
 }
+
 .RoomID-div{
-  margin-top: 20px;
-  margin-bottom: 30px;
+  margin-top: 60px;
+  margin-bottom: 50px;
 }
-
+.room-id-text{
+  font-family: Copperplate, Papyrus, fantasy;
+  font-size: 30px;
+  padding: 16;
+  color: #ffffff;
+  text-shadow: 2px 4px 3px rgba(0,0,0,0.6);
+  text-shadow: horizontal-offset vertical-offset blur color;
+}
+.room-username-text{
+  font-family: Copperplate, Papyrus, fantasy;
+  font-size: 30px;
+  padding: 16;
+  color: #ffffff;
+  text-shadow: 2px 4px 3px rgba(0,0,0,0.6);
+  text-shadow: horizontal-offset vertical-offset blur color;
+}
 .SubmitRoom {
-  margin-bottom: 80px;
+  margin-bottom: 150px;
 }
 
-.input-box {
+.id-input-box {
   border-radius: 4px;
   color: #000000;
   font-size: 20px;
@@ -157,7 +183,21 @@ margin-bottom: 30px;
   background: rgb(251, 251, 251);
   padding: 10px 20px 10px 20px;
   border: none;
+  margin-left: 30px;
+  box-shadow: 2px 3px 3px rgba(0,0,0,0.4);
 }
+
+.username-input-box {
+  border-radius: 4px;
+  color: #000000;
+  font-size: 20px;
+  top: 20px;
+  background: rgb(251, 251, 251);
+  padding: 10px 20px 10px 20px;
+  border: none;
+  box-shadow: 2px 3px 3px rgba(0,0,0,0.4);
+}
+.connec
 .connection-status{
 margin-bottom: 30px;
 text-shadow: 2px 4px 3px rgba(0,0,0,0.4);
@@ -186,6 +226,7 @@ text-shadow: horizontal-offset vertical-offset blur color;
   scroll-snap-align: start;
   transition: all 0.2s;
   padding: 10px;
+  z-index: -1;
 }
 
 .board:hover, .shipPlacement-PlayerBoard:hover {
@@ -290,10 +331,12 @@ margin: auto
   position: relative;
   color: #ffffff;
   margin-top: 40px;
-  font-size: 30px;
+  font-size: 40px;
   font-family: Copperplate, Papyrus, fantasy;
   text-shadow: 2px 4px 3px rgba(0,0,0,0.6);
   text-shadow: horizontal-offset vertical-offset blur color;
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 
 @keyframes glowing {
@@ -311,10 +354,11 @@ margin: auto
 .Player1turn{
   position: relative;
   color: #ffffff;
-  font-size: 30px;
+  font-size: 40px;
   font-family: Copperplate, Papyrus, fantasy;
   animation: glowing 900ms infinite;
-  margin-top: 40px;
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 
 
@@ -331,12 +375,12 @@ margin: auto
 
 .player-board-title{
   position: relative;
-  /* top: 20px; */
   color: #ffffff;
   font-family: Copperplate, Papyrus, fantasy;
   font-size: 40px;
   text-shadow: 2px 4px 3px rgba(0,0,0,0.6);
   text-shadow: horizontal-offset vertical-offset blur color;
+  z-index: -1;
 }
 
 .destroyed-ship-message{
@@ -346,6 +390,7 @@ margin: auto
   font-size: 30px;
   text-shadow: 2px 4px 3px rgba(0,0,0,0.6);
   text-shadow: horizontal-offset vertical-offset blur color;
+  z-index: -1;
 }
 
 

@@ -46,13 +46,14 @@ export function RunMPGame(props) {
         <div>
         <br></br>
           <form id='roomIdForm' onSubmit={handleRoomIdSubmit}>
+          <h1 className='multiplayer-title'>Multiplayer</h1>
           <div className='RoomID-div'>
-            <label style={{fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '30px', padding: '16px', color:'#ffffff'}}>Room id:</label>
-            <input className='input-box' style={{padding: '10px', fontSize: '20px'}}type='text' name='RoomId' id='RoomIdinput' onChange={handleRoomIdChange}/>
+            <label className='room-id-text'>Room id: </label>
+            <input className='id-input-box' style={{padding: '8px', fontSize: '20px'}}type='text' name='RoomId' id='RoomIdinput' onChange={handleRoomIdChange}/>
           </div>
           <div className='Username-div'>
-            <label style={{fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '30px', color:'#ffffff'}}>Username: </label>
-            <input className='input-box' style={{padding: '10px', fontSize: '20px'}} type='text' name='username'  id='usernameInput' onChange={handleUsernameChange}/>
+            <label className='room-username-text'>Username: </label>
+            <input className='username-input-box' style={{padding: '8px', fontSize: '20px'}} type='text' name='username'  id='usernameInput' onChange={handleUsernameChange}/>
           </div>  
 
             <input  className="SubmitRoom"style={{fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '25px'}} type='submit' value=" Submit Room ID"/>
