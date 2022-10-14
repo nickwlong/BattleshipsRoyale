@@ -60,14 +60,14 @@ export function ShipPlacement(props) {
   }
 
   const showReadyBtn = () => {
-    // if (props.play1Grid.filter(square => square.shipStatus === 'ship2').length > 0 &&
-    //   props.play1Grid.filter(square => square.shipStatus === 'ship31').length > 0 &&
-    //   props.play1Grid.filter(square => square.shipStatus === 'ship32').length > 0 &&
-    //   props.play1Grid.filter(square => square.shipStatus === 'ship4').length > 0 &&
-    //   props.play1Grid.filter(square => square.shipStatus === 'ship5').length > 0) {
+    if (props.play1Grid.filter(square => square.shipStatus === 'ship2').length > 0 &&
+      props.play1Grid.filter(square => square.shipStatus === 'ship31').length > 0 &&
+      props.play1Grid.filter(square => square.shipStatus === 'ship32').length > 0 &&
+      props.play1Grid.filter(square => square.shipStatus === 'ship4').length > 0 &&
+      props.play1Grid.filter(square => square.shipStatus === 'ship5').length > 0) {
 
         return (<button className="readyBtn" onClick={()=>{ handleReadyBtnClick(); hideAllBtn()}}> Ready! </button>)
-      // } else {return ''}
+      } else {return ''}
   }
 
   const hideAllBtn = () => {
@@ -85,12 +85,12 @@ export function ShipPlacement(props) {
     hitStatus: '-'
   })
 
-  const showWaitingForOthers = () => {
-    console.log(hidAllButtons)
-    if (hidAllButtons === true){
-      return (<div className="waiting"> Waiting for others </div>)
-    }
-  }
+  // const showWaitingForOthers = () => {
+  //   console.log(hidAllButtons)
+  //   if (hidAllButtons === true){
+  //     return (<div className="waiting"> Waiting for others </div>)
+  //   }
+  // }
 
 
   return (
@@ -105,7 +105,7 @@ export function ShipPlacement(props) {
       <button className="ships" id="verticalBtn" onClick={()=>{ SelectOrientation('vertical');}}> Vertical </button>
       <button className="ships" id="resetBtn" onClick={()=>{ props.setPlay1Grid(playerGridSetup);}}> Reset all ship places </button>
       {showReadyBtn()}
-      {showWaitingForOthers()}
+      {/* {showWaitingForOthers()} */}
 
       <h1 className='boardTitle'>Your Board</h1>
       <br></br>

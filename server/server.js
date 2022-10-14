@@ -96,15 +96,15 @@ io.on('connection', socket => {
 
         room.play1Grid = play1Grid 
         let player1Hits = play1Grid.filter((square) => square.hitStatus === "hitfull").length;
-        if (player1Hits >= 3) {room.playersStatus[0] = 'out'} // if the player is 'out', don't let them play.
+        if (player1Hits >= 17) {room.playersStatus[0] = 'out'} // if the player is 'out', don't let them play.
 
         room.play2Grid = play2Grid 
         let player2Hits = play2Grid.filter((square) => square.hitStatus === "hitfull").length;
-        if (player2Hits >= 3) {room.playersStatus[1] = 'out'} // if the player is 'out', don't let them play.
+        if (player2Hits >= 17) {room.playersStatus[1] = 'out'} // if the player is 'out', don't let them play.
 
         room.play3Grid = play3Grid 
         let player3Hits = play3Grid.filter((square) => square.hitStatus === "hitfull").length;
-        if (player3Hits >= 3) {room.playersStatus[2] = 'out'} // if the player is 'out', don't let them play.
+        if (player3Hits >= 17) {room.playersStatus[2] = 'out'} // if the player is 'out', don't let them play.
 
         room.currentTurnIndex == 2 ? room.currentTurnIndex = 0 : room.currentTurnIndex += 1 // update turn to next player
 

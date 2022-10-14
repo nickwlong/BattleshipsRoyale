@@ -42,27 +42,32 @@ export function RunMPGame(props) {
   return (
     <div>
     <row>
-      <column style={{flex: "70%"}}>
+      <column style={{flex: "100%"}}>
         <div>
+        <br></br>
           <form id='roomIdForm' onSubmit={handleRoomIdSubmit}>
-            <label>Room id:</label>
-            <input type='text' name='RoomId' id='roomIdInput' onChange={handleRoomIdChange}/>
-            <label>Username:</label>
-            <input type='text' name='username' id='usernameInput' onChange={handleUsernameChange}/>
-            <input type='submit' value="Submit Room ID"/>
-          </form>
-          <br></br>
-          
+          <h1 className='multiplayer-title'>Multiplayer</h1>
+          <div className='RoomID-div'>
+            <label className='room-id-text'>Room id: </label>
+            <input className='id-input-box' style={{padding: '8px', fontSize: '20px'}}type='text' name='RoomId' id='RoomIdinput' onChange={handleRoomIdChange}/>
+          </div>
+          <div className='Username-div'>
+            <label className='room-username-text'>Username: </label>
+            <input className='username-input-box' style={{padding: '8px', fontSize: '20px'}} type='text' name='username'  id='usernameInput' onChange={handleUsernameChange}/>
+          </div>  
 
-          <div style={{background: 'white'}}>
-              <p id='connectedStatus'>Connected: { '' + props.isConnected + ' with id ' + socket.id }</p>
-              <p id='connectedStatus2'></p>
+            <input  className="SubmitRoom"style={{fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '25px'}} type='submit' value=" Submit Room ID"/>
+          </form>
+        
+          <div style={{background:'transparent', fontFamily: "Copperplate", "Papyrus":  "fantasy", fontSize: '25px', color:'#ffffff'}}>
+              <div className='connection-status' id='connectedStatus'>Connected: { '' + props.isConnected + ' with id ' + socket.id }</div>
+              <div id='connectedStatus2'></div>
+              <h2 className={`joinRoom playersJoined${props.opponentNames.length}`}>Join a room</h2>
+              <div className='players-connected'>
+              <div className={`otherConnectedStatus three${props.opponentNames.length}`}>Players connected: {props.opponentNames.length}</div>
+              </div>
           </div>
         </div>
-      </column>
-      <column style={{flex: "20%", padding: "20px", background: "white"}}>
-        <h2 className={`joinRoom playersJoined${props.opponentNames.length}`}>Join a room</h2>
-        <h2 className={`otherConnectedStatus three${props.opponentNames.length}`}>Players connected: {props.opponentNames.length}</h2>
       </column>
     </row>
     
