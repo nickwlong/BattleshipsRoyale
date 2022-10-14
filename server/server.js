@@ -111,8 +111,8 @@ io.on('connection', socket => {
         if(room.playersStatus[room.currentTurnIndex] === 'out'){room.currentTurnIndex == 2 ? room.currentTurnIndex = 0 : room.currentTurnIndex += 1} // if the player is out, skip to the next player
 
         room.currentTurnPlayer = room.usernames[room.currentTurnIndex]
-        socket.to(roomId).emit('receiveData', room)
-        socket.emit('receiveData', room)
+        socket.to(roomId).emit('receiveData', room, turnState)
+        socket.emit('receiveData', room, turnState)
       }
   })
 
